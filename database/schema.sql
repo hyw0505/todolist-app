@@ -71,12 +71,18 @@ COMMENT ON COLUMN todos.updated_at   IS '최종 수정 일시';
 -- 인덱스
 -- =============================================================
 
+-- 이메일 조회 (로그인 시 빈번한 쿼리)
+CREATE INDEX idx_users_email      ON users (email);
+
 -- 사용자별 할일 조회 (가장 빈번한 쿼리)
-CREATE INDEX idx_todos_user_id   ON todos (user_id);
+CREATE INDEX idx_todos_user_id    ON todos (user_id);
 
 -- 정렬 기준 컬럼 (BR-07: 시작일·종료일 정렬)
 CREATE INDEX idx_todos_start_date ON todos (start_date);
 CREATE INDEX idx_todos_due_date   ON todos (due_date);
+
+-- 복합 인덱스: 사용자별 상태 필터 + 정렬 최적화
+CREATE INDEX idx_todos_user_status ON todos (user_id, is_completed, start_date, due_date);
 
 -- =============================================================
 -- updated_at 자동 갱신 트리거

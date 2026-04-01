@@ -60,10 +60,10 @@
 **설명:** PostgreSQL 12+ 서버를 설치하고 개발 환경 접속 설정을 완료한다.
 
 **완료 조건:**
-- [ ] PostgreSQL 12+ 버전 설치 완료
-- [ ] 개발용 데이터베이스 사용자 생성
-- [ ] 접속 권한 및 방화벽 설정 완료
-- [ ] `psql` CLI 로 접속 테스트 성공
+- [x] PostgreSQL 12+ 버전 설치 완료
+- [x] 개발용 데이터베이스 사용자 생성
+- [x] 접속 권한 및 방화벽 설정 완료
+- [x] `psql` CLI 로 접속 테스트 성공
 
 **의존성:**
 - [x] 선행 작업: 없음
@@ -75,14 +75,14 @@
 **설명:** todolist_dev(개발용) 및 todolist_prod(프로덕션용) 데이터베이스를 생성한다.
 
 **완료 조건:**
-- [ ] `todolist_dev` 데이터베이스 생성
+- [x] `todolist_dev` 데이터베이스 생성
 - [ ] `todolist_prod` 데이터베이스 생성 (배포 시)
-- [ ] 문자 인코딩 UTF-8 설정
-- [ ] 타임존 KST(UTC+9) 설정 확인
+- [x] 문자 인코딩 UTF-8 설정
+- [x] 타임존 KST(UTC+9) 설정 확인
 
 **의존성:**
 - [x] 선행 작업: DB-01
-- [ ] 후행 작업: DB-03
+- [x] 후행 작업: DB-03
 
 ---
 
@@ -102,14 +102,14 @@ CREATE TABLE users (
 ```
 
 **완료 조건:**
-- [ ] `users` 테이블 DDL 실행 완료
-- [ ] `email` 컬럼에 UNIQUE 제약조건 설정
-- [ ] `id` 컬럼에 PRIMARY KEY 설정
-- [ ] 인덱스 자동 생성 확인
+- [x] `users` 테이블 DDL 실행 완료
+- [x] `email` 컬럼에 UNIQUE 제약조건 설정
+- [x] `id` 컬럼에 PRIMARY KEY 설정
+- [x] 인덱스 자동 생성 확인
 
 **의존성:**
 - [x] 선행 작업: DB-02
-- [ ] 후행 작업: DB-05, BE-01
+- [x] 후행 작업: DB-05, BE-01
 
 ---
 
@@ -134,14 +134,14 @@ CREATE TABLE todos (
 ```
 
 **완료 조건:**
-- [ ] `todos` 테이블 DDL 실행 완료
-- [ ] `user_id` 에 FOREIGN KEY 제약조건 설정 (ON DELETE CASCADE)
-- [ ] `CHECK` 제약조건: `due_date >= start_date`
-- [ ] `status` 컬럼 제외 (런타임 계산)
+- [x] `todos` 테이블 DDL 실행 완료
+- [x] `user_id` 에 FOREIGN KEY 제약조건 설정 (ON DELETE CASCADE)
+- [x] `CHECK` 제약조건: `due_date >= start_date`
+- [x] `status` 컬럼 제외 (런타임 계산)
 
 **의존성:**
 - [x] 선행 작업: DB-02
-- [ ] 후행 작업: DB-05, BE-07
+- [x] 후행 작업: DB-05, BE-07
 
 ---
 
@@ -150,15 +150,15 @@ CREATE TABLE todos (
 **설명:** 조회 성능 최적화를 위한 인덱스를 생성한다.
 
 **완료 조건:**
-- [ ] `idx_users_email`: `users(email)` 생성
-- [ ] `idx_todos_user_id`: `todos(user_id)` 생성
-- [ ] `idx_todos_start_date`: `todos(start_date)` 생성
-- [ ] `idx_todos_due_date`: `todos(due_date)` 생성
-- [ ] 복합 인덱스 `idx_todos_user_status`: `todos(user_id, is_completed, start_date, due_date)` 생성
+- [x] `idx_users_email`: `users(email)` 생성
+- [x] `idx_todos_user_id`: `todos(user_id)` 생성
+- [x] `idx_todos_start_date`: `todos(start_date)` 생성
+- [x] `idx_todos_due_date`: `todos(due_date)` 생성
+- [x] 복합 인덱스 `idx_todos_user_status`: `todos(user_id, is_completed, start_date, due_date)` 생성
 
 **의존성:**
-- [ ] 선행 작업: DB-03, DB-04
-- [ ] 후행 작업: DB-06
+- [x] 선행 작업: DB-03, DB-04
+- [x] 후행 작업: DB-06
 
 ---
 
@@ -167,14 +167,14 @@ CREATE TABLE todos (
 **설명:** 백엔드에서 데이터베이스 접속이 정상적인지 테스트한다.
 
 **완료 조건:**
-- [ ] `pg` Pool 연결 테스트 성공
-- [ ] 환경변수 (`DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`) 설정
-- [ ] 연결 풀링 설정: `max=10`, `idleTimeoutMillis=30000`
-- [ ] 연결 타임아웃 설정: `connectionTimeoutMillis=2000`
+- [x] `pg` Pool 연결 테스트 성공
+- [x] 환경변수 (`DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`) 설정
+- [x] 연결 풀링 설정: `max=10`, `idleTimeoutMillis=30000`
+- [x] 연결 타임아웃 설정: `connectionTimeoutMillis=2000`
 
 **의존성:**
-- [ ] 선행 작업: DB-05
-- [ ] 후행 작업: BE-01
+- [x] 선행 작업: DB-05
+- [x] 후행 작업: BE-01
 
 ---
 
@@ -183,13 +183,13 @@ CREATE TABLE todos (
 **설명:** `database/schema.sql` 파일에 최종 스키마를 기록한다.
 
 **완료 조건:**
-- [ ] `users` 테이블 DDL 기록
-- [ ] `todos` 테이블 DDL 기록
-- [ ] 인덱스 DDL 기록
-- [ ] 제약조건 주석 추가
+- [x] `users` 테이블 DDL 기록
+- [x] `todos` 테이블 DDL 기록
+- [x] 인덱스 DDL 기록
+- [x] 제약조건 주석 추가
 
 **의존성:**
-- [ ] 선행 작업: DB-05
+- [x] 선행 작업: DB-05
 
 ---
 
@@ -198,12 +198,12 @@ CREATE TABLE todos (
 **설명:** 데이터베이스 자동 백업 정책을 수립한다.
 
 **완료 조건:**
-- [ ] 일일 자동 백업 스크립트 작성
-- [ ] 백업 보관 기간: 7 일 설정
-- [ ] 백업 복구 테스트 1 회 수행
+- [x] 일일 자동 백업 스크립트 작성
+- [x] 백업 보관 기간: 7 일 설정
+- [x] 백업 복구 테스트 1 회 수행
 
 **의존성:**
-- [ ] 선행 작업: DB-06
+- [x] 선행 작업: DB-06
 
 ---
 
