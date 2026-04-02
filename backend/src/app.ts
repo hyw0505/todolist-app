@@ -36,6 +36,9 @@ function createApp(pool: Pool): Application {
   // Request logging middleware (BE-08)
   app.use(requestLogger);
 
+  // Serve static files from public folder
+  app.use(express.static(path.join(__dirname, 'public')));
+
   // Swagger UI
   const swaggerPath = path.join(__dirname, '../../swagger/swagger.json');
   // eslint-disable-next-line @typescript-eslint/no-var-requires
