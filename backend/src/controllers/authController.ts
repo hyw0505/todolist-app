@@ -1,5 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { Pool } from 'pg';
+import { env } from '../config/env';
+import { AuthError } from '../errors/AppError';
 import { AuthService } from '../services/authService';
 
 /**
@@ -49,10 +51,10 @@ export class AuthController {
 
       const result = await this.authService.login(email, password);
 
-      // Set refresh token as httpOnly cookie
+      // Set refresh token as httpOnly cookie (PRD §4.7: sameSite=Strict, secure=production)
       res.cookie('refreshToken', result.refreshToken, {
         httpOnly: true,
-        secure: false, // Set to true in production with HTTPS
+        secure: env.NODE_ENV === 'production',
         sameSite: 'strict',
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       });
@@ -77,13 +79,10 @@ export class AuthController {
   refreshToken = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       // Get refresh token from cookie
-      const refreshToken = req.cookies?.refreshToken;
+      const refreshToken = req.cookies?.refreshToken as string | undefined;
 
       if (!refreshToken) {
-        res.status(401).json({
-          success: false,
-          message: '인증이 필요합니다',
-        });
+        next(new AuthError('세션이 만료되었습니다. 다시 로그인해 주세요'));
         return;
       }
 
@@ -110,7 +109,7 @@ export class AuthController {
       // Clear refresh token cookie
       res.clearCookie('refreshToken', {
         httpOnly: true,
-        secure: false,
+        secure: env.NODE_ENV === 'production',
         sameSite: 'strict',
       });
 

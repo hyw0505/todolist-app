@@ -188,7 +188,7 @@ describe('authValidator (BE-10, BE-11)', () => {
         expect(result.success).toBe(false);
         if (!result.success) {
           const passwordError = result.error.errors.find((e) => e.path.includes('password'));
-          expect(passwordError?.message).toBe('Password must be at least 8 characters');
+          expect(passwordError?.message).toBe('비밀번호는 8 자 이상이어야 합니다');
         }
       });
 
@@ -206,7 +206,7 @@ describe('authValidator (BE-10, BE-11)', () => {
         expect(result.success).toBe(false);
         if (!result.success) {
           const passwordError = result.error.errors.find((e) => e.path.includes('password'));
-          expect(passwordError?.message).toBe('Password must be at most 64 characters');
+          expect(passwordError?.message).toBe('비밀번호는 64 자 이하여야 합니다');
         }
       });
 
@@ -222,7 +222,7 @@ describe('authValidator (BE-10, BE-11)', () => {
         expect(result.success).toBe(false);
         if (!result.success) {
           const passwordError = result.error.errors.find((e) => e.path.includes('password'));
-          expect(passwordError?.message).toContain('uppercase');
+          expect(passwordError?.message).toContain('대문자');
         }
       });
 
@@ -238,7 +238,7 @@ describe('authValidator (BE-10, BE-11)', () => {
         expect(result.success).toBe(false);
         if (!result.success) {
           const passwordError = result.error.errors.find((e) => e.path.includes('password'));
-          expect(passwordError?.message).toContain('lowercase');
+          expect(passwordError?.message).toContain('소문자');
         }
       });
 
@@ -254,7 +254,7 @@ describe('authValidator (BE-10, BE-11)', () => {
         expect(result.success).toBe(false);
         if (!result.success) {
           const passwordError = result.error.errors.find((e) => e.path.includes('password'));
-          expect(passwordError?.message).toContain('number');
+          expect(passwordError?.message).toContain('숫자');
         }
       });
 
@@ -270,7 +270,7 @@ describe('authValidator (BE-10, BE-11)', () => {
         expect(result.success).toBe(false);
         if (!result.success) {
           const passwordError = result.error.errors.find((e) => e.path.includes('password'));
-          expect(passwordError?.message).toContain('special character');
+          expect(passwordError?.message).toContain('특수문자');
         }
       });
 
@@ -298,7 +298,7 @@ describe('authValidator (BE-10, BE-11)', () => {
         expect(result.success).toBe(false);
         if (!result.success) {
           const passwordError = result.error.errors.find((e) => e.path.includes('password'));
-          expect(passwordError?.message).toBe('Password must be at least 8 characters');
+          expect(passwordError?.message).toBe('비밀번호는 8 자 이상이어야 합니다');
         }
       });
     });
@@ -316,7 +316,7 @@ describe('authValidator (BE-10, BE-11)', () => {
         expect(result.success).toBe(false);
         if (!result.success) {
           const nameError = result.error.errors.find((e) => e.path.includes('name'));
-          expect(nameError?.message).toBe('Name is required');
+          expect(nameError?.message).toBe('이름은 필수입니다');
         }
       });
 
@@ -332,7 +332,7 @@ describe('authValidator (BE-10, BE-11)', () => {
         expect(result.success).toBe(false);
         if (!result.success) {
           const nameError = result.error.errors.find((e) => e.path.includes('name'));
-          expect(nameError?.message).toBe('Name must be at most 50 characters');
+          expect(nameError?.message).toBe('이름은 50 자 이하여야 합니다');
         }
       });
 
@@ -481,7 +481,7 @@ describe('authValidator (BE-10, BE-11)', () => {
         expect(result.success).toBe(false);
         if (!result.success) {
           const passwordError = result.error.errors.find((e) => e.path.includes('password'));
-          expect(passwordError?.message).toBe('Password is required');
+          expect(passwordError?.message).toBe('비밀번호는 필수입니다');
         }
       });
 
@@ -524,7 +524,7 @@ describe('authValidator (BE-10, BE-11)', () => {
         expect(result.success).toBe(false);
         if (!result.success) {
           const passwordError = result.error.errors.find((e) => e.path.includes('password'));
-          expect(passwordError?.message).toBe('Password must be at most 64 characters');
+          expect(passwordError?.message).toBe('비밀번호는 64 자 이하여야 합니다');
         }
       });
     });

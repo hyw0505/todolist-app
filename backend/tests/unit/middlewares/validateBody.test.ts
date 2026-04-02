@@ -94,7 +94,7 @@ describe('validateBody middleware (BE-09)', () => {
       const error = mockNext.mock.calls[0][0] as ValidationError;
       expect(error.statusCode).toBe(400);
       expect(error.code).toBe('VALIDATION_ERROR');
-      expect(error.message).toBe('Validation failed');
+      expect(error.message).toBe('입력값 검증에 실패했습니다');
     });
 
     test('should include field-specific error for missing name', () => {
@@ -109,7 +109,7 @@ describe('validateBody middleware (BE-09)', () => {
       const error = mockNext.mock.calls[0][0] as ValidationError;
       expect(error.details).toBeDefined();
       expect(error.details?.name).toBeDefined();
-      expect(error.details?.name[0]).toContain('Expected string, received undefined');
+      expect(error.details?.name[0]).toContain('예상: string, 실제: undefined');
     });
 
     test('should return 400 when multiple required fields are missing', () => {
@@ -139,7 +139,7 @@ describe('validateBody middleware (BE-09)', () => {
       expect(mockNext).toHaveBeenCalledWith(expect.any(ValidationError));
       const error = mockNext.mock.calls[0][0] as ValidationError;
       expect(error.details?.name).toBeDefined();
-      expect(error.details?.name[0]).toContain('Expected string, received number');
+      expect(error.details?.name[0]).toContain('예상: string, 실제: number');
     });
 
     test('should return 400 when email is invalid format', () => {
@@ -154,7 +154,7 @@ describe('validateBody middleware (BE-09)', () => {
       expect(mockNext).toHaveBeenCalledWith(expect.any(ValidationError));
       const error = mockNext.mock.calls[0][0] as ValidationError;
       expect(error.details?.email).toBeDefined();
-      expect(error.details?.email[0]).toBe('Invalid email address');
+      expect(error.details?.email[0]).toBe('유효하지 않은 이메일 주소입니다');
     });
 
     test('should return 400 when number is not positive', () => {
@@ -191,7 +191,7 @@ describe('validateBody middleware (BE-09)', () => {
       expect(mockNext).toHaveBeenCalledWith(expect.any(ValidationError));
       const error = mockNext.mock.calls[0][0] as ValidationError;
       expect(error.details?.name).toBeDefined();
-      expect(error.details?.name[0]).toContain('at least 3 character');
+      expect(error.details?.name[0]).toContain('최소 3자');
     });
   });
 
@@ -376,7 +376,7 @@ describe('validateBody middleware (BE-09)', () => {
       expect(mockNext).toHaveBeenCalledWith(expect.any(ValidationError));
       const error = mockNext.mock.calls[0][0] as ValidationError;
       expect(error.details?.status).toBeDefined();
-      expect(error.details?.status[0]).toContain('Invalid value');
+      expect(error.details?.status[0]).toContain('유효하지 않은 값입니다');
     });
   });
 
@@ -394,7 +394,7 @@ describe('validateBody middleware (BE-09)', () => {
 
       expect(mockNext).toHaveBeenCalledWith(expect.any(ValidationError));
       const error = mockNext.mock.calls[0][0] as ValidationError;
-      expect(error.message).toBe('Invalid request body');
+      expect(error.message).toBe('유효하지 않은 요청 본문입니다');
     });
   });
 });

@@ -137,7 +137,7 @@ describe('TodoService (BE-14 through BE-19)', () => {
       expect(result.todos).toHaveLength(3);
       expect(result.total).toBe(3);
       expect(result.page).toBe(1);
-      expect(result.limit).toBe(20);
+      expect(result.limit).toBe(10);
       expect(todoStatusService.addStatusToTodos).toHaveBeenCalledWith(mockTodos);
     });
 
@@ -151,10 +151,10 @@ describe('TodoService (BE-14 through BE-19)', () => {
 
       expect(mockTodoRepository.findByUserId).toHaveBeenCalledWith({
         user_id: mockUserId,
-        sort_by: 'start_date',
+        sort_by: 'due_date',
         sort_order: 'asc',
         page: 1,
-        limit: 20,
+        limit: 10,
       });
     });
 
@@ -182,10 +182,7 @@ describe('TodoService (BE-14 through BE-19)', () => {
         { ...mockTodos[2], status: 'OVERDUE' },
       ];
 
-      mockTodoRepository.findByUserId.mockResolvedValue({
-        todos: mockTodos,
-        total: 3,
-      });
+      mockTodoRepository.findAllByUserId.mockResolvedValue(mockTodos);
 
       // Override the mock for this specific test
       (todoStatusService.addStatusToTodos as jest.Mock).mockReturnValue(todosWithStatus);
@@ -225,10 +222,7 @@ describe('TodoService (BE-14 through BE-19)', () => {
           status: i === 0 ? status : 'OTHER',
         }));
 
-        mockTodoRepository.findByUserId.mockResolvedValue({
-          todos: mockTodos,
-          total: 3,
-        });
+        mockTodoRepository.findAllByUserId.mockResolvedValue(mockTodos);
         (todoStatusService.addStatusToTodos as jest.Mock).mockReturnValue(todosWithStatus);
 
         const result = await todoService.getTodos(mockUserId, status);
@@ -254,7 +248,7 @@ describe('TodoService (BE-14 through BE-19)', () => {
 
       await expect(todoService.getTodoById(mockTodoId, mockUserId)).rejects.toThrow(NotFoundError);
       await expect(todoService.getTodoById(mockTodoId, mockUserId)).rejects.toThrow(
-        'Todo not found',
+        '할일을 찾을 수 없습니다',
       );
     });
 
@@ -264,7 +258,7 @@ describe('TodoService (BE-14 through BE-19)', () => {
 
       await expect(todoService.getTodoById(mockTodoId, mockUserId)).rejects.toThrow(ForbiddenError);
       await expect(todoService.getTodoById(mockTodoId, mockUserId)).rejects.toThrow(
-        'You do not have permission to access this todo',
+        '해당 리소스에 접근할 권한이 없습니다',
       );
     });
 
@@ -321,7 +315,7 @@ describe('TodoService (BE-14 through BE-19)', () => {
       mockTodoRepository.findById.mockResolvedValue(mockTodo);
 
       await expect(todoService.updateTodo(mockTodoId, mockUserId, {})).rejects.toThrow(
-        'At least one field must be provided for update',
+        '수정할 필드가 최소 하나 이상 필요합니다',
       );
     });
 
@@ -335,7 +329,7 @@ describe('TodoService (BE-14 through BE-19)', () => {
 
       await expect(
         todoService.updateTodo(mockTodoId, mockUserId, invalidUpdate),
-      ).rejects.toThrow('due_date must be greater than or equal to start_date');
+      ).rejects.toThrow('종료일은 시작일과 같거나 이후 날짜여야 합니다');
     });
 
     test('should validate new start_date against existing due_date', async () => {
@@ -348,7 +342,7 @@ describe('TodoService (BE-14 through BE-19)', () => {
 
       await expect(
         todoService.updateTodo(mockTodoId, mockUserId, invalidUpdate),
-      ).rejects.toThrow('due_date must be greater than or equal to start_date');
+      ).rejects.toThrow('종료일은 시작일과 같거나 이후 날짜여야 합니다');
     });
 
     test('should validate new due_date against existing start_date', async () => {
@@ -361,7 +355,7 @@ describe('TodoService (BE-14 through BE-19)', () => {
 
       await expect(
         todoService.updateTodo(mockTodoId, mockUserId, invalidUpdate),
-      ).rejects.toThrow('due_date must be greater than or equal to start_date');
+      ).rejects.toThrow('종료일은 시작일과 같거나 이후 날짜여야 합니다');
     });
 
     test('should allow valid date updates', async () => {
@@ -445,7 +439,7 @@ describe('TodoService (BE-14 through BE-19)', () => {
         ConflictError,
       );
       await expect(todoService.completeTodo(mockTodoId, mockUserId, true)).rejects.toThrow(
-        'Todo is already completed',
+        '이미 완료 처리된 할일입니다',
       );
     });
 

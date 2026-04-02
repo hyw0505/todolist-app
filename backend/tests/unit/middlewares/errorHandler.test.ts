@@ -57,10 +57,7 @@ describe('errorHandler middleware (BE-07)', () => {
       expect(mockRes.status).toHaveBeenCalledWith(400);
       expect(mockRes.json).toHaveBeenCalledWith({
         success: false,
-        error: {
-          code: 'CUSTOM_ERROR',
-          message: 'Something went wrong',
-        },
+        message: 'Something went wrong',
       });
     });
 
@@ -86,11 +83,7 @@ describe('errorHandler middleware (BE-07)', () => {
       expect(mockRes.status).toHaveBeenCalledWith(400);
       expect(mockRes.json).toHaveBeenCalledWith({
         success: false,
-        error: {
-          code: 'VALIDATION_ERROR',
-          message: 'Validation failed',
-          details: details,
-        },
+        message: 'Validation failed',
       });
     });
 
@@ -102,10 +95,7 @@ describe('errorHandler middleware (BE-07)', () => {
       expect(mockRes.status).toHaveBeenCalledWith(400);
       expect(mockRes.json).toHaveBeenCalledWith({
         success: false,
-        error: {
-          code: 'VALIDATION_ERROR',
-          message: 'Invalid input',
-        },
+        message: 'Invalid input',
       });
     });
   });
@@ -119,10 +109,7 @@ describe('errorHandler middleware (BE-07)', () => {
       expect(mockRes.status).toHaveBeenCalledWith(401);
       expect(mockRes.json).toHaveBeenCalledWith({
         success: false,
-        error: {
-          code: 'AUTH_TOKEN_INVALID',
-          message: 'Invalid token',
-        },
+        message: 'Invalid token',
       });
     });
 
@@ -134,10 +121,7 @@ describe('errorHandler middleware (BE-07)', () => {
       expect(mockRes.status).toHaveBeenCalledWith(401);
       expect(mockRes.json).toHaveBeenCalledWith({
         success: false,
-        error: {
-          code: 'AUTH_TOKEN_MISSING',
-          message: 'Authorization header is missing',
-        },
+        message: 'Authorization header is missing',
       });
     });
   });
@@ -151,10 +135,7 @@ describe('errorHandler middleware (BE-07)', () => {
       expect(mockRes.status).toHaveBeenCalledWith(403);
       expect(mockRes.json).toHaveBeenCalledWith({
         success: false,
-        error: {
-          code: 'AUTH_FORBIDDEN',
-          message: 'Access denied',
-        },
+        message: 'Access denied',
       });
     });
   });
@@ -168,10 +149,7 @@ describe('errorHandler middleware (BE-07)', () => {
       expect(mockRes.status).toHaveBeenCalledWith(404);
       expect(mockRes.json).toHaveBeenCalledWith({
         success: false,
-        error: {
-          code: 'RESOURCE_NOT_FOUND',
-          message: 'User not found',
-        },
+        message: 'User not found',
       });
     });
   });
@@ -185,10 +163,7 @@ describe('errorHandler middleware (BE-07)', () => {
       expect(mockRes.status).toHaveBeenCalledWith(429);
       expect(mockRes.json).toHaveBeenCalledWith({
         success: false,
-        error: {
-          code: 'RATE_LIMIT_EXCEEDED',
-          message: 'Too many requests',
-        },
+        message: 'Too many requests',
       });
     });
   });
@@ -203,10 +178,7 @@ describe('errorHandler middleware (BE-07)', () => {
       expect(mockRes.json).toHaveBeenCalledWith(
         expect.objectContaining({
           success: false,
-          error: expect.objectContaining({
-            code: 'INTERNAL_SERVER_ERROR',
-            message: 'Unexpected error',
-          }),
+          message: 'Unexpected error',
         }),
       );
     });
@@ -233,10 +205,7 @@ describe('errorHandler middleware (BE-07)', () => {
       expect(mockRes.status).toHaveBeenCalledWith(400);
       expect(mockRes.json).toHaveBeenCalledWith({
         success: false,
-        error: {
-          code: 'CUSTOM_CODE',
-          message: 'Custom structured error',
-        },
+        message: 'Custom structured error',
       });
     });
 
@@ -253,13 +222,7 @@ describe('errorHandler middleware (BE-07)', () => {
 
       expect(mockRes.json).toHaveBeenCalledWith({
         success: false,
-        error: {
-          code: 'VALIDATION_ERROR',
-          message: 'Error with details',
-          details: {
-            field: ['is required'],
-          },
-        },
+        message: 'Error with details',
       });
     });
   });
@@ -273,10 +236,7 @@ describe('errorHandler middleware (BE-07)', () => {
       expect(mockRes.status).toHaveBeenCalledWith(500);
       expect(mockRes.json).toHaveBeenCalledWith({
         success: false,
-        error: {
-          code: 'DATABASE_ERROR',
-          message: 'Connection failed',
-        },
+        message: 'Connection failed',
       });
     });
 
@@ -405,7 +365,7 @@ describe('notFoundHandler', () => {
 
     expect(mockNext).toHaveBeenCalledWith(expect.any(NotFoundError));
     const error = mockNext.mock.calls[0][0] as NotFoundError;
-    expect(error.message).toBe('Cannot GET /api/nonexistent');
+    expect(error.message).toBe('GET /api/nonexistent 경로를 찾을 수 없습니다');
     expect(error.statusCode).toBe(404);
     expect(error.code).toBe('RESOURCE_NOT_FOUND');
   });
@@ -418,7 +378,7 @@ describe('notFoundHandler', () => {
 
     expect(mockNext).toHaveBeenCalledWith(expect.any(NotFoundError));
     const error = mockNext.mock.calls[0][0] as NotFoundError;
-    expect(error.message).toBe('Cannot POST /api/users');
+    expect(error.message).toBe('POST /api/users 경로를 찾을 수 없습니다');
   });
 
   test('should pass instanceof check for NotFoundError', () => {

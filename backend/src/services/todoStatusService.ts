@@ -53,23 +53,14 @@ export function calculateTodoStatus(
     return isSuccess === true ? 'COMPLETED_SUCCESS' : 'COMPLETED_FAILURE';
   }
 
-  // Get current date in KST (UTC+9)
-  const now = new Date();
-  const kstOffset = 9 * 60 * 60 * 1000; // 9 hours in milliseconds
-  const kstNow = new Date(now.getTime() + kstOffset);
+  // 오늘 날짜를 KST(Asia/Seoul) 기준으로 YYYY-MM-DD 문자열로 추출
+  // toLocaleDateString('en-CA')는 'YYYY-MM-DD' 형식을 반환
+  const todayKST = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Seoul' });
 
-  // Normalize to start of day in KST (midnight)
-  const kstDate = new Date(kstNow);
-  kstDate.setUTCHours(0, 0, 0, 0);
-
-  // Parse dates (they are in YYYY-MM-DD format, treat as UTC midnight)
-  const start = new Date(startDate);
-  const due = new Date(dueDate);
-
-  // Compare dates
-  if (kstDate < start) {
+  // YYYY-MM-DD 문자열 직접 비교 (날짜 형식이 동일하므로 사전순 = 날짜순)
+  if (todayKST < startDate) {
     return 'NOT_STARTED';
-  } else if (kstDate > due) {
+  } else if (todayKST > dueDate) {
     return 'OVERDUE';
   } else {
     return 'IN_PROGRESS';

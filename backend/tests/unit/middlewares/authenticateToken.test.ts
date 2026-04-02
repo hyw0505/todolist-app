@@ -33,7 +33,7 @@ describe('authenticateToken middleware (BE-05)', () => {
   let mockNext: jest.Mock;
 
   const mockUser = {
-    userId: 123,
+    sub: 'user-123',
     email: 'test@example.com',
     iat: Math.floor(Date.now() / 1000),
     exp: Math.floor(Date.now() / 1000) + 3600,
@@ -66,7 +66,7 @@ describe('authenticateToken middleware (BE-05)', () => {
       expect(jwt.verify).toHaveBeenCalledWith(validToken, env.JWT_ACCESS_SECRET);
       expect(mockNext).toHaveBeenCalledWith();
       expect((mockReq as AuthenticatedRequest).user).toEqual({
-        userId: mockUser.userId,
+        userId: mockUser.sub,
         email: mockUser.email,
         iat: mockUser.iat,
         exp: mockUser.exp,
@@ -84,7 +84,7 @@ describe('authenticateToken middleware (BE-05)', () => {
       const error = mockNext.mock.calls[0][0] as AuthError;
       expect(error.code).toBe(AUTH_TOKEN_MISSING);
       expect(error.statusCode).toBe(401);
-      expect(error.message).toBe('Authorization header is missing');
+      expect(error.message).toBe('인증 헤더가 필요합니다');
     });
   });
 
@@ -145,7 +145,7 @@ describe('authenticateToken middleware (BE-05)', () => {
       const error = mockNext.mock.calls[0][0] as AuthError;
       expect(error.code).toBe(AUTH_TOKEN_EXPIRED);
       expect(error.statusCode).toBe(401);
-      expect(error.message).toBe('Token has expired');
+      expect(error.message).toBe('토큰이 만료되었습니다');
     });
   });
 
@@ -167,7 +167,7 @@ describe('authenticateToken middleware (BE-05)', () => {
       const error = mockNext.mock.calls[0][0] as AuthError;
       expect(error.code).toBe(AUTH_TOKEN_INVALID);
       expect(error.statusCode).toBe(401);
-      expect(error.message).toBe('Invalid token');
+      expect(error.message).toBe('유효하지 않은 토큰입니다');
     });
 
     test('should return 401 for unknown jwt verification errors', () => {
@@ -185,7 +185,7 @@ describe('authenticateToken middleware (BE-05)', () => {
       expect(mockNext).toHaveBeenCalledWith(expect.any(AuthError));
       const error = mockNext.mock.calls[0][0] as AuthError;
       expect(error.code).toBe(AUTH_TOKEN_INVALID);
-      expect(error.message).toBe('Token verification failed');
+      expect(error.message).toBe('토큰 검증에 실패했습니다');
     });
   });
 
@@ -203,7 +203,7 @@ describe('authenticateToken middleware (BE-05)', () => {
       expect(jwt.verify).toHaveBeenCalled();
       expect(mockNext).toHaveBeenCalledWith();
       expect((mockReq as AuthenticatedRequest).user).toEqual({
-        userId: mockUser.userId,
+        userId: mockUser.sub,
         email: mockUser.email,
         iat: mockUser.iat,
         exp: mockUser.exp,

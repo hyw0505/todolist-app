@@ -112,7 +112,7 @@ export const getTodosQuerySchema = z.object({
     .enum(['NOT_STARTED', 'IN_PROGRESS', 'OVERDUE', 'COMPLETED_SUCCESS', 'COMPLETED_FAILURE'])
     .optional(),
 
-  sort_by: z.enum(['start_date', 'due_date']).optional().default('start_date'),
+  sort_by: z.enum(['start_date', 'due_date']).optional().default('due_date'),
 
   sort_order: z.enum(['asc', 'desc']).optional().default('asc'),
 
@@ -126,9 +126,9 @@ export const getTodosQuerySchema = z.object({
   limit: z
     .string()
     .optional()
-    .transform((val) => (val ? parseInt(val, 10) : 20))
+    .transform((val) => (val ? parseInt(val, 10) : 10))
     .refine((val) => !isNaN(val) && val > 0 && val <= 100, 'Limit must be between 1 and 100')
-    .default('20'),
+    .default('10'),
 });
 
 /**

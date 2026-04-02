@@ -21,7 +21,7 @@ import { apiRateLimiter } from '../middlewares/rateLimiter';
  * - POST / - Create new todo
  * - GET / - Get todos list (with filtering, sorting, pagination)
  * - GET /:id - Get todo by ID
- * - PATCH /:id - Update todo
+ * - PUT /:id - Update todo
  * - POST /:id/complete - Complete todo
  * - DELETE /:id - Delete todo
  */
@@ -42,8 +42,8 @@ export function createTodoRoutes(pool: Pool): Router {
   // Get todo by ID
   router.get('/:id', validateParams(todoIdParamSchema), todoController.getTodoById);
 
-  // Update todo
-  router.patch(
+  // Update todo (PUT: swagger/PRD 기준)
+  router.put(
     '/:id',
     validateParams(todoIdParamSchema),
     validateBody(updateTodoSchema),

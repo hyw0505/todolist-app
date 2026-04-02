@@ -62,7 +62,7 @@ describe('AppError classes (BE-07)', () => {
     test('should create ValidationError with default message', () => {
       const error = new ValidationError();
 
-      expect(error.message).toBe('Validation failed');
+      expect(error.message).toBe('입력값 검증에 실패했습니다');
       expect(error.code).toBe(VALIDATION_ERROR);
       expect(error.statusCode).toBe(400);
       expect(error.isOperational).toBe(true);
@@ -104,7 +104,7 @@ describe('AppError classes (BE-07)', () => {
     test('should create AuthError with default values', () => {
       const error = new AuthError();
 
-      expect(error.message).toBe('Authentication failed');
+      expect(error.message).toBe('인증에 실패했습니다');
       expect(error.code).toBe(AUTH_TOKEN_INVALID);
       expect(error.statusCode).toBe(401);
       expect(error.isOperational).toBe(true);
@@ -146,7 +146,7 @@ describe('AppError classes (BE-07)', () => {
     test('should create ForbiddenError with default message', () => {
       const error = new ForbiddenError();
 
-      expect(error.message).toBe('Access denied');
+      expect(error.message).toBe('접근이 거부되었습니다');
       expect(error.code).toBe(AUTH_FORBIDDEN);
       expect(error.statusCode).toBe(403);
       expect(error.isOperational).toBe(true);
@@ -172,7 +172,7 @@ describe('AppError classes (BE-07)', () => {
     test('should create NotFoundError with default message', () => {
       const error = new NotFoundError();
 
-      expect(error.message).toBe('Resource not found');
+      expect(error.message).toBe('리소스를 찾을 수 없습니다');
       expect(error.code).toBe(RESOURCE_NOT_FOUND);
       expect(error.statusCode).toBe(404);
       expect(error.isOperational).toBe(true);
@@ -198,7 +198,7 @@ describe('AppError classes (BE-07)', () => {
     test('should create RateLimitError with default values', () => {
       const error = new RateLimitError();
 
-      expect(error.message).toBe('Too many requests');
+      expect(error.message).toBe('요청 횟수 제한을 초과했습니다');
       expect(error.code).toBe('RATE_LIMIT_EXCEEDED');
       expect(error.statusCode).toBe(429);
       expect(error.retryAfter).toBeUndefined();
@@ -231,7 +231,7 @@ describe('AppError classes (BE-07)', () => {
     test('should create DatabaseError with default message', () => {
       const error = new DatabaseError();
 
-      expect(error.message).toBe('Database operation failed');
+      expect(error.message).toBe('데이터베이스 작업에 실패했습니다');
       expect(error.code).toBe('DATABASE_ERROR');
       expect(error.statusCode).toBe(500);
       expect(error.isOperational).toBe(false);
@@ -264,7 +264,7 @@ describe('AppError classes (BE-07)', () => {
     test('should create ConflictError with default message', () => {
       const error = new ConflictError();
 
-      expect(error.message).toBe('Resource conflict');
+      expect(error.message).toBe('리소스 충돌이 발생했습니다');
       expect(error.code).toBe('RESOURCE_CONFLICT');
       expect(error.statusCode).toBe(409);
       expect(error.isOperational).toBe(true);

@@ -1,18 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
 import { env } from '../config/env';
 import { AppError, NotFoundError } from '../errors/AppError';
-import { INTERNAL_SERVER_ERROR } from '../constants/errorCodes';
 
 /**
- * Standardized error response format
+ * Standardized error response format (swagger ErrorResponse 스키마 일치)
  */
 interface ErrorResponse {
   success: false;
-  error: {
-    code: string;
-    message: string;
-    details?: Record<string, string[]>;
-  };
+  message: string;
 }
 
 /**
@@ -46,18 +41,8 @@ export function errorHandler(err: Error, req: Request, res: Response, _next: Nex
   if (err instanceof AppError) {
     const response: ErrorResponse = {
       success: false,
-      error: {
-        code: err.code,
-        message: err.message,
-      },
+      message: err.message,
     };
-
-    // Include validation details if present
-    const appError = err as AppError & { details?: Record<string, string[]> };
-    if (appError.details) {
-      (response.error as Record<string, unknown>)['details'] = appError.details;
-    }
-
     res.status(err.statusCode).json(response);
     return;
   }
@@ -67,16 +52,8 @@ export function errorHandler(err: Error, req: Request, res: Response, _next: Nex
   if (errorWithDetails.statusCode && errorWithDetails.code) {
     const response: ErrorResponse = {
       success: false,
-      error: {
-        code: errorWithDetails.code,
-        message: errorWithDetails.message,
-      },
+      message: errorWithDetails.message,
     };
-
-    if (errorWithDetails.details) {
-      response.error.details = errorWithDetails.details;
-    }
-
     res.status(errorWithDetails.statusCode).json(response);
     return;
   }
@@ -84,16 +61,8 @@ export function errorHandler(err: Error, req: Request, res: Response, _next: Nex
   // Unknown error - return 500 Internal Server Error
   const response: ErrorResponse = {
     success: false,
-    error: {
-      code: INTERNAL_SERVER_ERROR,
-      message: isProduction ? '예상치 못한 오류가 발생했습니다' : err.message,
-    },
+    message: isProduction ? '예상치 못한 오류가 발생했습니다' : err.message,
   };
-
-  // Include stack trace only in development
-  if (!isProduction) {
-    (response.error as Record<string, unknown>).stack = err.stack;
-  }
 
   res.status(500).json(response);
 }

@@ -11,7 +11,7 @@ export interface TodoItem {
   id: string;
   user_id: string;
   title: string;
-  description: string;
+  description: string | null;
   start_date: string;
   due_date: string;
   is_completed: boolean;

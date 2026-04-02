@@ -655,10 +655,10 @@ describe('todoValidator (BE-14 through BE-19)', () => {
         expect(result.success).toBe(true);
         if (result.success) {
           expect(result.data).toEqual({
-            sort_by: 'start_date',
+            sort_by: 'due_date',
             sort_order: 'asc',
             page: 1,
-            limit: 20,
+            limit: 10,
           });
         }
       });

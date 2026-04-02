@@ -292,7 +292,7 @@ describe('AuthService (BE-10, BE-11, BE-12)', () => {
 
       await expect(authService.refreshToken(validRefreshToken)).rejects.toThrow(AuthError);
       await expect(authService.refreshToken(validRefreshToken)).rejects.toThrow(
-        'Refresh token has expired',
+        '세션이 만료되었습니다. 다시 로그인해 주세요',
       );
     });
 
@@ -304,7 +304,7 @@ describe('AuthService (BE-10, BE-11, BE-12)', () => {
 
       await expect(authService.refreshToken(validRefreshToken)).rejects.toThrow(AuthError);
       await expect(authService.refreshToken(validRefreshToken)).rejects.toThrow(
-        'Invalid refresh token',
+        '유효하지 않은 토큰입니다',
       );
     });
 
@@ -320,7 +320,7 @@ describe('AuthService (BE-10, BE-11, BE-12)', () => {
 
       await expect(authService.refreshToken(validRefreshToken)).rejects.toThrow(AuthError);
       await expect(authService.refreshToken(validRefreshToken)).rejects.toThrow(
-        'Invalid token type',
+        '유효하지 않은 토큰입니다',
       );
     });
 
@@ -338,7 +338,7 @@ describe('AuthService (BE-10, BE-11, BE-12)', () => {
       mockUserRepository.findById.mockResolvedValue(undefined);
 
       await expect(authService.refreshToken(validRefreshToken)).rejects.toThrow(AuthError);
-      await expect(authService.refreshToken(validRefreshToken)).rejects.toThrow('User not found');
+      await expect(authService.refreshToken(validRefreshToken)).rejects.toThrow('사용자를 찾을 수 없습니다');
     });
 
     test('should verify user exists after token verification', async () => {
@@ -381,7 +381,7 @@ describe('AuthService (BE-10, BE-11, BE-12)', () => {
 
       await expect(authService.refreshToken(validRefreshToken)).rejects.toThrow(AuthError);
       await expect(authService.refreshToken(validRefreshToken)).rejects.toThrow(
-        'Token verification failed',
+        '토큰 검증에 실패했습니다',
       );
     });
   });
@@ -454,7 +454,7 @@ describe('AuthService (BE-10, BE-11, BE-12)', () => {
       });
 
       // The error gets caught and wrapped in AuthError with generic message
-      await expect(authService.refreshToken('token')).rejects.toThrow('Token verification failed');
+      await expect(authService.refreshToken('token')).rejects.toThrow('토큰 검증에 실패했습니다');
     });
   });
 });

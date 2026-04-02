@@ -71,12 +71,26 @@ export class TodoService {
   async getTodos(
     userId: string,
     status?: TodoStatus,
-    sortBy: 'start_date' | 'due_date' = 'start_date',
+    sortBy: 'start_date' | 'due_date' = 'due_date',
     sortOrder: 'asc' | 'desc' = 'asc',
     page: number = 1,
-    limit: number = 20,
+    limit: number = 10,
   ): Promise<GetTodosResult> {
-    // Fetch todos from repository
+    if (status) {
+      // status 필터 시: 전체 조회 후 런타임 필터 → 페이지네이션 적용
+      // (status는 DB에 저장되지 않으므로 정확한 total을 위해 전체 데이터 필요)
+      const allRaw = await this.todoRepository.findAllByUserId(userId, sortBy, sortOrder);
+      const allWithStatus = addStatusToTodos(allRaw);
+      const filtered = allWithStatus.filter((todo) => todo.status === status);
+
+      const total = filtered.length;
+      const offset = (page - 1) * limit;
+      const pagedTodos = filtered.slice(offset, offset + limit);
+
+      return { todos: pagedTodos, total, page, limit };
+    }
+
+    // status 필터 없음: DB 페이지네이션 그대로 사용
     const { todos: rawTodos, total } = await this.todoRepository.findByUserId({
       user_id: userId,
       sort_by: sortBy,
@@ -85,18 +99,9 @@ export class TodoService {
       limit,
     });
 
-    // Add status to each todo
-    const todosWithStatus = addStatusToTodos(rawTodos);
-
-    // Filter by status if provided (runtime filtering)
-    let filteredTodos = todosWithStatus;
-    if (status) {
-      filteredTodos = todosWithStatus.filter((todo) => todo.status === status);
-    }
-
     return {
-      todos: filteredTodos,
-      total: status ? filteredTodos.length : total,
+      todos: addStatusToTodos(rawTodos),
+      total,
       page,
       limit,
     };

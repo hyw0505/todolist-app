@@ -22,9 +22,10 @@ export interface AuthenticatedRequest extends Request {
 
 /**
  * JWT Token payload structure
+ * sub: userId (JWT standard claim)
  */
 interface TokenPayload {
-  userId: string;
+  sub: string; // userId
   email: string;
   iat: number;
   exp: number;
@@ -59,7 +60,7 @@ export function authenticateToken(req: Request, _res: Response, next: NextFuncti
 
     // Inject user info into request
     (req as AuthenticatedRequest).user = {
-      userId: decoded.userId,
+      userId: decoded.sub,
       email: decoded.email,
       iat: decoded.iat,
       exp: decoded.exp,
@@ -104,7 +105,7 @@ export function optionalAuth(req: Request, _res: Response, next: NextFunction): 
     const decoded = jwt.verify(token, env.JWT_ACCESS_SECRET) as TokenPayload;
 
     (req as AuthenticatedRequest).user = {
-      userId: decoded.userId,
+      userId: decoded.sub,
       email: decoded.email,
       iat: decoded.iat,
       exp: decoded.exp,

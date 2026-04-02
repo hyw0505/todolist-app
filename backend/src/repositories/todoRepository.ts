@@ -115,46 +115,55 @@ export class TodoRepository {
    * @throws DatabaseError if query fails
    */
   async findByUserId(options: GetTodosOptions): Promise<{ todos: Todo[]; total: number }> {
-    const { user_id, sort_by = 'start_date', sort_order = 'asc', page = 1, limit = 20 } = options;
+    const { user_id, sort_by = 'due_date', sort_order = 'asc', page = 1, limit = 10 } = options;
 
     const offset = (page - 1) * limit;
 
-    // Base query for counting
-    const countQuery = `
-      SELECT COUNT(*)::int as count
-      FROM todos
-      WHERE user_id = $1
-    `;
-
-    // Base query for fetching todos
-    const baseQuery = `
-      SELECT *
-      FROM todos
-      WHERE user_id = $1
-    `;
-
     try {
       // Get total count
-      const countResult = await this.pool.query<{ count: number }>(countQuery, [user_id]);
+      const countResult = await this.pool.query<{ count: number }>(
+        `SELECT COUNT(*)::int as count FROM todos WHERE user_id = $1`,
+        [user_id],
+      );
       const total = countResult.rows[0].count;
 
-      // If no todos, return empty array
       if (total === 0) {
         return { todos: [], total };
       }
 
       // Get paginated todos with sorting
-      const query = `
-        ${baseQuery}
-        ORDER BY ${sort_by} ${sort_order.toUpperCase()}
-        LIMIT $2 OFFSET $3
-      `;
-
-      const result = await this.pool.query<Todo>(query, [user_id, limit, offset]);
+      const result = await this.pool.query<Todo>(
+        `SELECT * FROM todos WHERE user_id = $1 ORDER BY ${sort_by} ${sort_order.toUpperCase()} LIMIT $2 OFFSET $3`,
+        [user_id, limit, offset],
+      );
 
       return { todos: result.rows, total };
     } catch (error) {
       throw new DatabaseError('Failed to fetch todos');
+    }
+  }
+
+  /**
+   * Find all todos by user ID without pagination (status 런타임 필터링용)
+   *
+   * @param userId - User ID
+   * @param sortBy - Sort field
+   * @param sortOrder - Sort order
+   * @returns All todos for the user
+   */
+  async findAllByUserId(
+    userId: string,
+    sortBy: 'start_date' | 'due_date' = 'due_date',
+    sortOrder: 'asc' | 'desc' = 'asc',
+  ): Promise<Todo[]> {
+    try {
+      const result = await this.pool.query<Todo>(
+        `SELECT * FROM todos WHERE user_id = $1 ORDER BY ${sortBy} ${sortOrder.toUpperCase()}`,
+        [userId],
+      );
+      return result.rows;
+    } catch (error) {
+      throw new DatabaseError('Failed to fetch all todos');
     }
   }
 
