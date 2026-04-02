@@ -37,7 +37,7 @@ function createApp(pool: Pool): Application {
   app.use(requestLogger);
 
   // Serve static files from public folder
-  app.use(express.static(path.join(__dirname, 'public')));
+  app.use(express.static(path.join(__dirname, '../public')));
 
   // Swagger UI
   const swaggerPath = path.join(__dirname, '../../swagger/swagger.json');
