@@ -16,13 +16,11 @@ export interface SignupRequest {
 }
 
 export interface TokenResponse {
-  success: true;
   accessToken: string;
   user: User;
 }
 
 export interface SignupResponse {
-  success: true;
   message: string;
   userId: string;
 }

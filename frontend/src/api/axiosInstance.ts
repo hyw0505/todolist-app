@@ -103,12 +103,17 @@ axiosInstance.interceptors.response.use(
 function toApiError(error: unknown): ApiError {
   if (axios.isAxiosError(error) && error.response?.data !== undefined) {
     const data = error.response.data as Partial<ApiError>;
-    return {
+    const result: ApiError = {
       success: false,
       message: data.message ?? '알 수 없는 오류가 발생했습니다.',
-      code: data.code,
-      details: data.details,
     };
+    if (data.code !== undefined) {
+      result.code = data.code;
+    }
+    if (data.details !== undefined) {
+      result.details = data.details;
+    }
+    return result;
   }
   if (error instanceof Error) {
     return { success: false, message: error.message };

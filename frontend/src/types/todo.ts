@@ -46,7 +46,6 @@ export interface TodosQueryParams {
 }
 
 export interface TodosResponse {
-  success: true;
   todos: Todo[];
   total: number;
   page: number;

@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import axios from 'axios';
-import type { AxiosInstance, InternalAxiosRequestConfig, AxiosResponse } from 'axios';
+import type { InternalAxiosRequestConfig, AxiosResponse } from 'axios';
 
 // useAuthStore 모킹
 const mockGetState = vi.fn();
@@ -33,7 +33,7 @@ afterEach(() => {
 });
 
 describe('axiosInstance 요청 인터셉터', () => {
-  it('accessToken이 있을 때 Authorization 헤더를 첨부한다', async () => {
+  it('accessToken 이 있을 때 Authorization 헤더를 첨부한다', async () => {
     mockGetState.mockReturnValue({
       accessToken: 'test-token',
       user: null,
@@ -43,21 +43,21 @@ describe('axiosInstance 요청 인터셉터', () => {
 
     const { axiosInstance } = await import('@/api/axiosInstance');
 
-    // 인터셉터를 직접 실행
-    const requestInterceptor = (axiosInstance.interceptors.request as unknown as {
+    const handlers = (axiosInstance.interceptors.request as unknown as {
       handlers: Array<{ fulfilled: (config: InternalAxiosRequestConfig) => InternalAxiosRequestConfig }>;
-    }).handlers[0];
+    }).handlers;
+    const requestInterceptor = handlers[0];
+    expect(requestInterceptor).toBeDefined();
 
     const config: InternalAxiosRequestConfig = {
-      headers: axios.defaults.headers as InternalAxiosRequestConfig['headers'],
+      headers: {} as InternalAxiosRequestConfig['headers'],
     };
-    const result = requestInterceptor.fulfilled(config);
+    const result = requestInterceptor!.fulfilled(config);
 
     expect(result.headers['Authorization']).toBe('Bearer test-token');
   });
 
-  it('accessToken이 없을 때 Authorization 헤더를 첨부하지 않는다', async () => {
-    // accessToken이 null인 상태로 모킹
+  it('accessToken 이 없을 때 Authorization 헤더를 첨부하지 않는다', async () => {
     mockGetState.mockReturnValue({
       accessToken: null,
       user: null,
@@ -67,24 +67,22 @@ describe('axiosInstance 요청 인터셉터', () => {
 
     const { axiosInstance } = await import('@/api/axiosInstance');
 
-    const requestInterceptor = (axiosInstance.interceptors.request as unknown as {
+    const handlers = (axiosInstance.interceptors.request as unknown as {
       handlers: Array<{ fulfilled: (config: InternalAxiosRequestConfig) => InternalAxiosRequestConfig }>;
-    }).handlers[0];
+    }).handlers;
+    const requestInterceptor = handlers[0];
+    expect(requestInterceptor).toBeDefined();
 
-    // Authorization 헤더가 없는 새 config 객체 사용
-    const { AxiosHeaders } = axios;
     const config: InternalAxiosRequestConfig = {
-      headers: new AxiosHeaders(),
+      headers: {} as InternalAxiosRequestConfig['headers'],
     };
-    const result = requestInterceptor.fulfilled(config);
+    const result = requestInterceptor!.fulfilled(config);
 
     expect(result.headers['Authorization']).toBeUndefined();
   });
 });
 
 describe('axiosInstance 응답 인터셉터', () => {
-  let axiosInstanceModule: { axiosInstance: AxiosInstance };
-
   beforeEach(async () => {
     mockGetState.mockReturnValue({
       accessToken: 'old-token',
@@ -92,25 +90,31 @@ describe('axiosInstance 응답 인터셉터', () => {
       setAuth: mockSetAuth,
       clearAuth: mockClearAuth,
     });
-    axiosInstanceModule = await import('@/api/axiosInstance');
   });
 
-  it('401 응답 시 /auth/refresh 를 호출한다', async () => {
-    const postSpy = vi.spyOn(axiosInstanceModule.axiosInstance, 'post').mockResolvedValueOnce({
-      data: { accessToken: 'new-token' },
-    } as AxiosResponse);
+  it('401 응답 시 토큰 갱신을 시도한다', async () => {
+    const { axiosInstance } = await import('@/api/axiosInstance');
 
-    vi.spyOn(axiosInstanceModule.axiosInstance, 'request').mockResolvedValueOnce({
+    // post 메서드를 모킹
+    const originalPost = axiosInstance.post;
+    axiosInstance.post = vi.fn().mockResolvedValueOnce({
+      data: { accessToken: 'new-token' },
+    }) as unknown as typeof axiosInstance.post;
+
+    // request 메서드를 모킹
+    axiosInstance.request = vi.fn().mockResolvedValueOnce({
       data: {},
       status: 200,
-    } as AxiosResponse);
+    } as AxiosResponse) as unknown as typeof axiosInstance.request;
 
-    const responseInterceptor = (axiosInstanceModule.axiosInstance.interceptors.response as unknown as {
+    const handlers = (axiosInstance.interceptors.response as unknown as {
       handlers: Array<{
         fulfilled: (res: AxiosResponse) => AxiosResponse;
         rejected: (err: unknown) => Promise<unknown>;
       }>;
-    }).handlers[0];
+    }).handlers;
+    const responseInterceptor = handlers[0];
+    expect(responseInterceptor).toBeDefined();
 
     const error401 = {
       isAxiosError: true,
@@ -118,32 +122,39 @@ describe('axiosInstance 응답 인터셉터', () => {
       config: { headers: {}, _retry: false, url: '/todos' },
     };
 
-    Object.defineProperty(error401, 'isAxiosError', { value: true });
-
-    // axios.isAxiosError가 true를 반환하도록 설정
     vi.spyOn(axios, 'isAxiosError').mockReturnValue(true);
 
     try {
-      await responseInterceptor.rejected(error401);
+      await responseInterceptor!.rejected(error401);
     } catch {
       // 재시도 이후 실패해도 refresh 호출 여부만 검증
     }
 
-    expect(postSpy).toHaveBeenCalledWith('/auth/refresh');
+    expect(axiosInstance.post).toHaveBeenCalledWith('/auth/refresh');
+
+    // 원복
+    axiosInstance.post = originalPost;
   });
 
-  it('refresh 실패 시 clearAuth를 호출하고 /login으로 리다이렉트한다', async () => {
-    vi.spyOn(axiosInstanceModule.axiosInstance, 'post').mockRejectedValueOnce(
+  it('refresh 실패 시 clearAuth 를 호출하고 /login 으로 리다이렉트한다', async () => {
+    const { axiosInstance } = await import('@/api/axiosInstance');
+
+    // post 메서드를 모킹 (실패)
+    const originalPost = axiosInstance.post;
+    axiosInstance.post = vi.fn().mockRejectedValueOnce(
       new Error('refresh failed'),
-    );
+    ) as unknown as typeof axiosInstance.post;
+
     vi.spyOn(axios, 'isAxiosError').mockReturnValue(true);
 
-    const responseInterceptor = (axiosInstanceModule.axiosInstance.interceptors.response as unknown as {
+    const handlers = (axiosInstance.interceptors.response as unknown as {
       handlers: Array<{
         fulfilled: (res: AxiosResponse) => AxiosResponse;
         rejected: (err: unknown) => Promise<unknown>;
       }>;
-    }).handlers[0];
+    }).handlers;
+    const responseInterceptor = handlers[0];
+    expect(responseInterceptor).toBeDefined();
 
     const error401 = {
       isAxiosError: true,
@@ -152,12 +163,15 @@ describe('axiosInstance 응답 인터셉터', () => {
     };
 
     try {
-      await responseInterceptor.rejected(error401);
+      await responseInterceptor!.rejected(error401);
     } catch {
       // 예상된 reject
     }
 
     expect(mockClearAuth).toHaveBeenCalled();
     expect(window.location.href).toBe('/login');
+
+    // 원복
+    axiosInstance.post = originalPost;
   });
 });
