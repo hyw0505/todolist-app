@@ -36,8 +36,8 @@ export type TodoWithStatus<T extends TodoBase = TodoBase> = T & {
  *
  * Uses KST (UTC+9) for date comparison
  *
- * @param startDate - Start date in YYYY-MM-DD format
- * @param dueDate - Due date in YYYY-MM-DD format
+ * @param startDate - Start date in ISO format (YYYY-MM-DDTHH:mm:ss.sssZ)
+ * @param dueDate - Due date in ISO format (YYYY-MM-DDTHH:mm:ss.sssZ)
  * @param isCompleted - Whether the todo is completed
  * @param isSuccess - Success status (only valid when completed)
  * @returns TodoStatus value
@@ -54,13 +54,18 @@ export function calculateTodoStatus(
   }
 
   // 오늘 날짜를 KST(Asia/Seoul) 기준으로 YYYY-MM-DD 문자열로 추출
-  // toLocaleDateString('en-CA')는 'YYYY-MM-DD' 형식을 반환
+  // toLocaleDateString('en-CA') 는 'YYYY-MM-DD' 형식을 반환
   const todayKST = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Seoul' });
 
+  // start_date, due_date 를 ISO 문자열 (YYYY-MM-DDTHH:mm:ss.sssZ) 에서 YYYY-MM-DD 형식으로 변환
+  // Date 객체로 변환 후 KST 기준으로 날짜 추출
+  const startKST = new Date(startDate).toLocaleDateString('en-CA', { timeZone: 'Asia/Seoul' });
+  const dueKST = new Date(dueDate).toLocaleDateString('en-CA', { timeZone: 'Asia/Seoul' });
+
   // YYYY-MM-DD 문자열 직접 비교 (날짜 형식이 동일하므로 사전순 = 날짜순)
-  if (todayKST < startDate) {
+  if (todayKST < startKST) {
     return 'NOT_STARTED';
-  } else if (todayKST > dueDate) {
+  } else if (todayKST > dueKST) {
     return 'OVERDUE';
   } else {
     return 'IN_PROGRESS';

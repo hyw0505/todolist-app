@@ -20,12 +20,16 @@ export function createTestPool(): Pool {
 /**
  * Clean up test data from tables
  * Order matters due to foreign key constraints
+ * @param pool - Database pool
+ * @param includeUsers - If true, also delete from users table (default: false)
  */
-export async function cleanTestDatabase(pool: Pool): Promise<void> {
+export async function cleanTestDatabase(pool: Pool, includeUsers: boolean = false): Promise<void> {
   // Delete from todos first (has foreign key to users)
   await pool.query('DELETE FROM todos');
-  // Then delete from users
-  await pool.query('DELETE FROM users');
+  // Then delete from users if requested
+  if (includeUsers) {
+    await pool.query('DELETE FROM users');
+  }
 }
 
 /**

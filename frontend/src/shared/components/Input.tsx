@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTheme } from '@/shared/hooks/useTheme';
 
 interface InputProps {
   label?: string;
@@ -28,6 +29,7 @@ export function Input({
   autoComplete,
 }: InputProps): React.JSX.Element {
   const [isFocused, setIsFocused] = useState(false);
+  const { colors } = useTheme();
 
   const wrapperStyle: React.CSSProperties = {
     display: 'flex',
@@ -39,37 +41,37 @@ export function Input({
     fontSize: '14px',
     fontWeight: 500,
     marginBottom: '6px',
-    color: '#1A1A1A',
+    color: colors.textPrimary,
     fontFamily: "'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif",
   };
 
   const inputStyle: React.CSSProperties = {
     border: error
-      ? '1px solid #FF3838'
+      ? `1px solid ${colors.danger}`
       : isFocused
-      ? '1px solid #0068C4'
-      : '1px solid #C4C4C4',
+      ? `1px solid ${colors.primary}`
+      : `1px solid ${colors.borderStrong}`,
     borderRadius: '4px',
     padding: '10px 12px',
     fontSize: '14px',
     fontFamily: "'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif",
-    color: '#1A1A1A',
+    color: colors.textPrimary,
     outline: 'none',
     boxSizing: 'border-box',
     width: '100%',
-    backgroundColor: disabled ? '#F5F5F5' : '#ffffff',
+    backgroundColor: disabled ? colors.surface2 : colors.surface1,
     cursor: disabled ? 'not-allowed' : 'text',
     boxShadow: error
-      ? '0 0 0 3px rgba(255,56,56,0.15)'
+      ? colors.inputErrorShadow
       : isFocused
-      ? '0 0 0 3px rgba(0,104,196,0.15)'
+      ? colors.inputFocusShadow
       : 'none',
-    transition: 'border-color 0.15s, box-shadow 0.15s',
+    transition: 'border-color 0.15s, box-shadow 0.15s, background-color 0.15s',
   };
 
   const errorStyle: React.CSSProperties = {
     fontSize: '12px',
-    color: '#FF3838',
+    color: colors.danger,
     marginTop: '4px',
     fontFamily: "'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif",
   };
@@ -79,7 +81,7 @@ export function Input({
       {label && (
         <label htmlFor={id} style={labelStyle}>
           {label}
-          {required && <span style={{ color: '#FF3838', marginLeft: '2px' }}>*</span>}
+          {required && <span style={{ color: colors.danger, marginLeft: '2px' }}>*</span>}
         </label>
       )}
       <input

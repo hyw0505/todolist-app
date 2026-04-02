@@ -115,10 +115,8 @@ describe('SignupForm', () => {
   it('모든 유효성 검사를 통과하면 회원가입이 진행된다', async () => {
     const mockSignupResponse = {
       success: true as const,
-      data: {
-        message: '회원가입이 완료되었습니다.',
-        userId: 'user-1',
-      },
+      message: '회원가입이 완료되었습니다.',
+      userId: 'user-1',
     };
 
     vi.spyOn(authApi, 'signup').mockResolvedValue(mockSignupResponse);

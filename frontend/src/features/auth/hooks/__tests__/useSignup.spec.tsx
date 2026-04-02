@@ -26,10 +26,8 @@ describe('useSignup', () => {
   it('회원가입 성공 시 onSuccess 콜백이 호출된다', async () => {
     const mockSignupResponse = {
       success: true as const,
-      data: {
-        message: '회원가입이 완료되었습니다.',
-        userId: 'user-1',
-      },
+      message: '회원가입이 완료되었습니다.',
+      userId: 'user-1',
     };
 
     vi.spyOn(authApi, 'signup').mockResolvedValue(mockSignupResponse);
@@ -74,10 +72,8 @@ describe('useSignup', () => {
   it('올바른 뮤테이션 함수를 사용한다', async () => {
     const mockSignupResponse = {
       success: true as const,
-      data: {
-        message: '회원가입이 완료되었습니다.',
-        userId: 'user-1',
-      },
+      message: '회원가입이 완료되었습니다.',
+      userId: 'user-1',
     };
 
     const signupSpy = vi.spyOn(authApi, 'signup').mockResolvedValue(mockSignupResponse);

@@ -48,7 +48,7 @@ export class TodoController {
    * Handle get todos list
    *
    * GET /api/v1/todos?status=&sort_by=&sort_order=&page=&limit=
-   * Response: { success: true, todos, total, page, limit } (200)
+   * Response: { success: true, data: { todos, total, page, limit } } (200)
    */
   getTodos = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
@@ -74,7 +74,7 @@ export class TodoController {
 
       res.status(200).json({
         success: true,
-        ...result,
+        data: result,
       });
     } catch (error) {
       next(error);

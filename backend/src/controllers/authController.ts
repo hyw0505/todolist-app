@@ -3,6 +3,7 @@ import { Pool } from 'pg';
 import { env } from '../config/env';
 import { AuthError } from '../errors/AppError';
 import { AuthService } from '../services/authService';
+import { resetRateLimit } from '../middlewares/rateLimiter';
 
 /**
  * Auth controller handling HTTP requests for authentication
@@ -50,6 +51,11 @@ export class AuthController {
       const { email, password } = req.body;
 
       const result = await this.authService.login(email, password);
+
+      // 로그인 성공 시 rate limit 카운터 초기화
+      const forwarded = req.headers['x-forwarded-for'];
+      const clientIP = typeof forwarded === 'string' ? forwarded.split(',')[0].trim() : (req.ip ?? req.socket.remoteAddress ?? 'unknown');
+      resetRateLimit(clientIP);
 
       // Set refresh token as httpOnly cookie (PRD §4.7: sameSite=Strict, secure=production)
       res.cookie('refreshToken', result.refreshToken, {

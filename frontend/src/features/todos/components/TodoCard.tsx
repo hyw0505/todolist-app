@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
 import type { Todo, TodoStatus } from '@/types/todo';
-import {
-  getTodoStatusLabel,
-  getTodoStatusBgColor,
-  getTodoStatusTextColor,
-  getTodoStatusBorderColor,
-} from '@/shared/utils/todoStatusLabel';
+import { getTodoStatusLabel } from '@/shared/utils/todoStatusLabel';
 import { formatDateKorean } from '@/shared/utils/formatDate';
 import { Button } from '@/shared/components/Button';
 import { Modal } from '@/shared/components/Modal';
+import { useTheme } from '@/shared/hooks/useTheme';
 
 interface TodoCardProps {
   todo: Todo;
@@ -28,28 +24,51 @@ interface TodoCardProps {
 export function TodoCard({ todo, onComplete, onEdit, onDelete }: TodoCardProps): React.JSX.Element {
   const [showCompleteModal, setShowCompleteModal] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const { colors } = useTheme();
 
   const statusLabel = getTodoStatusLabel(todo.status);
-  const statusBgColor = getTodoStatusBgColor(todo.status);
-  const statusTextColor = getTodoStatusTextColor(todo.status);
-  const statusBorderColor = getTodoStatusBorderColor(todo.status);
 
-  // 상태별 카드 배경색 (스타일 가이드 준수)
-  const getCardBackgroundColor = (status: TodoStatus): string => {
-    const colors: Record<TodoStatus, string> = {
-      NOT_STARTED: '#ffffff',
-      IN_PROGRESS: '#ffffff',
-      OVERDUE: '#FFF0F0',
-      COMPLETED_SUCCESS: '#F0FFF4',
-      COMPLETED_FAILURE: '#FFF5F5',
+  const getStatusColors = (status: TodoStatus) => {
+    const map: Record<TodoStatus, { bg: string; text: string; border: string; cardBg: string }> = {
+      NOT_STARTED: {
+        bg: colors.statusNotStartedBg,
+        text: colors.statusNotStartedText,
+        border: colors.statusNotStartedBorder,
+        cardBg: colors.cardBgNotStarted,
+      },
+      IN_PROGRESS: {
+        bg: colors.statusInProgressBg,
+        text: colors.statusInProgressText,
+        border: colors.statusInProgressBorder,
+        cardBg: colors.cardBgInProgress,
+      },
+      OVERDUE: {
+        bg: colors.statusOverdueBg,
+        text: colors.statusOverdueText,
+        border: colors.statusOverdueBorder,
+        cardBg: colors.cardBgOverdue,
+      },
+      COMPLETED_SUCCESS: {
+        bg: colors.statusCompletedSuccessBg,
+        text: colors.statusCompletedSuccessText,
+        border: colors.statusCompletedSuccessBorder,
+        cardBg: colors.cardBgCompletedSuccess,
+      },
+      COMPLETED_FAILURE: {
+        bg: colors.statusCompletedFailureBg,
+        text: colors.statusCompletedFailureText,
+        border: colors.statusCompletedFailureBorder,
+        cardBg: colors.cardBgCompletedFailure,
+      },
     };
-    return colors[status];
+    return map[status];
   };
 
-  // 카드 컨테이너 스타일
+  const statusColors = getStatusColors(todo.status);
+
   const cardStyle: React.CSSProperties = {
-    backgroundColor: getCardBackgroundColor(todo.status),
-    borderLeft: `4px solid ${statusBorderColor}`,
+    backgroundColor: statusColors.cardBg,
+    borderLeft: `4px solid ${statusColors.border}`,
     borderRadius: '4px',
     padding: '16px',
     boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
@@ -57,7 +76,6 @@ export function TodoCard({ todo, onComplete, onEdit, onDelete }: TodoCardProps):
     cursor: 'pointer',
   };
 
-  // 헤더 영역 (상태 배지 + 제목)
   const headerStyle: React.CSSProperties = {
     display: 'flex',
     alignItems: 'flex-start',
@@ -66,21 +84,19 @@ export function TodoCard({ todo, onComplete, onEdit, onDelete }: TodoCardProps):
     gap: '12px',
   };
 
-  // 제목 스타일
   const titleStyle: React.CSSProperties = {
     fontSize: '16px',
     fontWeight: 600,
-    color: todo.is_completed ? '#767676' : '#1A1A1A',
+    color: todo.is_completed ? colors.textMuted : colors.textPrimary,
     fontFamily: "'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif",
     margin: 0,
     flex: 1,
     textDecoration: todo.is_completed ? 'line-through' : 'none',
   };
 
-  // 상태 배지 스타일
   const statusBadgeStyle: React.CSSProperties = {
-    backgroundColor: statusBgColor,
-    color: statusTextColor,
+    backgroundColor: statusColors.bg,
+    color: statusColors.text,
     borderRadius: '20px',
     padding: '3px 10px',
     fontSize: '12px',
@@ -90,10 +106,9 @@ export function TodoCard({ todo, onComplete, onEdit, onDelete }: TodoCardProps):
     flexShrink: 0,
   };
 
-  // 설명 스타일
   const descriptionStyle: React.CSSProperties = {
     fontSize: '14px',
-    color: '#767676',
+    color: colors.textMuted,
     fontFamily: "'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif",
     marginBottom: '12px',
     lineHeight: 1.5,
@@ -103,19 +118,23 @@ export function TodoCard({ todo, onComplete, onEdit, onDelete }: TodoCardProps):
     overflow: 'hidden',
   };
 
-  // 날짜 정보 스타일
   const dateStyle: React.CSSProperties = {
     fontSize: '12px',
-    color: '#767676',
+    color: colors.textMuted,
     fontFamily: "'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif",
     marginBottom: '12px',
   };
 
-  // 액션 버튼 영역 스타일
   const actionsStyle: React.CSSProperties = {
     display: 'flex',
     gap: '8px',
     justifyContent: 'flex-end',
+  };
+
+  const modalTextStyle: React.CSSProperties = {
+    fontSize: '14px',
+    color: colors.textSecondary,
+    marginBottom: '16px',
   };
 
   const handleCompleteClick = (e: React.MouseEvent) => {
@@ -198,9 +217,7 @@ export function TodoCard({ todo, onComplete, onEdit, onDelete }: TodoCardProps):
         size="sm"
       >
         <div style={{ textAlign: 'center', padding: '16px 0' }}>
-          <p style={{ fontSize: '14px', color: '#404040', marginBottom: '16px' }}>
-            할일을 완료 처리하시겠습니까?
-          </p>
+          <p style={modalTextStyle}>할일을 완료 처리하시겠습니까?</p>
           <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
             <Button variant="primary" size="md" onClick={handleCompleteSuccess}>
               성공
@@ -223,9 +240,7 @@ export function TodoCard({ todo, onComplete, onEdit, onDelete }: TodoCardProps):
         size="sm"
       >
         <div style={{ textAlign: 'center', padding: '16px 0' }}>
-          <p style={{ fontSize: '14px', color: '#404040', marginBottom: '16px' }}>
-            정말로 이 할일을 삭제하시겠습니까?
-          </p>
+          <p style={modalTextStyle}>정말로 이 할일을 삭제하시겠습니까?</p>
           <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
             <Button variant="danger" size="md" onClick={handleDeleteConfirm}>
               삭제

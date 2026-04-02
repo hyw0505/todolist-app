@@ -58,6 +58,7 @@ describe('errorHandler middleware (BE-07)', () => {
       expect(mockRes.json).toHaveBeenCalledWith({
         success: false,
         message: 'Something went wrong',
+        error: { code: 'CUSTOM_ERROR' },
       });
     });
 
@@ -84,6 +85,7 @@ describe('errorHandler middleware (BE-07)', () => {
       expect(mockRes.json).toHaveBeenCalledWith({
         success: false,
         message: 'Validation failed',
+        error: { code: 'VALIDATION_ERROR' },
       });
     });
 
@@ -96,6 +98,7 @@ describe('errorHandler middleware (BE-07)', () => {
       expect(mockRes.json).toHaveBeenCalledWith({
         success: false,
         message: 'Invalid input',
+        error: { code: 'VALIDATION_ERROR' },
       });
     });
   });
@@ -110,6 +113,7 @@ describe('errorHandler middleware (BE-07)', () => {
       expect(mockRes.json).toHaveBeenCalledWith({
         success: false,
         message: 'Invalid token',
+        error: { code: 'AUTH_TOKEN_INVALID' },
       });
     });
 
@@ -122,6 +126,7 @@ describe('errorHandler middleware (BE-07)', () => {
       expect(mockRes.json).toHaveBeenCalledWith({
         success: false,
         message: 'Authorization header is missing',
+        error: { code: 'AUTH_TOKEN_MISSING' },
       });
     });
   });
@@ -136,6 +141,7 @@ describe('errorHandler middleware (BE-07)', () => {
       expect(mockRes.json).toHaveBeenCalledWith({
         success: false,
         message: 'Access denied',
+        error: { code: 'AUTH_FORBIDDEN' },
       });
     });
   });
@@ -150,6 +156,7 @@ describe('errorHandler middleware (BE-07)', () => {
       expect(mockRes.json).toHaveBeenCalledWith({
         success: false,
         message: 'User not found',
+        error: { code: 'RESOURCE_NOT_FOUND' },
       });
     });
   });
@@ -164,6 +171,7 @@ describe('errorHandler middleware (BE-07)', () => {
       expect(mockRes.json).toHaveBeenCalledWith({
         success: false,
         message: 'Too many requests',
+        error: { code: 'RATE_LIMIT_EXCEEDED' },
       });
     });
   });
@@ -237,6 +245,7 @@ describe('errorHandler middleware (BE-07)', () => {
       expect(mockRes.json).toHaveBeenCalledWith({
         success: false,
         message: 'Connection failed',
+        error: { code: 'DATABASE_ERROR' },
       });
     });
 

@@ -4,6 +4,7 @@ import { Input } from '@/shared/components/Input';
 import { Button } from '@/shared/components/Button';
 import { ErrorMessage } from '@/shared/components/ErrorMessage';
 import { useLogin } from '../hooks/useLogin';
+import { useTheme } from '@/shared/hooks/useTheme';
 import type { LoginRequest } from '@/types/auth';
 
 interface LoginFormProps {
@@ -20,6 +21,7 @@ interface LoginFormProps {
  */
 export function LoginForm({ onSuccess }: LoginFormProps): React.JSX.Element {
   const navigate = useNavigate();
+  const { colors } = useTheme();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState<{ email?: string; password?: string; general?: string }>({});
@@ -35,46 +37,29 @@ export function LoginForm({ onSuccess }: LoginFormProps): React.JSX.Element {
     },
   });
 
-  // 이메일 유효성 검증
   const validateEmail = (value: string): string | undefined => {
-    if (!value) {
-      return '이메일을 입력해주세요.';
-    }
+    if (!value) return '이메일을 입력해주세요.';
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(value)) {
-      return '올바른 이메일 형식이 아닙니다.';
-    }
+    if (!emailRegex.test(value)) return '올바른 이메일 형식이 아닙니다.';
     return undefined;
   };
 
-  // 비밀번호 유효성 검증
   const validatePassword = (value: string): string | undefined => {
-    if (!value) {
-      return '비밀번호를 입력해주세요.';
-    }
+    if (!value) return '비밀번호를 입력해주세요.';
     return undefined;
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    // 유효성 검사
     const emailError = validateEmail(email);
     const passwordError = validatePassword(password);
-
     if (emailError || passwordError) {
-      setErrors({
-        email: emailError ?? '',
-        password: passwordError ?? '',
-      });
+      setErrors({ email: emailError ?? '', password: passwordError ?? '' });
       return;
     }
-
-    // 로그인 요청
     loginMutate({ email, password } as LoginRequest);
   };
 
-  // 폼 컨테이너 스타일
   const formStyle: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
@@ -82,14 +67,12 @@ export function LoginForm({ onSuccess }: LoginFormProps): React.JSX.Element {
     width: '100%',
   };
 
-  // 입력 필드 그룹 스타일
   const inputGroupStyle: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
     gap: '12px',
   };
 
-  // 버튼 그룹 스타일
   const buttonGroupStyle: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
@@ -97,18 +80,17 @@ export function LoginForm({ onSuccess }: LoginFormProps): React.JSX.Element {
     marginTop: '8px',
   };
 
-  // 링크 스타일
   const linkStyle: React.CSSProperties = {
     textAlign: 'center',
     fontSize: '14px',
-    color: '#767676',
+    color: colors.textMuted,
     fontFamily: "'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif",
   };
 
   const linkButtonStyle: React.CSSProperties = {
     background: 'none',
     border: 'none',
-    color: '#0068C4',
+    color: colors.primary,
     fontSize: '14px',
     fontWeight: 500,
     fontFamily: "'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif",
@@ -128,9 +110,7 @@ export function LoginForm({ onSuccess }: LoginFormProps): React.JSX.Element {
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
-            if (errors.email) {
-              setErrors((prev) => ({ ...prev, email: '' }));
-            }
+            if (errors.email) setErrors((prev) => ({ ...prev, email: '' }));
           }}
           placeholder="example@email.com"
           error={errors.email}
@@ -146,9 +126,7 @@ export function LoginForm({ onSuccess }: LoginFormProps): React.JSX.Element {
           value={password}
           onChange={(e) => {
             setPassword(e.target.value);
-            if (errors.password) {
-              setErrors((prev) => ({ ...prev, password: '' }));
-            }
+            if (errors.password) setErrors((prev) => ({ ...prev, password: '' }));
           }}
           placeholder="비밀번호를 입력해주세요"
           error={errors.password}
@@ -166,11 +144,7 @@ export function LoginForm({ onSuccess }: LoginFormProps): React.JSX.Element {
 
         <div style={linkStyle}>
           계정이 없으신가요?{' '}
-          <button
-            type="button"
-            style={linkButtonStyle}
-            onClick={() => navigate('/signup')}
-          >
+          <button type="button" style={linkButtonStyle} onClick={() => navigate('/signup')}>
             회원가입
           </button>
         </div>

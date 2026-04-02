@@ -1,7 +1,7 @@
 import { Pool } from 'pg';
 import { TodoRepository, CreateTodoDTO, UpdateTodoDTO, Todo } from '../repositories/todoRepository';
 import { addStatusToTodo, addStatusToTodos, TodoWithStatus, TodoStatus } from './todoStatusService';
-import { NotFoundError, ForbiddenError, ConflictError } from '../errors/AppError';
+import { NotFoundError, ForbiddenError, ConflictError, ValidationError } from '../errors/AppError';
 
 /**
  * Todo item with calculated status
@@ -145,7 +145,7 @@ export class TodoService {
     // Check if at least one field is provided
     const fields = Object.keys(updateData);
     if (fields.length === 0) {
-      throw new Error('수정할 필드가 최소 하나 이상 필요합니다');
+      throw new ValidationError('수정할 필드가 최소 하나 이상 필요합니다');
     }
 
     // Get existing todo for ownership check and date validation
@@ -164,21 +164,21 @@ export class TodoService {
       const startDate = new Date(updateData.start_date);
       const dueDate = new Date(updateData.due_date);
       if (dueDate < startDate) {
-        throw new Error('종료일은 시작일과 같거나 이후 날짜여야 합니다');
+        throw new ValidationError('종료일은 시작일과 같거나 이후 날짜여야 합니다');
       }
     } else if (updateData.start_date && !updateData.due_date) {
       // Check new start_date against existing due_date
       const startDate = new Date(updateData.start_date);
       const dueDate = new Date(existingTodo.due_date);
       if (dueDate < startDate) {
-        throw new Error('종료일은 시작일과 같거나 이후 날짜여야 합니다');
+        throw new ValidationError('종료일은 시작일과 같거나 이후 날짜여야 합니다');
       }
     } else if (updateData.due_date && !updateData.start_date) {
       // Check new due_date against existing start_date
       const startDate = new Date(existingTodo.start_date);
       const dueDate = new Date(updateData.due_date);
       if (dueDate < startDate) {
-        throw new Error('종료일은 시작일과 같거나 이후 날짜여야 합니다');
+        throw new ValidationError('종료일은 시작일과 같거나 이후 날짜여야 합니다');
       }
     }
 

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useTheme } from '@/shared/hooks/useTheme';
 
 interface ModalProps {
   isOpen: boolean;
@@ -21,6 +22,8 @@ export function Modal({
   children,
   size = 'md',
 }: ModalProps): React.JSX.Element | null {
+  const { colors } = useTheme();
+
   useEffect(() => {
     if (!isOpen) return;
 
@@ -41,7 +44,7 @@ export function Modal({
   const backdropStyle: React.CSSProperties = {
     position: 'fixed',
     inset: 0,
-    background: 'rgba(0,0,0,0.5)',
+    background: colors.overlayBg,
     zIndex: 1000,
     display: 'flex',
     alignItems: 'center',
@@ -49,10 +52,10 @@ export function Modal({
   };
 
   const containerStyle: React.CSSProperties = {
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface1,
     borderRadius: '8px',
     padding: '24px',
-    boxShadow: '0 4px 16px rgba(0,0,0,0.16)',
+    boxShadow: colors.shadow2,
     maxWidth: maxWidthMap[size],
     width: '100%',
     maxHeight: '90vh',
@@ -70,7 +73,7 @@ export function Modal({
   const titleStyle: React.CSSProperties = {
     fontSize: '18px',
     fontWeight: 600,
-    color: '#1A1A1A',
+    color: colors.textPrimary,
     fontFamily: "'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif",
     margin: 0,
   };
@@ -80,7 +83,7 @@ export function Modal({
     border: 'none',
     cursor: 'pointer',
     fontSize: '20px',
-    color: '#767676',
+    color: colors.textMuted,
     lineHeight: 1,
     padding: '0 4px',
     display: 'flex',
@@ -96,7 +99,7 @@ export function Modal({
   return (
     <div style={backdropStyle} onClick={handleBackdropClick}>
       <div style={containerStyle}>
-        {(title !== undefined) && (
+        {title !== undefined && (
           <div style={headerStyle}>
             <h2 style={titleStyle}>{title}</h2>
             <button style={closeBtnStyle} onClick={onClose} aria-label="닫기" type="button">

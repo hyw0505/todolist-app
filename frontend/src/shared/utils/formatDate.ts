@@ -10,16 +10,19 @@ export function formatDate(date: Date | string): string {
 }
 
 /**
- * YYYY-MM-DD 문자열을 "YYYY년 MM월 DD일" 형식으로 반환
+ * YYYY-MM-DD 문자열을 "YYYY 년 M 월 D 일" 형식으로 반환 (앞자리 0 제거)
  */
 export function formatDateKorean(dateStr: string): string {
-  const [year, month, day] = dateStr.split('-');
-  return `${year}년 ${month}월 ${day}일`;
+  const parts = dateStr.split('-');
+  if (parts.length !== 3) return dateStr;
+  const [year, month, day] = parts;
+  if (!year || !month || !day) return dateStr;
+  return `${year}년 ${parseInt(month)}월 ${parseInt(day)}일`;
 }
 
 /**
- * 두 날짜 문자열(YYYY-MM-DD) 사이의 D-day 계산
- * 오늘 기준 dueDate까지 남은 일수. 음수면 초과.
+ * 두 날짜 문자열 (YYYY-MM-DD) 사이의 D-day 계산
+ * 오늘 기준 dueDate 까지 남은 일수. 음수면 초과.
  */
 export function getDaysUntil(dueDate: string): number {
   const today = getTodayString();

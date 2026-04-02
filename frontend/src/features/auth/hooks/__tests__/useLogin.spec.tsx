@@ -28,10 +28,8 @@ describe('useLogin', () => {
   it('로그인 성공 시 인증 정보를 스토어에 저장한다', async () => {
     const mockLoginResponse = {
       success: true as const,
-      data: {
-        accessToken: 'test-access-token',
-        user: { id: 'user-1', email: 'test@example.com', name: 'Test User' },
-      },
+      accessToken: 'test-access-token',
+      user: { id: 'user-1', email: 'test@example.com', name: 'Test User' },
     };
 
     vi.spyOn(authApi, 'login').mockResolvedValue(mockLoginResponse);
@@ -69,10 +67,8 @@ describe('useLogin', () => {
   it('onSuccess 콜백이 호출된다', async () => {
     const mockLoginResponse = {
       success: true as const,
-      data: {
-        accessToken: 'test-token',
-        user: { id: 'user-1', email: 'test@example.com', name: 'Test' },
-      },
+      accessToken: 'test-token',
+      user: { id: 'user-1', email: 'test@example.com', name: 'Test' },
     };
 
     vi.spyOn(authApi, 'login').mockResolvedValue(mockLoginResponse);

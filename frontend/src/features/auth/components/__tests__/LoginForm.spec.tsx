@@ -78,10 +78,8 @@ describe('LoginForm', () => {
   it('로그인 성공 시 페이지가 리다이렉트된다', async () => {
     const mockLoginResponse = {
       success: true as const,
-      data: {
-        accessToken: 'test-token',
-        user: { id: 'user-1', email: 'test@example.com', name: 'Test' },
-      },
+      accessToken: 'test-token',
+      user: { id: 'user-1', email: 'test@example.com', name: 'Test' },
     };
 
     vi.spyOn(authApi, 'login').mockResolvedValue(mockLoginResponse);

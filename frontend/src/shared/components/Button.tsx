@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Spinner } from './Spinner';
+import { useTheme } from '@/shared/hooks/useTheme';
 
 interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'ghost' | 'danger';
@@ -34,38 +35,6 @@ const sizeStyles: Record<NonNullable<ButtonProps['size']>, React.CSSProperties> 
 
 type VariantKey = NonNullable<ButtonProps['variant']>;
 
-const variantStyles: Record<VariantKey, React.CSSProperties> = {
-  primary: {
-    backgroundColor: '#0068C4',
-    color: '#ffffff',
-    borderRadius: '4px',
-  },
-  secondary: {
-    backgroundColor: '#ffffff',
-    color: '#0068C4',
-    border: '1px solid #0068C4',
-    borderRadius: '20px',
-  },
-  ghost: {
-    backgroundColor: 'transparent',
-    color: '#404040',
-    border: '1px solid #C4C4C4',
-    borderRadius: '4px',
-  },
-  danger: {
-    backgroundColor: '#FF3838',
-    color: '#ffffff',
-    borderRadius: '4px',
-  },
-};
-
-const variantHoverStyles: Record<VariantKey, React.CSSProperties> = {
-  primary: { backgroundColor: '#003D7A' },
-  secondary: { backgroundColor: '#E8F2FF' },
-  ghost: { backgroundColor: '#F5F5F5' },
-  danger: { backgroundColor: '#cc2d2d' },
-};
-
 export function Button({
   variant = 'primary',
   size = 'md',
@@ -77,8 +46,40 @@ export function Button({
   fullWidth = false,
 }: ButtonProps): React.JSX.Element {
   const [isHovered, setIsHovered] = useState(false);
-
+  const { colors, isDark } = useTheme();
   const isDisabled = disabled || loading;
+
+  const variantStyles: Record<VariantKey, React.CSSProperties> = {
+    primary: {
+      backgroundColor: colors.primary,
+      color: isDark ? '#121212' : '#ffffff',
+      borderRadius: '4px',
+    },
+    secondary: {
+      backgroundColor: isDark ? colors.surface1 : '#ffffff',
+      color: colors.primary,
+      border: `1px solid ${colors.primary}`,
+      borderRadius: '20px',
+    },
+    ghost: {
+      backgroundColor: 'transparent',
+      color: colors.textSecondary,
+      border: `1px solid ${colors.borderStrong}`,
+      borderRadius: '4px',
+    },
+    danger: {
+      backgroundColor: colors.danger,
+      color: '#ffffff',
+      borderRadius: '4px',
+    },
+  };
+
+  const variantHoverStyles: Record<VariantKey, React.CSSProperties> = {
+    primary: { backgroundColor: colors.primaryDark },
+    secondary: { backgroundColor: colors.primaryLight },
+    ghost: { backgroundColor: colors.surface2 },
+    danger: { backgroundColor: isDark ? '#e05050' : '#cc2d2d' },
+  };
 
   const style: React.CSSProperties = {
     ...baseStyle,
@@ -98,7 +99,12 @@ export function Button({
       onMouseLeave={() => setIsHovered(false)}
       style={style}
     >
-      {loading && <Spinner size="sm" color={variant === 'primary' || variant === 'danger' ? '#ffffff' : '#0068C4'} />}
+      {loading && (
+        <Spinner
+          size="sm"
+          color={variant === 'primary' || variant === 'danger' ? '#ffffff' : colors.primary}
+        />
+      )}
       {children}
     </button>
   );

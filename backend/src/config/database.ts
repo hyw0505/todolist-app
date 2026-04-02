@@ -1,5 +1,9 @@
-import { Pool, PoolConfig } from 'pg';
+import { Pool, PoolConfig, types } from 'pg';
 import { env } from './env';
+
+// Return DATE columns as YYYY-MM-DD strings instead of Date objects
+// Prevents timezone-related date shifting (OID 1082 = DATE)
+types.setTypeParser(1082, (val: string) => val);
 
 const poolConfig: PoolConfig = {
   host: env.DB_HOST,

@@ -8,7 +8,11 @@ export interface ApiError {
   details?: Record<string, string[]>;
 }
 
-interface RefreshResponse {
+/**
+ * 토큰 갱신 API 응답 (명세서 기준)
+ */
+interface RefreshTokenApiResponse {
+  success: true;
   accessToken: string;
 }
 
@@ -77,7 +81,7 @@ axiosInstance.interceptors.response.use(
     isRefreshing = true;
 
     try {
-      const response = await axiosInstance.post<RefreshResponse>('/auth/refresh');
+      const response = await axiosInstance.post<RefreshTokenApiResponse>('/auth/refresh');
       const newToken = response.data.accessToken;
       const { user } = useAuthStore.getState();
       if (user !== null) {

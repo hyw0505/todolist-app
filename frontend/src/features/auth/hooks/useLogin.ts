@@ -36,8 +36,8 @@ export function useLogin(options?: UseLoginOptions) {
     mutationFn: (data: LoginRequest) => login(data),
     onSuccess: (response) => {
       if (response.success) {
-        // 인증 정보를 Zustand 스토어에 저장
-        setAuth(response.data.accessToken, response.data.user);
+        // API 명세서: { success: true, accessToken, user }
+        setAuth(response.accessToken, response.user);
       }
       options?.onSuccess?.();
     },

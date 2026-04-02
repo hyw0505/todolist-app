@@ -42,8 +42,8 @@ export function createTodoRoutes(pool: Pool): Router {
   // Get todo by ID
   router.get('/:id', validateParams(todoIdParamSchema), todoController.getTodoById);
 
-  // Update todo (PUT: swagger/PRD 기준)
-  router.put(
+  // Update todo
+  router.patch(
     '/:id',
     validateParams(todoIdParamSchema),
     validateBody(updateTodoSchema),

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTodoFilterStore } from '../stores/useTodoFilterStore';
+import { useTheme } from '@/shared/hooks/useTheme';
 import type { TodoStatus } from '@/types/todo';
 
 /** 상태 필터 옵션 */
@@ -26,25 +27,18 @@ const SORT_ORDER_OPTIONS: { value: 'asc' | 'desc'; label: string }[] = [
 
 /**
  * 할일 필터 바 컴포넌트
- * 
+ *
  * - 상태 필터: 전체, NOT_STARTED, IN_PROGRESS, OVERDUE, COMPLETED_SUCCESS, COMPLETED_FAILURE
  * - 정렬 기준: 시작일, 종료일
  * - 정렬 순서: 오름차순, 내림차순
  * - useTodoFilterStore 와 연동되어 변경 시 자동 재조회
  */
 export function TodoFilterBar(): React.JSX.Element {
-  const {
-    status,
-    setStatus,
-    sortBy,
-    setSortBy,
-    sortOrder,
-    setSortOrder,
-  } = useTodoFilterStore();
+  const { status, setStatus, sortBy, setSortBy, sortOrder, setSortOrder } = useTodoFilterStore();
+  const { colors } = useTheme();
 
-  // 필터 바 컨테이너 스타일
   const containerStyle: React.CSSProperties = {
-    backgroundColor: '#F5F5F5',
+    backgroundColor: colors.surface2,
     height: '48px',
     padding: '0 16px',
     display: 'flex',
@@ -55,38 +49,28 @@ export function TodoFilterBar(): React.JSX.Element {
     flexWrap: 'wrap',
   };
 
-  // 필터 그룹 스타일
   const filterGroupStyle: React.CSSProperties = {
     display: 'flex',
     alignItems: 'center',
     gap: '8px',
   };
 
-  // 레이블 스타일
   const labelStyle: React.CSSProperties = {
     fontSize: '13px',
     fontWeight: 500,
-    color: '#404040',
+    color: colors.textSecondary,
     fontFamily: "'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif",
   };
 
-  // 셀렉트 컨테이너 스타일
-  const selectContainerStyle: React.CSSProperties = {
-    display: 'flex',
-    alignItems: 'center',
-  };
-
-  // 셀렉트 스타일
   const getSelectStyle = (isActive: boolean): React.CSSProperties => ({
     appearance: 'none',
-    backgroundColor: isActive ? '#ffffff' : '#F5F5F5',
-    border: isActive ? '2px solid #0068C4' : '1px solid #C4C4C4',
-    borderBottom: isActive ? '2px solid #0068C4' : '1px solid #C4C4C4',
+    backgroundColor: isActive ? colors.surface1 : colors.surface2,
+    border: isActive ? `2px solid ${colors.primary}` : `1px solid ${colors.borderStrong}`,
     borderRadius: '4px',
     padding: '6px 28px 6px 10px',
     fontSize: '13px',
     fontWeight: 500,
-    color: isActive ? '#0068C4' : '#404040',
+    color: isActive ? colors.primary : colors.textSecondary,
     fontFamily: "'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif",
     cursor: 'pointer',
     outline: 'none',
@@ -100,7 +84,7 @@ export function TodoFilterBar(): React.JSX.Element {
   const dividerStyle: React.CSSProperties = {
     width: '1px',
     height: '20px',
-    backgroundColor: '#C4C4C4',
+    backgroundColor: colors.borderStrong,
   };
 
   return (
@@ -108,20 +92,18 @@ export function TodoFilterBar(): React.JSX.Element {
       {/* 상태 필터 */}
       <div style={filterGroupStyle}>
         <span style={labelStyle}>상태</span>
-        <div style={selectContainerStyle}>
-          <select
-            value={status}
-            onChange={(e) => setStatus(e.target.value as TodoStatus | 'ALL')}
-            style={getSelectStyle(status !== 'ALL')}
-            aria-label="상태 필터"
-          >
-            {STATUS_OPTIONS.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </div>
+        <select
+          value={status}
+          onChange={(e) => setStatus(e.target.value as TodoStatus | 'ALL')}
+          style={getSelectStyle(status !== 'ALL')}
+          aria-label="상태 필터"
+        >
+          {STATUS_OPTIONS.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div style={dividerStyle} />
@@ -129,37 +111,33 @@ export function TodoFilterBar(): React.JSX.Element {
       {/* 정렬 기준 */}
       <div style={filterGroupStyle}>
         <span style={labelStyle}>정렬</span>
-        <div style={selectContainerStyle}>
-          <select
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value as 'start_date' | 'due_date')}
-            style={getSelectStyle(true)}
-            aria-label="정렬 기준"
-          >
-            {SORT_BY_OPTIONS.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
-
-      {/* 정렬 순서 */}
-      <div style={selectContainerStyle}>
         <select
-          value={sortOrder}
-          onChange={(e) => setSortOrder(e.target.value as 'asc' | 'desc')}
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value as 'start_date' | 'due_date')}
           style={getSelectStyle(true)}
-          aria-label="정렬 순서"
+          aria-label="정렬 기준"
         >
-          {SORT_ORDER_OPTIONS.map((option) => (
+          {SORT_BY_OPTIONS.map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}
             </option>
           ))}
         </select>
       </div>
+
+      {/* 정렬 순서 */}
+      <select
+        value={sortOrder}
+        onChange={(e) => setSortOrder(e.target.value as 'asc' | 'desc')}
+        style={getSelectStyle(true)}
+        aria-label="정렬 순서"
+      >
+        {SORT_ORDER_OPTIONS.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
     </div>
   );
 }

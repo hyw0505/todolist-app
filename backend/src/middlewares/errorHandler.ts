@@ -39,11 +39,11 @@ export function errorHandler(err: Error, req: Request, res: Response, _next: Nex
 
   // Check if it's an AppError instance
   if (err instanceof AppError) {
-    const response: ErrorResponse = {
+    res.status(err.statusCode).json({
       success: false,
       message: err.message,
-    };
-    res.status(err.statusCode).json(response);
+      error: { code: err.code },
+    });
     return;
   }
 

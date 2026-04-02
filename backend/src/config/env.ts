@@ -34,7 +34,15 @@ function loadEnv(): void {
       : nodeEnv === 'production'
         ? '.env.production'
         : '.env.development';
-  dotenv.config({ path: path.resolve(process.cwd(), envFile) });
+  const envPath = path.resolve(process.cwd(), envFile);
+  console.log(`[ENV] Loading environment file: ${envPath}`);
+  // override: true to override existing environment variables
+  const result = dotenv.config({ path: envPath, override: true });
+  if (result.error) {
+    console.error(`[ENV] Failed to load ${envFile}:`, result.error);
+  } else {
+    console.log(`[ENV] Successfully loaded ${envFile}`);
+  }
 }
 
 function validateEnv(): Env {
