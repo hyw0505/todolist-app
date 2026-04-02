@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.env
+.env.development
+.env.staging
+.env.production
+.env.local
+coverage/
+.eslintcache
+*.log
+.DS_Store
+Thumbs.db

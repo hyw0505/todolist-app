@@ -1,8 +1,21 @@
 {
- "mcpServers": {
-  "postgresql-mcp": {
-   "command": "cmd",
-   "args": ["/c", "npx", "-y", "@henkey/postgres-mcp-server"]
-  }
- }
+  "general": {
+    "output-language": "ko"
+  },
+  "mcpServers": {
+    "postgresql-mcp": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@henkey/postgres-mcp-server"
+      ]
+    },
+    "context7": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@upstash/context7-mcp"]
+    }
+  },
+  "$version": 3
 }
