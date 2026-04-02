@@ -725,12 +725,12 @@ CREATE TABLE todos (
 - `VITE_APP_ENV`: `development` / `production`
 
 **완료 조건:**
-- [ ] `.env.development` 파일 작성
-- [ ] `VITE_` 접두사 확인 (Vite 요구사항)
-- [ ] 환경별 API URL 설정
+- [x] `.env.development` 파일 작성
+- [x] `VITE_` 접두사 확인 (Vite 요구사항)
+- [x] 환경별 API URL 설정
 
 **의존성:**
-- [ ] 선행 작업: FE-01
+- [x] 선행 작업: FE-01
 
 ---
 
@@ -739,13 +739,13 @@ CREATE TABLE todos (
 **설명:** 프로젝트 구조 설계 원칙 (§6) 에 따라 디렉토리를 생성한다.
 
 **완료 조건:**
-- [ ] `src/api/`, `src/features/`, `src/pages/`, `src/shared/` 생성
-- [ ] `src/constants/`, `src/types/` 생성
-- [ ] `src/features/auth/`, `src/features/todos/` 기능 모듈 생성
-- [ ] 진입점 `src/main.tsx`, `src/App.tsx` 생성
+- [x] `src/api/`, `src/features/`, `src/pages/`, `src/shared/` 생성
+- [x] `src/constants/`, `src/types/` 생성
+- [x] `src/features/auth/`, `src/features/todos/` 기능 모듈 생성
+- [x] 진입점 `src/main.tsx`, `src/App.tsx` 생성
 
 **의존성:**
-- [ ] 선행 작업: FE-01
+- [x] 선행 작업: FE-01
 
 ---
 
@@ -756,14 +756,14 @@ CREATE TABLE todos (
 **설명:** 서버 API 통신을 위한 Axios 인스턴스를 설정한다.
 
 **완료 조건:**
-- [ ] `src/api/axiosInstance.ts` 생성
-- [ ] `baseURL` 환경변수로 설정
-- [ ] 요청 인터셉터: `Authorization` 헤더 자동 첨부
-- [ ] 응답 인터셉터: 401 감지 시 토큰 갱신 또는 재로그인
-- [ ] 에러 핸들링 표준화
+- [x] `src/api/axiosInstance.ts` 생성
+- [x] `baseURL` 환경변수로 설정
+- [x] 요청 인터셉터: `Authorization` 헤더 자동 첨부
+- [x] 응답 인터셉터: 401 감지 시 토큰 갱신 또는 재로그인
+- [x] 에러 핸들링 표준화
 
 **의존성:**
-- [ ] 선행 작업: FE-03
+- [x] 선행 작업: FE-03
 
 ---
 
@@ -772,13 +772,13 @@ CREATE TABLE todos (
 **설명:** TypeScript 타입을 정의한다.
 
 **완료 조건:**
-- [ ] `src/types/auth.ts`: `User`, `LoginRequest`, `SignupRequest`, `TokenResponse`
-- [ ] `src/types/todo.ts`: `Todo`, `TodoStatus`, `CreateTodoInput`, `UpdateTodoInput`
-- [ ] `src/types/api.ts`: `ApiResponse<T>` 공통 응답 타입
-- [ ] `src/constants/todoStatus.ts`: `TodoStatus` enum 상수 정의
+- [x] `src/types/auth.ts`: `User`, `LoginRequest`, `SignupRequest`, `TokenResponse`
+- [x] `src/types/todo.ts`: `Todo`, `TodoStatus`, `CreateTodoInput`, `UpdateTodoInput`
+- [x] `src/types/api.ts`: `ApiResponse<T>` 공통 응답 타입
+- [x] `src/constants/todoStatus.ts`: `TodoStatus` enum 상수 정의
 
 **의존성:**
-- [ ] 선행 작업: FE-03
+- [x] 선행 작업: FE-03
 
 ---
 
