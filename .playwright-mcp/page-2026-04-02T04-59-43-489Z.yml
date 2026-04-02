@@ -1,0 +1,63 @@
+- generic [ref=e18]:
+  - banner [ref=e19]:
+    - heading "TodoList" [level=1] [ref=e20]
+    - generic [ref=e21]:
+      - generic [ref=e22]: 테스트사용자님
+      - button "로그아웃" [ref=e23] [cursor=pointer]
+  - main [ref=e24]:
+    - generic [ref=e25]:
+      - generic [ref=e26]:
+        - heading "할일 목록" [level=2] [ref=e27]
+        - button "+ 할일 추가" [ref=e28] [cursor=pointer]
+      - generic [ref=e29]:
+        - generic [ref=e30]:
+          - generic [ref=e31]: 상태
+          - combobox "상태 필터" [ref=e33] [cursor=pointer]:
+            - option "전체" [selected]
+            - option "시작 전"
+            - option "진행 중"
+            - option "기한 초과"
+            - option "완료 (성공)"
+            - option "완료 (실패)"
+        - generic [ref=e35]:
+          - generic [ref=e36]: 정렬
+          - combobox "정렬 기준" [ref=e38] [cursor=pointer]:
+            - option "시작일"
+            - option "종료일" [selected]
+        - combobox "정렬 순서" [ref=e40] [cursor=pointer]:
+          - option "오름차순" [selected]
+          - option "내림차순"
+      - generic [ref=e41]:
+        - generic [ref=e42]: 📝
+        - heading "등록된 할일이 없습니다" [level=3] [ref=e43]
+        - paragraph [ref=e44]: 새로운 할일을 추가해보세요
+        - button "+ 할일 추가" [ref=e45] [cursor=pointer]
+  - generic [ref=e47]:
+    - generic [ref=e48]:
+      - heading "새 할일 추가" [level=2] [ref=e49]
+      - button "닫기" [ref=e50] [cursor=pointer]: ×
+    - generic [ref=e51]:
+      - generic [ref=e52]:
+        - generic [ref=e53]:
+          - generic [ref=e54]: 제목 *
+          - textbox "제목 *" [ref=e56]:
+            - /placeholder: 할일 제목을 입력해주세요
+            - text: 두번째 테스트
+        - generic [ref=e57]:
+          - text: 설명
+          - textbox "설명" [ref=e58]:
+            - /placeholder: 설명을 입력해주세요 (선택사항)
+            - text: 두번째 테스트 설명
+          - generic [ref=e59]: 10/1000 자
+        - generic [ref=e60]:
+          - generic [ref=e61]:
+            - generic [ref=e62]: 시작일 *
+            - textbox "시작일 *" [ref=e63] [cursor=pointer]
+            - generic [ref=e70]: 시작일을 입력해주세요.
+          - generic [ref=e64]:
+            - generic [ref=e65]: 종료일 *
+            - textbox "종료일 *" [ref=e66] [cursor=pointer]
+            - generic [ref=e71]: 종료일을 입력해주세요.
+      - generic [ref=e67]:
+        - button "취소" [ref=e68] [cursor=pointer]
+        - button "추가" [active] [ref=e69] [cursor=pointer]

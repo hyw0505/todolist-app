@@ -1,0 +1,87 @@
+- generic [ref=e82]:
+  - banner [ref=e83]:
+    - generic [ref=e84]:
+      - generic [ref=e85] [cursor=pointer]: todolist-app
+      - button "다크모드로 전환" [ref=e86] [cursor=pointer]:
+        - generic [ref=e87]: ☀️
+    - generic [ref=e89]:
+      - generic [ref=e90]: 테스트사용자
+      - button "로그아웃" [ref=e91] [cursor=pointer]
+  - main [ref=e92]:
+    - generic [ref=e93]:
+      - generic [ref=e94]:
+        - heading "할일 목록" [level=2] [ref=e95]
+        - button "+ 할일 추가" [ref=e96] [cursor=pointer]
+      - generic [ref=e97]:
+        - generic [ref=e98]:
+          - generic [ref=e99]: 상태
+          - combobox "상태 필터" [ref=e100] [cursor=pointer]:
+            - option "전체" [selected]
+            - option "시작 전"
+            - option "진행 중"
+            - option "기한 초과"
+            - option "완료 (성공)"
+            - option "완료 (실패)"
+        - generic [ref=e102]:
+          - generic [ref=e103]: 정렬
+          - combobox "정렬 기준" [ref=e104] [cursor=pointer]:
+            - option "시작일" [selected]
+            - option "종료일"
+        - combobox "정렬 순서" [ref=e105] [cursor=pointer]:
+          - option "오름차순"
+          - option "내림차순" [selected]
+      - generic [ref=e236]:
+        - generic [ref=e237] [cursor=pointer]:
+          - generic [ref=e238]:
+            - heading "영어 에세이 제출" [level=3] [ref=e239]
+            - generic [ref=e240]: 시작 전
+          - generic [ref=e241]: A Tale of Two Cities 독후감
+          - generic [ref=e242]: 2026년 4월 5일 ~ 2026년 4월 9일
+          - generic [ref=e243]:
+            - button "완료" [ref=e244]
+            - button "수정" [ref=e245]
+            - button "삭제" [ref=e246]
+        - generic [ref=e247] [cursor=pointer]:
+          - generic [ref=e248]:
+            - heading "수학 수행평가 제출" [level=3] [ref=e249]
+            - generic [ref=e250]: 진행 중
+          - generic [ref=e251]: 3 단원까지
+          - generic [ref=e252]: 2026년 4월 1일 ~ 2026년 4월 7일
+          - generic [ref=e253]:
+            - button "완료" [ref=e254]
+            - button "수정" [ref=e255]
+            - button "삭제" [ref=e256]
+      - generic [ref=e257]:
+        - button "이전 페이지" [disabled] [ref=e258]: ‹
+        - button "1페이지" [ref=e259] [cursor=pointer]: "1"
+        - button "다음 페이지" [disabled] [ref=e260]: ›
+  - generic [ref=e262]:
+    - generic [ref=e263]:
+      - heading "할일 수정" [level=2] [ref=e264]
+      - button "닫기" [ref=e265] [cursor=pointer]: ×
+    - generic [ref=e266]:
+      - alert [ref=e285]:
+        - generic [ref=e286]: ⚠
+        - generic [ref=e287]: 할일 수정에 실패했습니다.
+      - generic [ref=e267]:
+        - generic [ref=e268]:
+          - generic [ref=e269]: 제목 *
+          - textbox "제목 *" [ref=e271]:
+            - /placeholder: 할일 제목을 입력해주세요
+            - text: 수학 수행평가 제출 (수정)
+        - generic [ref=e272]:
+          - text: 설명
+          - textbox "설명" [ref=e273]:
+            - /placeholder: 설명을 입력해주세요 (선택사항)
+            - text: 3 단원까지
+          - generic [ref=e274]: 6/1000 자
+        - generic [ref=e275]:
+          - generic [ref=e276]:
+            - generic [ref=e277]: 시작일 *
+            - textbox "시작일 *" [ref=e278] [cursor=pointer]: 2026-04-01
+          - generic [ref=e279]:
+            - generic [ref=e280]: 종료일 *
+            - textbox "종료일 *" [ref=e281] [cursor=pointer]: 2026-04-07
+      - generic [ref=e282]:
+        - button "취소" [ref=e283] [cursor=pointer]
+        - button "수정" [ref=e284] [cursor=pointer]

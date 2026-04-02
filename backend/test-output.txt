@@ -1,0 +1,794 @@
+
+> todolist-app-backend@1.0.0 test:integration
+> jest tests/integration --verbose
+
+  console.log
+    [ENV] Loading environment file: C:\_vibe\todolist-app\backend\.env.test
+
+      at loadEnv (src/config/env.ts:38:11)
+
+  console.log
+    [ENV] Successfully loaded .env.test
+
+      at loadEnv (src/config/env.ts:44:13)
+
+  console.info
+    [2026-04-02T05:29:06.357Z] POST /signup [32m201[0m (72ms)
+
+      at logRequest (src/middlewares/requestLogger.ts:103:13)
+
+  console.warn
+    [OPERATIONAL_ERROR] {"timestamp":"2026-04-02T05:29:06.434Z","method":"POST","path":"/api/v1/auth/signup","message":"입력값 검증에 실패했습니다","stack":"Error: 입력값 검증에 실패했습니다\n    at C:\\_vibe\\todolist-app\\backend\\src\\middlewares\\validateBody.ts:34:14\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at C:\\_vibe\\todolist-app\\backend\\src\\middlewares\\rateLimiter.ts:119:5\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at Route.dispatch (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\route.js:119:3)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:284:15\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at router.handle (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:47:12)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at requestLogger (C:\\_vibe\\todolist-app\\backend\\src\\middlewares\\requestLogger.ts:69:3)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at cookieParser (C:\\_vibe\\todolist-app\\backend\\node_modules\\cookie-parser\\index.js:57:14)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\body-parser\\lib\\read.js:137:5\n    at AsyncResource.runInAsyncScope (node:async_hooks:228:14)\n    at invokeCallback (C:\\_vibe\\todolist-app\\backend\\node_modules\\raw-body\\index.js:238:16)\n    at done (C:\\_vibe\\todolist-app\\backend\\node_modules\\raw-body\\index.js:227:7)\n    at IncomingMessage.onEnd (C:\\_vibe\\todolist-app\\backend\\node_modules\\raw-body\\index.js:287:7)\n    at IncomingMessage.emit (node:events:508:28)\n    at endReadableNT (node:internal/streams/readable:1729:12)\n    at processTicksAndRejections (node:internal/process/task_queues:90:21)","isOperational":true}
+
+    [0m [90m 83 |[39m   [90m// Log operational errors as warnings[39m
+     [90m 84 |[39m   [36mif[39m ((err [36mas[39m [33mAppError[39m)[33m.[39misOperational) {
+    [31m[1m>[22m[39m[90m 85 |[39m     console[33m.[39mwarn([32m'[OPERATIONAL_ERROR]'[39m[33m,[39m [33mJSON[39m[33m.[39mstringify(logEntry))[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 86 |[39m   } [36melse[39m {
+     [90m 87 |[39m     [90m// Log programming/unknown errors as errors[39m
+     [90m 88 |[39m     console[33m.[39merror([32m'[UNHANDLED_ERROR]'[39m[33m,[39m [33mJSON[39m[33m.[39mstringify(logEntry))[33m;[39m[0m
+
+      at logError (src/middlewares/errorHandler.ts:85:13)
+      at errorHandler (src/middlewares/errorHandler.ts:38:3)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:71:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:67:12)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at node_modules/express/lib/router/index.js:646:15
+      at next (node_modules/express/lib/router/index.js:265:14)
+      at next (node_modules/express/lib/router/route.js:141:14)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:67:12)
+      at next (node_modules/express/lib/router/route.js:147:13)
+      at src/middlewares/validateBody.ts:34:9
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at next (node_modules/express/lib/router/route.js:149:13)
+      at src/middlewares/rateLimiter.ts:119:5
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at next (node_modules/express/lib/router/route.js:149:13)
+      at Route.dispatch (node_modules/express/lib/router/route.js:119:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at node_modules/express/lib/router/index.js:284:15
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at router.handle (node_modules/express/lib/router/index.js:175:3)
+      at router (node_modules/express/lib/router/index.js:47:12)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at requestLogger (src/middlewares/requestLogger.ts:69:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at cookieParser (node_modules/cookie-parser/index.js:57:14)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at node_modules/body-parser/lib/read.js:137:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+  console.info
+    [2026-04-02T05:29:06.446Z] POST /api/v1/auth/signup [33m400[0m (13ms)
+
+      at logRequest (src/middlewares/requestLogger.ts:103:13)
+
+  console.warn
+    [OPERATIONAL_ERROR] {"timestamp":"2026-04-02T05:29:06.516Z","method":"POST","path":"/api/v1/auth/signup","message":"입력값 검증에 실패했습니다","stack":"Error: 입력값 검증에 실패했습니다\n    at C:\\_vibe\\todolist-app\\backend\\src\\middlewares\\validateBody.ts:34:14\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at C:\\_vibe\\todolist-app\\backend\\src\\middlewares\\rateLimiter.ts:119:5\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at Route.dispatch (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\route.js:119:3)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:284:15\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at router.handle (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:47:12)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at requestLogger (C:\\_vibe\\todolist-app\\backend\\src\\middlewares\\requestLogger.ts:69:3)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at cookieParser (C:\\_vibe\\todolist-app\\backend\\node_modules\\cookie-parser\\index.js:57:14)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\body-parser\\lib\\read.js:137:5\n    at AsyncResource.runInAsyncScope (node:async_hooks:228:14)\n    at invokeCallback (C:\\_vibe\\todolist-app\\backend\\node_modules\\raw-body\\index.js:238:16)\n    at done (C:\\_vibe\\todolist-app\\backend\\node_modules\\raw-body\\index.js:227:7)\n    at IncomingMessage.onEnd (C:\\_vibe\\todolist-app\\backend\\node_modules\\raw-body\\index.js:287:7)\n    at IncomingMessage.emit (node:events:508:28)\n    at endReadableNT (node:internal/streams/readable:1729:12)\n    at processTicksAndRejections (node:internal/process/task_queues:90:21)","isOperational":true}
+
+    [0m [90m 83 |[39m   [90m// Log operational errors as warnings[39m
+     [90m 84 |[39m   [36mif[39m ((err [36mas[39m [33mAppError[39m)[33m.[39misOperational) {
+    [31m[1m>[22m[39m[90m 85 |[39m     console[33m.[39mwarn([32m'[OPERATIONAL_ERROR]'[39m[33m,[39m [33mJSON[39m[33m.[39mstringify(logEntry))[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 86 |[39m   } [36melse[39m {
+     [90m 87 |[39m     [90m// Log programming/unknown errors as errors[39m
+     [90m 88 |[39m     console[33m.[39merror([32m'[UNHANDLED_ERROR]'[39m[33m,[39m [33mJSON[39m[33m.[39mstringify(logEntry))[33m;[39m[0m
+
+      at logError (src/middlewares/errorHandler.ts:85:13)
+      at errorHandler (src/middlewares/errorHandler.ts:38:3)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:71:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:67:12)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at node_modules/express/lib/router/index.js:646:15
+      at next (node_modules/express/lib/router/index.js:265:14)
+      at next (node_modules/express/lib/router/route.js:141:14)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:67:12)
+      at next (node_modules/express/lib/router/route.js:147:13)
+      at src/middlewares/validateBody.ts:34:9
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at next (node_modules/express/lib/router/route.js:149:13)
+      at src/middlewares/rateLimiter.ts:119:5
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at next (node_modules/express/lib/router/route.js:149:13)
+      at Route.dispatch (node_modules/express/lib/router/route.js:119:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at node_modules/express/lib/router/index.js:284:15
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at router.handle (node_modules/express/lib/router/index.js:175:3)
+      at router (node_modules/express/lib/router/index.js:47:12)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at requestLogger (src/middlewares/requestLogger.ts:69:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at cookieParser (node_modules/cookie-parser/index.js:57:14)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at node_modules/body-parser/lib/read.js:137:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+  console.info
+    [2026-04-02T05:29:06.520Z] POST /api/v1/auth/signup [33m400[0m (5ms)
+
+      at logRequest (src/middlewares/requestLogger.ts:103:13)
+
+  console.warn
+    [OPERATIONAL_ERROR] {"timestamp":"2026-04-02T05:29:06.588Z","method":"POST","path":"/api/v1/auth/signup","message":"입력값 검증에 실패했습니다","stack":"Error: 입력값 검증에 실패했습니다\n    at C:\\_vibe\\todolist-app\\backend\\src\\middlewares\\validateBody.ts:34:14\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at C:\\_vibe\\todolist-app\\backend\\src\\middlewares\\rateLimiter.ts:119:5\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at Route.dispatch (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\route.js:119:3)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:284:15\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at router.handle (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:47:12)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at requestLogger (C:\\_vibe\\todolist-app\\backend\\src\\middlewares\\requestLogger.ts:69:3)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at cookieParser (C:\\_vibe\\todolist-app\\backend\\node_modules\\cookie-parser\\index.js:57:14)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\body-parser\\lib\\read.js:137:5\n    at AsyncResource.runInAsyncScope (node:async_hooks:228:14)\n    at invokeCallback (C:\\_vibe\\todolist-app\\backend\\node_modules\\raw-body\\index.js:238:16)\n    at done (C:\\_vibe\\todolist-app\\backend\\node_modules\\raw-body\\index.js:227:7)\n    at IncomingMessage.onEnd (C:\\_vibe\\todolist-app\\backend\\node_modules\\raw-body\\index.js:287:7)\n    at IncomingMessage.emit (node:events:508:28)\n    at endReadableNT (node:internal/streams/readable:1729:12)\n    at processTicksAndRejections (node:internal/process/task_queues:90:21)","isOperational":true}
+
+    [0m [90m 83 |[39m   [90m// Log operational errors as warnings[39m
+     [90m 84 |[39m   [36mif[39m ((err [36mas[39m [33mAppError[39m)[33m.[39misOperational) {
+    [31m[1m>[22m[39m[90m 85 |[39m     console[33m.[39mwarn([32m'[OPERATIONAL_ERROR]'[39m[33m,[39m [33mJSON[39m[33m.[39mstringify(logEntry))[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 86 |[39m   } [36melse[39m {
+     [90m 87 |[39m     [90m// Log programming/unknown errors as errors[39m
+     [90m 88 |[39m     console[33m.[39merror([32m'[UNHANDLED_ERROR]'[39m[33m,[39m [33mJSON[39m[33m.[39mstringify(logEntry))[33m;[39m[0m
+
+      at logError (src/middlewares/errorHandler.ts:85:13)
+      at errorHandler (src/middlewares/errorHandler.ts:38:3)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:71:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:67:12)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at node_modules/express/lib/router/index.js:646:15
+      at next (node_modules/express/lib/router/index.js:265:14)
+      at next (node_modules/express/lib/router/route.js:141:14)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:67:12)
+      at next (node_modules/express/lib/router/route.js:147:13)
+      at src/middlewares/validateBody.ts:34:9
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at next (node_modules/express/lib/router/route.js:149:13)
+      at src/middlewares/rateLimiter.ts:119:5
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at next (node_modules/express/lib/router/route.js:149:13)
+      at Route.dispatch (node_modules/express/lib/router/route.js:119:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at node_modules/express/lib/router/index.js:284:15
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at router.handle (node_modules/express/lib/router/index.js:175:3)
+      at router (node_modules/express/lib/router/index.js:47:12)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at requestLogger (src/middlewares/requestLogger.ts:69:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at cookieParser (node_modules/cookie-parser/index.js:57:14)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at node_modules/body-parser/lib/read.js:137:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+  console.info
+    [2026-04-02T05:29:06.592Z] POST /api/v1/auth/signup [33m400[0m (5ms)
+
+      at logRequest (src/middlewares/requestLogger.ts:103:13)
+
+  console.warn
+    [OPERATIONAL_ERROR] {"timestamp":"2026-04-02T05:29:06.661Z","method":"POST","path":"/api/v1/auth/signup","message":"입력값 검증에 실패했습니다","stack":"Error: 입력값 검증에 실패했습니다\n    at C:\\_vibe\\todolist-app\\backend\\src\\middlewares\\validateBody.ts:34:14\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at C:\\_vibe\\todolist-app\\backend\\src\\middlewares\\rateLimiter.ts:119:5\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at Route.dispatch (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\route.js:119:3)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:284:15\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at router.handle (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:47:12)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at requestLogger (C:\\_vibe\\todolist-app\\backend\\src\\middlewares\\requestLogger.ts:69:3)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at cookieParser (C:\\_vibe\\todolist-app\\backend\\node_modules\\cookie-parser\\index.js:57:14)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\body-parser\\lib\\read.js:137:5\n    at AsyncResource.runInAsyncScope (node:async_hooks:228:14)\n    at invokeCallback (C:\\_vibe\\todolist-app\\backend\\node_modules\\raw-body\\index.js:238:16)\n    at done (C:\\_vibe\\todolist-app\\backend\\node_modules\\raw-body\\index.js:227:7)\n    at IncomingMessage.onEnd (C:\\_vibe\\todolist-app\\backend\\node_modules\\raw-body\\index.js:287:7)\n    at IncomingMessage.emit (node:events:508:28)\n    at endReadableNT (node:internal/streams/readable:1729:12)\n    at processTicksAndRejections (node:internal/process/task_queues:90:21)","isOperational":true}
+
+    [0m [90m 83 |[39m   [90m// Log operational errors as warnings[39m
+     [90m 84 |[39m   [36mif[39m ((err [36mas[39m [33mAppError[39m)[33m.[39misOperational) {
+    [31m[1m>[22m[39m[90m 85 |[39m     console[33m.[39mwarn([32m'[OPERATIONAL_ERROR]'[39m[33m,[39m [33mJSON[39m[33m.[39mstringify(logEntry))[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 86 |[39m   } [36melse[39m {
+     [90m 87 |[39m     [90m// Log programming/unknown errors as errors[39m
+     [90m 88 |[39m     console[33m.[39merror([32m'[UNHANDLED_ERROR]'[39m[33m,[39m [33mJSON[39m[33m.[39mstringify(logEntry))[33m;[39m[0m
+
+      at logError (src/middlewares/errorHandler.ts:85:13)
+      at errorHandler (src/middlewares/errorHandler.ts:38:3)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:71:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:67:12)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at node_modules/express/lib/router/index.js:646:15
+      at next (node_modules/express/lib/router/index.js:265:14)
+      at next (node_modules/express/lib/router/route.js:141:14)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:67:12)
+      at next (node_modules/express/lib/router/route.js:147:13)
+      at src/middlewares/validateBody.ts:34:9
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at next (node_modules/express/lib/router/route.js:149:13)
+      at src/middlewares/rateLimiter.ts:119:5
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at next (node_modules/express/lib/router/route.js:149:13)
+      at Route.dispatch (node_modules/express/lib/router/route.js:119:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at node_modules/express/lib/router/index.js:284:15
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at router.handle (node_modules/express/lib/router/index.js:175:3)
+      at router (node_modules/express/lib/router/index.js:47:12)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at requestLogger (src/middlewares/requestLogger.ts:69:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at cookieParser (node_modules/cookie-parser/index.js:57:14)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at node_modules/body-parser/lib/read.js:137:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+  console.info
+    [2026-04-02T05:29:06.664Z] POST /api/v1/auth/signup [33m400[0m (3ms)
+
+      at logRequest (src/middlewares/requestLogger.ts:103:13)
+
+  console.warn
+    [OPERATIONAL_ERROR] {"timestamp":"2026-04-02T05:29:06.736Z","method":"POST","path":"/api/v1/auth/signup","message":"이미 사용 중인 이메일입니다","stack":"Error: 이미 사용 중인 이메일입니다\n    at AuthService.signup (C:\\_vibe\\todolist-app\\backend\\src\\services\\authService.ts:75:13)\n    at processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at signup (C:\\_vibe\\todolist-app\\backend\\src\\controllers\\authController.ts:29:22)","isOperational":true}
+
+    [0m [90m 83 |[39m   [90m// Log operational errors as warnings[39m
+     [90m 84 |[39m   [36mif[39m ((err [36mas[39m [33mAppError[39m)[33m.[39misOperational) {
+    [31m[1m>[22m[39m[90m 85 |[39m     console[33m.[39mwarn([32m'[OPERATIONAL_ERROR]'[39m[33m,[39m [33mJSON[39m[33m.[39mstringify(logEntry))[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 86 |[39m   } [36melse[39m {
+     [90m 87 |[39m     [90m// Log programming/unknown errors as errors[39m
+     [90m 88 |[39m     console[33m.[39merror([32m'[UNHANDLED_ERROR]'[39m[33m,[39m [33mJSON[39m[33m.[39mstringify(logEntry))[33m;[39m[0m
+
+      at logError (src/middlewares/errorHandler.ts:85:13)
+      at errorHandler (src/middlewares/errorHandler.ts:38:3)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:71:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:67:12)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at node_modules/express/lib/router/index.js:646:15
+      at next (node_modules/express/lib/router/index.js:265:14)
+      at next (node_modules/express/lib/router/route.js:141:14)
+      at signup (src/controllers/authController.ts:37:7)
+
+  console.info
+    [2026-04-02T05:29:06.740Z] POST /api/v1/auth/signup [33m409[0m (5ms)
+
+      at logRequest (src/middlewares/requestLogger.ts:103:13)
+
+  console.warn
+    [OPERATIONAL_ERROR] {"timestamp":"2026-04-02T05:29:06.812Z","method":"POST","path":"/api/v1/auth/signup","message":"입력값 검증에 실패했습니다","stack":"Error: 입력값 검증에 실패했습니다\n    at C:\\_vibe\\todolist-app\\backend\\src\\middlewares\\validateBody.ts:34:14\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at C:\\_vibe\\todolist-app\\backend\\src\\middlewares\\rateLimiter.ts:119:5\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at Route.dispatch (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\route.js:119:3)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:284:15\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at router.handle (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:47:12)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at requestLogger (C:\\_vibe\\todolist-app\\backend\\src\\middlewares\\requestLogger.ts:69:3)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at cookieParser (C:\\_vibe\\todolist-app\\backend\\node_modules\\cookie-parser\\index.js:57:14)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\body-parser\\lib\\read.js:137:5\n    at AsyncResource.runInAsyncScope (node:async_hooks:228:14)\n    at invokeCallback (C:\\_vibe\\todolist-app\\backend\\node_modules\\raw-body\\index.js:238:16)\n    at done (C:\\_vibe\\todolist-app\\backend\\node_modules\\raw-body\\index.js:227:7)\n    at IncomingMessage.onEnd (C:\\_vibe\\todolist-app\\backend\\node_modules\\raw-body\\index.js:287:7)\n    at IncomingMessage.emit (node:events:508:28)\n    at endReadableNT (node:internal/streams/readable:1729:12)\n    at processTicksAndRejections (node:internal/process/task_queues:90:21)","isOperational":true}
+
+    [0m [90m 83 |[39m   [90m// Log operational errors as warnings[39m
+     [90m 84 |[39m   [36mif[39m ((err [36mas[39m [33mAppError[39m)[33m.[39misOperational) {
+    [31m[1m>[22m[39m[90m 85 |[39m     console[33m.[39mwarn([32m'[OPERATIONAL_ERROR]'[39m[33m,[39m [33mJSON[39m[33m.[39mstringify(logEntry))[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 86 |[39m   } [36melse[39m {
+     [90m 87 |[39m     [90m// Log programming/unknown errors as errors[39m
+     [90m 88 |[39m     console[33m.[39merror([32m'[UNHANDLED_ERROR]'[39m[33m,[39m [33mJSON[39m[33m.[39mstringify(logEntry))[33m;[39m[0m
+
+      at logError (src/middlewares/errorHandler.ts:85:13)
+      at errorHandler (src/middlewares/errorHandler.ts:38:3)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:71:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:67:12)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at node_modules/express/lib/router/index.js:646:15
+      at next (node_modules/express/lib/router/index.js:265:14)
+      at next (node_modules/express/lib/router/route.js:141:14)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:67:12)
+      at next (node_modules/express/lib/router/route.js:147:13)
+      at src/middlewares/validateBody.ts:34:9
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at next (node_modules/express/lib/router/route.js:149:13)
+      at src/middlewares/rateLimiter.ts:119:5
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at next (node_modules/express/lib/router/route.js:149:13)
+      at Route.dispatch (node_modules/express/lib/router/route.js:119:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at node_modules/express/lib/router/index.js:284:15
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at router.handle (node_modules/express/lib/router/index.js:175:3)
+      at router (node_modules/express/lib/router/index.js:47:12)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at requestLogger (src/middlewares/requestLogger.ts:69:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at cookieParser (node_modules/cookie-parser/index.js:57:14)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at node_modules/body-parser/lib/read.js:137:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+  console.info
+    [2026-04-02T05:29:06.815Z] POST /api/v1/auth/signup [33m400[0m (4ms)
+
+      at logRequest (src/middlewares/requestLogger.ts:103:13)
+
+  console.warn
+    [OPERATIONAL_ERROR] {"timestamp":"2026-04-02T05:29:06.883Z","method":"POST","path":"/api/v1/auth/signup","message":"입력값 검증에 실패했습니다","stack":"Error: 입력값 검증에 실패했습니다\n    at C:\\_vibe\\todolist-app\\backend\\src\\middlewares\\validateBody.ts:34:14\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at C:\\_vibe\\todolist-app\\backend\\src\\middlewares\\rateLimiter.ts:119:5\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at Route.dispatch (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\route.js:119:3)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:284:15\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at router.handle (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:47:12)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at requestLogger (C:\\_vibe\\todolist-app\\backend\\src\\middlewares\\requestLogger.ts:69:3)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at cookieParser (C:\\_vibe\\todolist-app\\backend\\node_modules\\cookie-parser\\index.js:57:14)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\body-parser\\lib\\read.js:137:5\n    at AsyncResource.runInAsyncScope (node:async_hooks:228:14)\n    at invokeCallback (C:\\_vibe\\todolist-app\\backend\\node_modules\\raw-body\\index.js:238:16)\n    at done (C:\\_vibe\\todolist-app\\backend\\node_modules\\raw-body\\index.js:227:7)\n    at IncomingMessage.onEnd (C:\\_vibe\\todolist-app\\backend\\node_modules\\raw-body\\index.js:287:7)\n    at IncomingMessage.emit (node:events:508:28)\n    at endReadableNT (node:internal/streams/readable:1729:12)\n    at processTicksAndRejections (node:internal/process/task_queues:90:21)","isOperational":true}
+
+    [0m [90m 83 |[39m   [90m// Log operational errors as warnings[39m
+     [90m 84 |[39m   [36mif[39m ((err [36mas[39m [33mAppError[39m)[33m.[39misOperational) {
+    [31m[1m>[22m[39m[90m 85 |[39m     console[33m.[39mwarn([32m'[OPERATIONAL_ERROR]'[39m[33m,[39m [33mJSON[39m[33m.[39mstringify(logEntry))[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 86 |[39m   } [36melse[39m {
+     [90m 87 |[39m     [90m// Log programming/unknown errors as errors[39m
+     [90m 88 |[39m     console[33m.[39merror([32m'[UNHANDLED_ERROR]'[39m[33m,[39m [33mJSON[39m[33m.[39mstringify(logEntry))[33m;[39m[0m
+
+      at logError (src/middlewares/errorHandler.ts:85:13)
+      at errorHandler (src/middlewares/errorHandler.ts:38:3)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:71:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:67:12)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at node_modules/express/lib/router/index.js:646:15
+      at next (node_modules/express/lib/router/index.js:265:14)
+      at next (node_modules/express/lib/router/route.js:141:14)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:67:12)
+      at next (node_modules/express/lib/router/route.js:147:13)
+      at src/middlewares/validateBody.ts:34:9
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at next (node_modules/express/lib/router/route.js:149:13)
+      at src/middlewares/rateLimiter.ts:119:5
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at next (node_modules/express/lib/router/route.js:149:13)
+      at Route.dispatch (node_modules/express/lib/router/route.js:119:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at node_modules/express/lib/router/index.js:284:15
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at router.handle (node_modules/express/lib/router/index.js:175:3)
+      at router (node_modules/express/lib/router/index.js:47:12)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at requestLogger (src/middlewares/requestLogger.ts:69:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at cookieParser (node_modules/cookie-parser/index.js:57:14)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at node_modules/body-parser/lib/read.js:137:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+  console.info
+    [2026-04-02T05:29:06.886Z] POST /api/v1/auth/signup [33m400[0m (4ms)
+
+      at logRequest (src/middlewares/requestLogger.ts:103:13)
+
+  console.info
+    [2026-04-02T05:29:07.019Z] POST /login [32m200[0m (66ms)
+
+      at logRequest (src/middlewares/requestLogger.ts:103:13)
+
+  console.warn
+    [OPERATIONAL_ERROR] {"timestamp":"2026-04-02T05:29:07.088Z","method":"POST","path":"/api/v1/auth/login","message":"이메일 또는 비밀번호가 올바르지 않습니다","stack":"Error: 이메일 또는 비밀번호가 올바르지 않습니다\n    at AuthService.login (C:\\_vibe\\todolist-app\\backend\\src\\services\\authService.ts:116:13)\n    at processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at login (C:\\_vibe\\todolist-app\\backend\\src\\controllers\\authController.ts:53:22)","isOperational":true}
+
+    [0m [90m 83 |[39m   [90m// Log operational errors as warnings[39m
+     [90m 84 |[39m   [36mif[39m ((err [36mas[39m [33mAppError[39m)[33m.[39misOperational) {
+    [31m[1m>[22m[39m[90m 85 |[39m     console[33m.[39mwarn([32m'[OPERATIONAL_ERROR]'[39m[33m,[39m [33mJSON[39m[33m.[39mstringify(logEntry))[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 86 |[39m   } [36melse[39m {
+     [90m 87 |[39m     [90m// Log programming/unknown errors as errors[39m
+     [90m 88 |[39m     console[33m.[39merror([32m'[UNHANDLED_ERROR]'[39m[33m,[39m [33mJSON[39m[33m.[39mstringify(logEntry))[33m;[39m[0m
+
+      at logError (src/middlewares/errorHandler.ts:85:13)
+      at errorHandler (src/middlewares/errorHandler.ts:38:3)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:71:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:67:12)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at node_modules/express/lib/router/index.js:646:15
+      at next (node_modules/express/lib/router/index.js:265:14)
+      at next (node_modules/express/lib/router/route.js:141:14)
+      at login (src/controllers/authController.ts:74:7)
+
+  console.info
+    [2026-04-02T05:29:07.089Z] POST /api/v1/auth/login [33m401[0m (2ms)
+
+      at logRequest (src/middlewares/requestLogger.ts:103:13)
+
+  console.warn
+    [OPERATIONAL_ERROR] {"timestamp":"2026-04-02T05:29:07.226Z","method":"POST","path":"/api/v1/auth/login","message":"이메일 또는 비밀번호가 올바르지 않습니다","stack":"Error: 이메일 또는 비밀번호가 올바르지 않습니다\n    at AuthService.login (C:\\_vibe\\todolist-app\\backend\\src\\services\\authService.ts:122:13)\n    at login (C:\\_vibe\\todolist-app\\backend\\src\\controllers\\authController.ts:53:22)","isOperational":true}
+
+    [0m [90m 83 |[39m   [90m// Log operational errors as warnings[39m
+     [90m 84 |[39m   [36mif[39m ((err [36mas[39m [33mAppError[39m)[33m.[39misOperational) {
+    [31m[1m>[22m[39m[90m 85 |[39m     console[33m.[39mwarn([32m'[OPERATIONAL_ERROR]'[39m[33m,[39m [33mJSON[39m[33m.[39mstringify(logEntry))[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 86 |[39m   } [36melse[39m {
+     [90m 87 |[39m     [90m// Log programming/unknown errors as errors[39m
+     [90m 88 |[39m     console[33m.[39merror([32m'[UNHANDLED_ERROR]'[39m[33m,[39m [33mJSON[39m[33m.[39mstringify(logEntry))[33m;[39m[0m
+
+      at logError (src/middlewares/errorHandler.ts:85:13)
+      at errorHandler (src/middlewares/errorHandler.ts:38:3)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:71:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:67:12)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at node_modules/express/lib/router/index.js:646:15
+      at next (node_modules/express/lib/router/index.js:265:14)
+      at next (node_modules/express/lib/router/route.js:141:14)
+      at login (src/controllers/authController.ts:74:7)
+
+  console.info
+    [2026-04-02T05:29:07.227Z] POST /api/v1/auth/login [33m401[0m (65ms)
+
+      at logRequest (src/middlewares/requestLogger.ts:103:13)
+
+  console.info
+    [2026-04-02T05:29:07.359Z] POST /login [32m200[0m (64ms)
+
+      at logRequest (src/middlewares/requestLogger.ts:103:13)
+
+  console.info
+    [2026-04-02T05:29:07.363Z] POST /refresh [32m200[0m (2ms)
+
+      at logRequest (src/middlewares/requestLogger.ts:103:13)
+
+  console.warn
+    [OPERATIONAL_ERROR] {"timestamp":"2026-04-02T05:29:07.431Z","method":"POST","path":"/api/v1/auth/refresh","message":"세션이 만료되었습니다. 다시 로그인해 주세요","stack":"Error: 세션이 만료되었습니다. 다시 로그인해 주세요\n    at refreshToken (C:\\_vibe\\todolist-app\\backend\\src\\controllers\\authController.ts:91:14)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at Route.dispatch (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\route.js:119:3)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:284:15\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at router.handle (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:47:12)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at requestLogger (C:\\_vibe\\todolist-app\\backend\\src\\middlewares\\requestLogger.ts:69:3)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at cookieParser (C:\\_vibe\\todolist-app\\backend\\node_modules\\cookie-parser\\index.js:57:14)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at jsonParser (C:\\_vibe\\todolist-app\\backend\\node_modules\\body-parser\\lib\\types\\json.js:122:7)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at cors (C:\\_vibe\\todolist-app\\backend\\node_modules\\cors\\lib\\index.js:188:7)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\cors\\lib\\index.js:224:17\n    at originCallback (C:\\_vibe\\todolist-app\\backend\\node_modules\\cors\\lib\\index.js:214:15)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\_vibe\\todolist-app\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\_vibe\\todolist-app\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at expressInit (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\middleware\\init.js:40:5)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at query (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\middleware\\query.js:45:5)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at router.handle (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at app.handle (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\application.js:181:10)\n    at Server.app (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\express.js:39:9)\n    at Server.emit (node:events:508:28)\n    at parserOnIncoming (node:_http_server:1210:12)\n    at HTTPParser.parserOnHeadersComplete (node:_http_common:125:17)","isOperational":true}
+
+    [0m [90m 83 |[39m   [90m// Log operational errors as warnings[39m
+     [90m 84 |[39m   [36mif[39m ((err [36mas[39m [33mAppError[39m)[33m.[39misOperational) {
+    [31m[1m>[22m[39m[90m 85 |[39m     console[33m.[39mwarn([32m'[OPERATIONAL_ERROR]'[39m[33m,[39m [33mJSON[39m[33m.[39mstringify(logEntry))[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 86 |[39m   } [36melse[39m {
+     [90m 87 |[39m     [90m// Log programming/unknown errors as errors[39m
+     [90m 88 |[39m     console[33m.[39merror([32m'[UNHANDLED_ERROR]'[39m[33m,[39m [33mJSON[39m[33m.[39mstringify(logEntry))[33m;[39m[0m
+
+      at logError (src/middlewares/errorHandler.ts:85:13)
+      at errorHandler (src/middlewares/errorHandler.ts:38:3)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:71:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:67:12)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at node_modules/express/lib/router/index.js:646:15
+      at next (node_modules/express/lib/router/index.js:265:14)
+      at next (node_modules/express/lib/router/route.js:141:14)
+      at refreshToken (src/controllers/authController.ts:91:9)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at next (node_modules/express/lib/router/route.js:149:13)
+      at Route.dispatch (node_modules/express/lib/router/route.js:119:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at node_modules/express/lib/router/index.js:284:15
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at router.handle (node_modules/express/lib/router/index.js:175:3)
+      at router (node_modules/express/lib/router/index.js:47:12)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at requestLogger (src/middlewares/requestLogger.ts:69:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at cookieParser (node_modules/cookie-parser/index.js:57:14)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at jsonParser (node_modules/body-parser/lib/types/json.js:122:7)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at cors (node_modules/cors/lib/index.js:188:7)
+      at node_modules/cors/lib/index.js:224:17
+      at originCallback (node_modules/cors/lib/index.js:214:15)
+      at node_modules/cors/lib/index.js:219:13
+      at optionsCallback (node_modules/cors/lib/index.js:199:9)
+      at corsMiddleware (node_modules/cors/lib/index.js:204:7)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at expressInit (node_modules/express/lib/middleware/init.js:40:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at query (node_modules/express/lib/middleware/query.js:45:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at router.handle (node_modules/express/lib/router/index.js:175:3)
+      at app.handle (node_modules/express/lib/application.js:181:10)
+      at Server.app (node_modules/express/lib/express.js:39:9)
+
+  console.info
+    [2026-04-02T05:29:07.436Z] POST /api/v1/auth/refresh [33m401[0m (5ms)
+
+      at logRequest (src/middlewares/requestLogger.ts:103:13)
+
+  console.warn
+    [OPERATIONAL_ERROR] {"timestamp":"2026-04-02T05:29:07.504Z","method":"POST","path":"/api/v1/auth/refresh","message":"세션이 만료되었습니다. 다시 로그인해 주세요","stack":"Error: 세션이 만료되었습니다. 다시 로그인해 주세요\n    at AuthService.refreshToken (C:\\_vibe\\todolist-app\\backend\\src\\services\\authService.ts:169:15)\n    at refreshToken (C:\\_vibe\\todolist-app\\backend\\src\\controllers\\authController.ts:95:45)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at Route.dispatch (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\route.js:119:3)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:284:15\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at router.handle (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:47:12)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at requestLogger (C:\\_vibe\\todolist-app\\backend\\src\\middlewares\\requestLogger.ts:69:3)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at cookieParser (C:\\_vibe\\todolist-app\\backend\\node_modules\\cookie-parser\\index.js:71:5)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at jsonParser (C:\\_vibe\\todolist-app\\backend\\node_modules\\body-parser\\lib\\types\\json.js:122:7)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at cors (C:\\_vibe\\todolist-app\\backend\\node_modules\\cors\\lib\\index.js:188:7)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\cors\\lib\\index.js:224:17\n    at originCallback (C:\\_vibe\\todolist-app\\backend\\node_modules\\cors\\lib\\index.js:214:15)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\_vibe\\todolist-app\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\_vibe\\todolist-app\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at expressInit (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\middleware\\init.js:40:5)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at query (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\middleware\\query.js:45:5)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at router.handle (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at app.handle (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\application.js:181:10)\n    at Server.app (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\express.js:39:9)\n    at Server.emit (node:events:508:28)\n    at parserOnIncoming (node:_http_server:1210:12)\n    at HTTPParser.parserOnHeadersComplete (node:_http_common:125:17)","isOperational":true}
+
+    [0m [90m 83 |[39m   [90m// Log operational errors as warnings[39m
+     [90m 84 |[39m   [36mif[39m ((err [36mas[39m [33mAppError[39m)[33m.[39misOperational) {
+    [31m[1m>[22m[39m[90m 85 |[39m     console[33m.[39mwarn([32m'[OPERATIONAL_ERROR]'[39m[33m,[39m [33mJSON[39m[33m.[39mstringify(logEntry))[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 86 |[39m   } [36melse[39m {
+     [90m 87 |[39m     [90m// Log programming/unknown errors as errors[39m
+     [90m 88 |[39m     console[33m.[39merror([32m'[UNHANDLED_ERROR]'[39m[33m,[39m [33mJSON[39m[33m.[39mstringify(logEntry))[33m;[39m[0m
+
+      at logError (src/middlewares/errorHandler.ts:85:13)
+      at errorHandler (src/middlewares/errorHandler.ts:38:3)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:71:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:67:12)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at node_modules/express/lib/router/index.js:646:15
+      at next (node_modules/express/lib/router/index.js:265:14)
+      at next (node_modules/express/lib/router/route.js:141:14)
+      at refreshToken (src/controllers/authController.ts:102:7)
+
+  console.info
+    [2026-04-02T05:29:07.506Z] POST /api/v1/auth/refresh [33m401[0m (2ms)
+
+      at logRequest (src/middlewares/requestLogger.ts:103:13)
+
+  console.warn
+    [OPERATIONAL_ERROR] {"timestamp":"2026-04-02T05:29:07.574Z","method":"POST","path":"/api/v1/auth/refresh","message":"유효하지 않은 토큰입니다","stack":"Error: 유효하지 않은 토큰입니다\n    at AuthService.refreshToken (C:\\_vibe\\todolist-app\\backend\\src\\services\\authService.ts:172:15)\n    at refreshToken (C:\\_vibe\\todolist-app\\backend\\src\\controllers\\authController.ts:95:45)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at Route.dispatch (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\route.js:119:3)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:284:15\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at router.handle (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:47:12)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at requestLogger (C:\\_vibe\\todolist-app\\backend\\src\\middlewares\\requestLogger.ts:69:3)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at cookieParser (C:\\_vibe\\todolist-app\\backend\\node_modules\\cookie-parser\\index.js:71:5)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at jsonParser (C:\\_vibe\\todolist-app\\backend\\node_modules\\body-parser\\lib\\types\\json.js:122:7)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at cors (C:\\_vibe\\todolist-app\\backend\\node_modules\\cors\\lib\\index.js:188:7)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\cors\\lib\\index.js:224:17\n    at originCallback (C:\\_vibe\\todolist-app\\backend\\node_modules\\cors\\lib\\index.js:214:15)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\_vibe\\todolist-app\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\_vibe\\todolist-app\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at expressInit (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\middleware\\init.js:40:5)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at query (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\middleware\\query.js:45:5)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at router.handle (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at app.handle (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\application.js:181:10)\n    at Server.app (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\express.js:39:9)\n    at Server.emit (node:events:508:28)\n    at parserOnIncoming (node:_http_server:1210:12)\n    at HTTPParser.parserOnHeadersComplete (node:_http_common:125:17)","isOperational":true}
+
+    [0m [90m 83 |[39m   [90m// Log operational errors as warnings[39m
+     [90m 84 |[39m   [36mif[39m ((err [36mas[39m [33mAppError[39m)[33m.[39misOperational) {
+    [31m[1m>[22m[39m[90m 85 |[39m     console[33m.[39mwarn([32m'[OPERATIONAL_ERROR]'[39m[33m,[39m [33mJSON[39m[33m.[39mstringify(logEntry))[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 86 |[39m   } [36melse[39m {
+     [90m 87 |[39m     [90m// Log programming/unknown errors as errors[39m
+     [90m 88 |[39m     console[33m.[39merror([32m'[UNHANDLED_ERROR]'[39m[33m,[39m [33mJSON[39m[33m.[39mstringify(logEntry))[33m;[39m[0m
+
+      at logError (src/middlewares/errorHandler.ts:85:13)
+      at errorHandler (src/middlewares/errorHandler.ts:38:3)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:71:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:67:12)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at node_modules/express/lib/router/index.js:646:15
+      at next (node_modules/express/lib/router/index.js:265:14)
+      at next (node_modules/express/lib/router/route.js:141:14)
+      at refreshToken (src/controllers/authController.ts:102:7)
+
+  console.info
+    [2026-04-02T05:29:07.577Z] POST /api/v1/auth/refresh [33m401[0m (3ms)
+
+      at logRequest (src/middlewares/requestLogger.ts:103:13)
+
+  console.warn
+    [OPERATIONAL_ERROR] {"timestamp":"2026-04-02T05:29:07.645Z","method":"POST","path":"/api/v1/auth/refresh","message":"유효하지 않은 토큰입니다","stack":"Error: 유효하지 않은 토큰입니다\n    at AuthService.refreshToken (C:\\_vibe\\todolist-app\\backend\\src\\services\\authService.ts:172:15)\n    at refreshToken (C:\\_vibe\\todolist-app\\backend\\src\\controllers\\authController.ts:95:45)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at Route.dispatch (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\route.js:119:3)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:284:15\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at router.handle (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:47:12)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at requestLogger (C:\\_vibe\\todolist-app\\backend\\src\\middlewares\\requestLogger.ts:69:3)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at cookieParser (C:\\_vibe\\todolist-app\\backend\\node_modules\\cookie-parser\\index.js:71:5)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at jsonParser (C:\\_vibe\\todolist-app\\backend\\node_modules\\body-parser\\lib\\types\\json.js:122:7)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at cors (C:\\_vibe\\todolist-app\\backend\\node_modules\\cors\\lib\\index.js:188:7)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\cors\\lib\\index.js:224:17\n    at originCallback (C:\\_vibe\\todolist-app\\backend\\node_modules\\cors\\lib\\index.js:214:15)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\_vibe\\todolist-app\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\_vibe\\todolist-app\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at expressInit (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\middleware\\init.js:40:5)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at query (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\middleware\\query.js:45:5)\n    at Layer.handle [as handle_request] (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at router.process_params (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at router.handle (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at app.handle (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\application.js:181:10)\n    at Server.app (C:\\_vibe\\todolist-app\\backend\\node_modules\\express\\lib\\express.js:39:9)\n    at Server.emit (node:events:508:28)\n    at parserOnIncoming (node:_http_server:1210:12)\n    at HTTPParser.parserOnHeadersComplete (node:_http_common:125:17)","isOperational":true}
+
+    [0m [90m 83 |[39m   [90m// Log operational errors as warnings[39m
+     [90m 84 |[39m   [36mif[39m ((err [36mas[39m [33mAppError[39m)[33m.[39misOperational) {
+    [31m[1m>[22m[39m[90m 85 |[39m     console[33m.[39mwarn([32m'[OPERATIONAL_ERROR]'[39m[33m,[39m [33mJSON[39m[33m.[39mstringify(logEntry))[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 86 |[39m   } [36melse[39m {
+     [90m 87 |[39m     [90m// Log programming/unknown errors as errors[39m
+     [90m 88 |[39m     console[33m.[39merror([32m'[UNHANDLED_ERROR]'[39m[33m,[39m [33mJSON[39m[33m.[39mstringify(logEntry))[33m;[39m[0m
+
+      at logError (src/middlewares/errorHandler.ts:85:13)
+      at errorHandler (src/middlewares/errorHandler.ts:38:3)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:71:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:67:12)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at node_modules/express/lib/router/index.js:646:15
+      at next (node_modules/express/lib/router/index.js:265:14)
+      at next (node_modules/express/lib/router/route.js:141:14)
+      at refreshToken (src/controllers/authController.ts:102:7)
+
+  console.info
+    [2026-04-02T05:29:07.648Z] POST /api/v1/auth/refresh [33m401[0m (3ms)
+
+      at logRequest (src/middlewares/requestLogger.ts:103:13)
+
+  console.warn
+    [OPERATIONAL_ERROR] {"timestamp":"2026-04-02T05:29:07.779Z","method":"POST","path":"/api/v1/auth/refresh","message":"사용자를 찾을 수 없습니다","stack":"Error: 사용자를 찾을 수 없습니다\n    at AuthService.refreshToken (C:\\_vibe\\todolist-app\\backend\\src\\services\\authService.ts:160:15)\n    at processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at refreshToken (C:\\_vibe\\todolist-app\\backend\\src\\controllers\\authController.ts:95:22)","isOperational":true}
+
+    [0m [90m 83 |[39m   [90m// Log operational errors as warnings[39m
+     [90m 84 |[39m   [36mif[39m ((err [36mas[39m [33mAppError[39m)[33m.[39misOperational) {
+    [31m[1m>[22m[39m[90m 85 |[39m     console[33m.[39mwarn([32m'[OPERATIONAL_ERROR]'[39m[33m,[39m [33mJSON[39m[33m.[39mstringify(logEntry))[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 86 |[39m   } [36melse[39m {
+     [90m 87 |[39m     [90m// Log programming/unknown errors as errors[39m
+     [90m 88 |[39m     console[33m.[39merror([32m'[UNHANDLED_ERROR]'[39m[33m,[39m [33mJSON[39m[33m.[39mstringify(logEntry))[33m;[39m[0m
+
+      at logError (src/middlewares/errorHandler.ts:85:13)
+      at errorHandler (src/middlewares/errorHandler.ts:38:3)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:71:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:67:12)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at router.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at node_modules/express/lib/router/index.js:646:15
+      at next (node_modules/express/lib/router/index.js:265:14)
+      at next (node_modules/express/lib/router/route.js:141:14)
+      at refreshToken (src/controllers/authController.ts:102:7)
+
+  console.info
+    [2026-04-02T05:29:07.781Z] POST /api/v1/auth/refresh [33m401[0m (3ms)
+
+      at logRequest (src/middlewares/requestLogger.ts:103:13)
+
+  console.info
+    [2026-04-02T05:29:07.848Z] POST /logout [32m200[0m (1ms)
+
+      at logRequest (src/middlewares/requestLogger.ts:103:13)
+
+  console.info
+    [2026-04-02T05:29:07.919Z] POST /logout [32m200[0m (0ms)
+
+      at logRequest (src/middlewares/requestLogger.ts:103:13)
+
+  console.info
+    [2026-04-02T05:29:08.051Z] POST /signup [32m201[0m (65ms)
+
+      at logRequest (src/middlewares/requestLogger.ts:103:13)
+
+  console.info
+    [2026-04-02T05:29:08.117Z] POST /login [32m200[0m (64ms)
+
+      at logRequest (src/middlewares/requestLogger.ts:103:13)
+
+  console.info
+    [2026-04-02T05:29:08.120Z] POST /refresh [32m200[0m (1ms)
+
+      at logRequest (src/middlewares/requestLogger.ts:103:13)
+
+  console.info
+    [2026-04-02T05:29:08.251Z] POST /signup [32m201[0m (65ms)
+
+      at logRequest (src/middlewares/requestLogger.ts:103:13)
+

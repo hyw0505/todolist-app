@@ -1,0 +1,34 @@
+- generic [ref=e18]:
+  - banner [ref=e19]:
+    - heading "TodoList" [level=1] [ref=e20]
+    - generic [ref=e21]:
+      - generic [ref=e22]: 테스트사용자님
+      - button "로그아웃" [ref=e23] [cursor=pointer]
+  - main [ref=e24]:
+    - generic [ref=e25]:
+      - generic [ref=e26]:
+        - heading "할일 목록" [level=2] [ref=e27]
+        - button "+ 할일 추가" [ref=e28] [cursor=pointer]
+      - generic [ref=e29]:
+        - generic [ref=e30]:
+          - generic [ref=e31]: 상태
+          - combobox "상태 필터" [ref=e33] [cursor=pointer]:
+            - option "전체" [selected]
+            - option "시작 전"
+            - option "진행 중"
+            - option "기한 초과"
+            - option "완료 (성공)"
+            - option "완료 (실패)"
+        - generic [ref=e35]:
+          - generic [ref=e36]: 정렬
+          - combobox "정렬 기준" [ref=e38] [cursor=pointer]:
+            - option "시작일"
+            - option "종료일" [selected]
+        - combobox "정렬 순서" [ref=e40] [cursor=pointer]:
+          - option "오름차순" [selected]
+          - option "내림차순"
+      - generic [ref=e41]:
+        - generic [ref=e42]: 📝
+        - heading "등록된 할일이 없습니다" [level=3] [ref=e43]
+        - paragraph [ref=e44]: 새로운 할일을 추가해보세요
+        - button "+ 할일 추가" [ref=e45] [cursor=pointer]

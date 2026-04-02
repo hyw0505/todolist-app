@@ -1,0 +1,17 @@
+- generic [ref=e122]:
+  - heading "로그인" [level=1] [ref=e123]
+  - generic [ref=e124]:
+    - generic [ref=e125]:
+      - generic [ref=e126]:
+        - generic [ref=e127]: 이메일*
+        - textbox "이메일*" [ref=e128]:
+          - /placeholder: example@email.com
+      - generic [ref=e129]:
+        - generic [ref=e130]: 비밀번호*
+        - textbox "비밀번호*" [ref=e131]:
+          - /placeholder: 비밀번호를 입력해주세요
+    - generic [ref=e132]:
+      - button "로그인" [ref=e133] [cursor=pointer]
+      - generic [ref=e134]:
+        - text: 계정이 없으신가요?
+        - button "회원가입" [ref=e135] [cursor=pointer]

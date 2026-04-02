@@ -1,0 +1,57 @@
+- generic [ref=e23]:
+  - banner [ref=e24]:
+    - generic [ref=e25]:
+      - generic [ref=e26] [cursor=pointer]: todolist-app
+      - button "다크모드로 전환" [ref=e27] [cursor=pointer]:
+        - generic [ref=e28]: ☀️
+    - generic [ref=e30]:
+      - generic [ref=e31]: 테스트사용자
+      - button "로그아웃" [ref=e32] [cursor=pointer]
+  - main [ref=e33]:
+    - generic [ref=e34]:
+      - generic [ref=e35]:
+        - heading "할일 목록" [level=2] [ref=e36]
+        - button "+ 할일 추가" [ref=e37] [cursor=pointer]
+      - generic [ref=e38]:
+        - generic [ref=e39]:
+          - generic [ref=e40]: 상태
+          - combobox "상태 필터" [ref=e41] [cursor=pointer]:
+            - option "전체" [selected]
+            - option "시작 전"
+            - option "진행 중"
+            - option "기한 초과"
+            - option "완료 (성공)"
+            - option "완료 (실패)"
+        - generic [ref=e43]:
+          - generic [ref=e44]: 정렬
+          - combobox "정렬 기준" [ref=e45] [cursor=pointer]:
+            - option "시작일"
+            - option "종료일" [selected]
+        - combobox "정렬 순서" [ref=e46] [cursor=pointer]:
+          - option "오름차순" [selected]
+          - option "내림차순"
+      - generic [ref=e47]:
+        - generic [ref=e48] [cursor=pointer]:
+          - generic [ref=e49]:
+            - heading "수학 수행평가 제출" [level=3] [ref=e50]
+            - generic [ref=e51]: 진행 중
+          - generic [ref=e52]: 3 단원까지
+          - generic [ref=e53]: 2026년 4월 1일 ~ 2026년 4월 7일
+          - generic [ref=e54]:
+            - button "완료" [ref=e55]
+            - button "수정" [ref=e56]
+            - button "삭제" [ref=e57]
+        - generic [ref=e58] [cursor=pointer]:
+          - generic [ref=e59]:
+            - heading "영어 에세이 제출" [level=3] [ref=e60]
+            - generic [ref=e61]: 시작 전
+          - generic [ref=e62]: A Tale of Two Cities 독후감
+          - generic [ref=e63]: 2026년 4월 5일 ~ 2026년 4월 9일
+          - generic [ref=e64]:
+            - button "완료" [ref=e65]
+            - button "수정" [ref=e66]
+            - button "삭제" [ref=e67]
+      - generic [ref=e68]:
+        - button "이전 페이지" [disabled] [ref=e69]: ‹
+        - button "1페이지" [ref=e70] [cursor=pointer]: "1"
+        - button "다음 페이지" [disabled] [ref=e71]: ›

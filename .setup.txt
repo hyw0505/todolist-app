@@ -1,0 +1,9 @@
+1. Supabase
+- DB Password : todolistappTest
+- ConnectionString : postgresql://postgres.vmfsqtediluljkvtaqfv:todolistappTest@aws-1-ap-northeast-1.pooler.supabase.com:6543/postgres
+
+DB_HOST=aws-1-ap-northeast-1.pooler.supabase.com
+DB_PORT=6543
+DB_NAME=postgres
+DB_USER=vmfsqtediluljkvtaqfv
+DB_PASSWORD=todolistappTest

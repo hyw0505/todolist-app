@@ -1,0 +1,35 @@
+- generic [ref=e82]:
+  - banner [ref=e83]:
+    - generic [ref=e84]:
+      - generic [ref=e85] [cursor=pointer]: todolist-app
+      - button "다크모드로 전환" [ref=e86] [cursor=pointer]:
+        - generic [ref=e87]: ☀️
+    - generic [ref=e89]:
+      - generic [ref=e90]: 테스트사용자
+      - button "로그아웃" [ref=e91] [cursor=pointer]
+  - main [ref=e92]:
+    - generic [ref=e93]:
+      - generic [ref=e94]:
+        - heading "할일 목록" [level=2] [ref=e95]
+        - button "+ 할일 추가" [ref=e96] [cursor=pointer]
+      - generic [ref=e97]:
+        - generic [ref=e98]:
+          - generic [ref=e99]: 상태
+          - combobox "상태 필터" [ref=e100] [cursor=pointer]:
+            - option "전체" [selected]
+            - option "시작 전"
+            - option "진행 중"
+            - option "기한 초과"
+            - option "완료 (성공)"
+            - option "완료 (실패)"
+        - generic [ref=e102]:
+          - generic [ref=e103]: 정렬
+          - combobox "정렬 기준" [ref=e104] [cursor=pointer]:
+            - option "시작일" [selected]
+            - option "종료일"
+        - combobox "정렬 순서" [ref=e105] [cursor=pointer]:
+          - option "오름차순" [selected]
+          - option "내림차순"
+      - generic [ref=e205]:
+        - status "로딩 중" [ref=e206]
+        - generic [ref=e207]: 할일을 불러오는 중...

@@ -1,0 +1,71 @@
+- generic [ref=e82]:
+  - banner [ref=e83]:
+    - generic [ref=e84]:
+      - generic [ref=e85] [cursor=pointer]: todolist-app
+      - button "다크모드로 전환" [ref=e86] [cursor=pointer]:
+        - generic [ref=e87]: ☀️
+    - generic [ref=e89]:
+      - generic [ref=e90]: 테스트사용자
+      - button "로그아웃" [ref=e91] [cursor=pointer]
+  - main [ref=e92]:
+    - generic [ref=e93]:
+      - generic [ref=e94]:
+        - heading "할일 목록" [level=2] [ref=e95]
+        - button "+ 할일 추가" [active] [ref=e96] [cursor=pointer]
+      - generic [ref=e97]:
+        - generic [ref=e98]:
+          - generic [ref=e99]: 상태
+          - combobox "상태 필터" [ref=e100] [cursor=pointer]:
+            - option "전체" [selected]
+            - option "시작 전"
+            - option "진행 중"
+            - option "기한 초과"
+            - option "완료 (성공)"
+            - option "완료 (실패)"
+        - generic [ref=e102]:
+          - generic [ref=e103]: 정렬
+          - combobox "정렬 기준" [ref=e104] [cursor=pointer]:
+            - option "시작일"
+            - option "종료일" [selected]
+        - combobox "정렬 순서" [ref=e105] [cursor=pointer]:
+          - option "오름차순" [selected]
+          - option "내림차순"
+      - generic [ref=e136] [cursor=pointer]:
+        - generic [ref=e137]:
+          - heading "수학 수행평가 제출" [level=3] [ref=e138]
+          - generic [ref=e139]: 진행 중
+        - generic [ref=e140]: 3 단원까지
+        - generic [ref=e141]: 2026년 4월 1일 ~ 2026년 4월 7일
+        - generic [ref=e142]:
+          - button "완료" [ref=e143]
+          - button "수정" [ref=e144]
+          - button "삭제" [ref=e145]
+      - generic [ref=e146]:
+        - button "이전 페이지" [disabled] [ref=e147]: ‹
+        - button "1페이지" [ref=e148] [cursor=pointer]: "1"
+        - button "다음 페이지" [disabled] [ref=e149]: ›
+  - generic [ref=e151]:
+    - generic [ref=e152]:
+      - heading "새 할일 추가" [level=2] [ref=e153]
+      - button "닫기" [ref=e154] [cursor=pointer]: ×
+    - generic [ref=e155]:
+      - generic [ref=e156]:
+        - generic [ref=e157]:
+          - generic [ref=e158]: 제목 *
+          - textbox "제목 *" [ref=e160]:
+            - /placeholder: 할일 제목을 입력해주세요
+        - generic [ref=e161]:
+          - text: 설명
+          - textbox "설명" [ref=e162]:
+            - /placeholder: 설명을 입력해주세요 (선택사항)
+          - generic [ref=e163]: 0/1000 자
+        - generic [ref=e164]:
+          - generic [ref=e165]:
+            - generic [ref=e166]: 시작일 *
+            - textbox "시작일 *" [ref=e167] [cursor=pointer]
+          - generic [ref=e168]:
+            - generic [ref=e169]: 종료일 *
+            - textbox "종료일 *" [ref=e170] [cursor=pointer]
+      - generic [ref=e171]:
+        - button "취소" [ref=e172] [cursor=pointer]
+        - button "추가" [ref=e173] [cursor=pointer]

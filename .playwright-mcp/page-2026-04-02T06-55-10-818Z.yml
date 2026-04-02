@@ -1,0 +1,23 @@
+- generic [ref=e2]:
+  - banner [ref=e89]:
+    - generic [ref=e90]:
+      - generic [ref=e91] [cursor=pointer]: todolist-app
+      - button "다크모드로 전환" [ref=e92] [cursor=pointer]:
+        - generic [ref=e93]: ☀️
+  - generic [ref=e95]:
+    - heading "로그인" [level=1] [ref=e96]
+    - generic [ref=e97]:
+      - generic [ref=e98]:
+        - generic [ref=e99]:
+          - generic [ref=e100]: 이메일*
+          - textbox "이메일*" [ref=e101]:
+            - /placeholder: example@email.com
+        - generic [ref=e102]:
+          - generic [ref=e103]: 비밀번호*
+          - textbox "비밀번호*" [ref=e104]:
+            - /placeholder: 비밀번호를 입력해주세요
+      - generic [ref=e105]:
+        - button "로그인" [ref=e106] [cursor=pointer]
+        - generic [ref=e107]:
+          - text: 계정이 없으신가요?
+          - button "회원가입" [ref=e108] [cursor=pointer]
