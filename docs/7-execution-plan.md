@@ -704,15 +704,15 @@ CREATE TABLE todos (
 **설명:** React 19 + TypeScript + Vite 프로젝트를 설정한다.
 
 **완료 조건:**
-- [ ] `npm create vite@latest` 로 프로젝트 생성
-- [ ] `package.json` 의존성 설치: React, TypeScript, Zustand, TanStack Query, Axios
-- [ ] `tsconfig.json` 설정 (strict: true, `any` 금지)
-- [ ] `.eslintrc.cjs`, `.prettierrc` 설정
-- [ ] `.env.example` 템플릿 생성
+- [x] `npm create vite@latest` 로 프로젝트 생성
+- [x] `package.json` 의존성 설치: React, TypeScript, Zustand, TanStack Query, Axios
+- [x] `tsconfig.json` 설정 (strict: true, `any` 금지)
+- [x] `.eslintrc.cjs`, `.prettierrc` 설정
+- [x] `.env.example` 템플릿 생성
 
 **의존성:**
 - [x] 선행 작업: 없음
-- [ ] 후행 작업: FE-02, FE-03
+- [x] 후행 작업: FE-02, FE-03
 
 ---
 

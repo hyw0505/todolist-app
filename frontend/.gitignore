@@ -1,0 +1,28 @@
+# 의존성
+node_modules/
+
+# 빌드 산출물
+dist/
+dist-ssr/
+
+# 환경변수 (예시 파일 제외)
+.env
+.env.*
+!.env.example
+
+# 에디터
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 테스트 커버리지
+coverage/
+
+# 캐시
+.eslintcache
+*.tsbuildinfo
