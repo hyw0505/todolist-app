@@ -38,10 +38,10 @@ export async function createTodo(data: CreateTodoInput): Promise<ApiResponse<Tod
 
 /**
  * 할일 수정 API
- * PUT /api/v1/todos/:id
+ * PATCH /api/v1/todos/:id
  */
 export async function updateTodo(id: string, data: UpdateTodoInput): Promise<ApiResponse<Todo>> {
-  const response = await axiosInstance.put<ApiResponse<Todo>>(`/todos/${id}`, data);
+  const response = await axiosInstance.patch<ApiResponse<Todo>>(`/todos/${id}`, data);
   return response.data;
 }
 
