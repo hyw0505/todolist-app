@@ -418,16 +418,16 @@ CREATE TABLE todos (
 **API:** `POST /auth/signup`
 
 **완료 조건:**
-- [ ] `src/validators/authValidator.ts` 에 회원가입 스키마 정의
-- [ ] 비밀번호 정책 검증: 8-64 자, 대소문자, 숫자, 특수문자 포함
-- [ ] `src/services/authService.ts` 에 회원가입 로직 구현
-- [ ] 이메일 중복 확인 (409 Conflict)
-- [ ] 비밀번호 bcrypt 암호화 (salt rounds: 10)
-- [ ] `src/repositories/userRepository.ts` 에 `insertUser` 구현
-- [ ] 응답: `{ success: true, userId: "UUID" }` (HTTP 201)
+- [x] `src/validators/authValidator.ts` 에 회원가입 스키마 정의
+- [x] 비밀번호 정책 검증: 8-64 자, 대소문자, 숫자, 특수문자 포함
+- [x] `src/services/authService.ts` 에 회원가입 로직 구현
+- [x] 이메일 중복 확인 (409 Conflict)
+- [x] 비밀번호 bcrypt 암호화 (salt rounds: 10)
+- [x] `src/repositories/userRepository.ts` 에 `insertUser` 구현
+- [x] 응답: `{ success: true, userId: "UUID" }` (HTTP 201)
 
 **의존성:**
-- [ ] 선행 작업: BE-07, BE-09, DB-03
+- [x] 선행 작업: BE-07, BE-09, DB-03
 
 ---
 
@@ -438,16 +438,16 @@ CREATE TABLE todos (
 **API:** `POST /auth/login`
 
 **완료 조건:**
-- [ ] 로그인 스키마 정의 (이메일, 비밀번호)
-- [ ] `authService.login()` 구현
-- [ ] 사용자 조회 및 비밀번호 검증
-- [ ] Access Token 발급 (HS256, 15 분 유효)
-- [ ] Refresh Token 발급 (HS256, 7 일 유효, httpOnly 쿠키)
-- [ ] 응답: `{ success: true, accessToken, refreshToken, user }` (HTTP 200)
-- [ ] 실패 시 401 Unauthorized
+- [x] 로그인 스키마 정의 (이메일, 비밀번호)
+- [x] `authService.login()` 구현
+- [x] 사용자 조회 및 비밀번호 검증
+- [x] Access Token 발급 (HS256, 15 분 유효)
+- [x] Refresh Token 발급 (HS256, 7 일 유효, httpOnly 쿠키)
+- [x] 응답: `{ success: true, accessToken, refreshToken, user }` (HTTP 200)
+- [x] 실패 시 401 Unauthorized
 
 **의존성:**
-- [ ] 선행 작업: BE-05, BE-10, DB-03
+- [x] 선행 작업: BE-05, BE-10, DB-03
 
 ---
 
@@ -458,14 +458,14 @@ CREATE TABLE todos (
 **API:** `POST /auth/refresh`
 
 **완료 조건:**
-- [ ] Refresh Token 검증 (쿠키 또는 body)
-- [ ] 만료 여부 확인
-- [ ] 새 Access Token 발급 (15 분)
-- [ ] 응답: `{ success: true, accessToken }` (HTTP 200)
-- [ ] Refresh Token 만료 시 401 응답
+- [x] Refresh Token 검증 (쿠키 또는 body)
+- [x] 만료 여부 확인
+- [x] 새 Access Token 발급 (15 분)
+- [x] 응답: `{ success: true, accessToken }` (HTTP 200)
+- [x] Refresh Token 만료 시 401 응답
 
 **의존성:**
-- [ ] 선행 작업: BE-05, BE-11
+- [x] 선행 작업: BE-05, BE-11
 
 ---
 
@@ -483,13 +483,13 @@ CREATE TABLE todos (
 - `COMPLETED_FAILURE`: 완료=true, 성공=false
 
 **완료 조건:**
-- [ ] `src/services/todoStatusService.ts` 에 `calculateTodoStatus()` 구현
-- [ ] 날짜 비교는 KST(UTC+9) 기준
-- [ ] 5 가지 상태 모두 단위 테스트 작성
-- [ ] 테스트 커버리지 100%
+- [x] `src/services/todoStatusService.ts` 에 `calculateTodoStatus()` 구현
+- [x] 날짜 비교는 KST(UTC+9) 기준
+- [x] 5 가지 상태 모두 단위 테스트 작성
+- [x] 테스트 커버리지 100%
 
 **의존성:**
-- [ ] 선행 작업: BE-03
+- [x] 선행 작업: BE-03
 
 ---
 
@@ -500,16 +500,16 @@ CREATE TABLE todos (
 **API:** `POST /todos` (인증 필요)
 
 **완료 조건:**
-- [ ] `src/validators/todoValidator.ts` 에 생성 스키마 정의
-- [ ] title: 1-100 자, description: 0-1000 자
-- [ ] `due_date >= start_date` 검증
-- [ ] `todoService.createTodo()` 구현
-- [ ] `todoRepository.insertTodo()` 구현
-- [ ] 응답에 `status` 필드 포함 (런타임 계산)
-- [ ] 응답: `{ success: true, todo }` (HTTP 201)
+- [x] `src/validators/todoValidator.ts` 에 생성 스키마 정의
+- [x] title: 1-100 자, description: 0-1000 자
+- [x] `due_date >= start_date` 검증
+- [x] `todoService.createTodo()` 구현
+- [x] `todoRepository.insertTodo()` 구현
+- [x] 응답에 `status` 필드 포함 (런타임 계산)
+- [x] 응답: `{ success: true, todo }` (HTTP 201)
 
 **의존성:**
-- [ ] 선행 작업: BE-05, BE-13, DB-04
+- [x] 선행 작업: BE-05, BE-13, DB-04
 
 ---
 
@@ -520,15 +520,15 @@ CREATE TABLE todos (
 **API:** `GET /todos?status=&sort_by=&sort_order=&page=&limit=` (인증 필요)
 
 **완료 조건:**
-- [ ] 쿼리 파라미터 검증
-- [ ] `WHERE user_id = $userId` 소유권 필터 필수 적용
-- [ ] `status` 필터: 런타임 계산된 상태 기반
-- [ ] 정렬: `start_date` 또는 `due_date`, asc/desc
-- [ ] 페이지네이션: `LIMIT/OFFSET` 적용
-- [ ] 응답: `{ success: true, todos, total, page, limit }` (HTTP 200)
+- [x] 쿼리 파라미터 검증
+- [x] `WHERE user_id = $userId` 소유권 필터 필수 적용
+- [x] `status` 필터: 런타임 계산된 상태 기반
+- [x] 정렬: `start_date` 또는 `due_date`, asc/desc
+- [x] 페이지네이션: `LIMIT/OFFSET` 적용
+- [x] 응답: `{ success: true, todos, total, page, limit }` (HTTP 200)
 
 **의존성:**
-- [ ] 선행 작업: BE-05, BE-13, BE-14
+- [x] 선행 작업: BE-05, BE-13, BE-14
 
 ---
 
@@ -539,14 +539,14 @@ CREATE TABLE todos (
 **API:** `GET /todos/:id` (인증 필요)
 
 **완료 조건:**
-- [ ] `todoRepository.findById()` 구현
-- [ ] 소유권 검증 (`WHERE id = $id AND user_id = $userId`)
-- [ ] 없음: 404 Not Found
-- [ ] 권한 없음: 403 Forbidden
-- [ ] 응답에 `status` 필드 포함
+- [x] `todoRepository.findById()` 구현
+- [x] 소유권 검증 (`WHERE id = $id AND user_id = $userId`)
+- [x] 없음: 404 Not Found
+- [x] 권한 없음: 403 Forbidden
+- [x] 응답에 `status` 필드 포함
 
 **의존성:**
-- [ ] 선행 작업: BE-05, BE-13, BE-14
+- [x] 선행 작업: BE-05, BE-13, BE-14
 
 ---
 
@@ -557,16 +557,16 @@ CREATE TABLE todos (
 **API:** `PUT /todos/:id` (인증 필요)
 
 **완료 조건:**
-- [ ] 수정 입력값 검증 (title, description, start_date, due_date)
-- [ ] 소유권 검증
-- [ ] `due_date >= start_date` 재검증 (변경 시)
-- [ ] `todoRepository.updateTodoById()` 구현
-- [ ] `updated_at` 자동 갱신
-- [ ] 응답에 `status` 필드 포함 (재산출)
-- [ ] 응답: `{ success: true, todo }` (HTTP 200)
+- [x] 수정 입력값 검증 (title, description, start_date, due_date)
+- [x] 소유권 검증
+- [x] `due_date >= start_date` 재검증 (변경 시)
+- [x] `todoRepository.updateTodoById()` 구현
+- [x] `updated_at` 자동 갱신
+- [x] 응답에 `status` 필드 포함 (재산출)
+- [x] 응답: `{ success: true, todo }` (HTTP 200)
 
 **의존성:**
-- [ ] 선행 작업: BE-05, BE-13, BE-14
+- [x] 선행 작업: BE-05, BE-13, BE-14
 
 ---
 
@@ -577,16 +577,16 @@ CREATE TABLE todos (
 **API:** `POST /todos/:id/complete` (인증 필요)
 
 **완료 조건:**
-- [ ] 입력값: `is_success` (boolean, 필수)
-- [ ] 소유권 검증
-- [ ] 이미 완료된 할일 재완료 차단 (409 Conflict)
-- [ ] OVERDUE 상태 할일도 완료 처리 가능 (BR-09)
-- [ ] `is_completed=true`, `is_success` 설정
-- [ ] `status` 자동 계산 (COMPLETED_SUCCESS 또는 COMPLETED_FAILURE)
-- [ ] 응답: `{ success: true, todo }` (HTTP 200)
+- [x] 입력값: `is_success` (boolean, 필수)
+- [x] 소유권 검증
+- [x] 이미 완료된 할일 재완료 차단 (409 Conflict)
+- [x] OVERDUE 상태 할일도 완료 처리 가능 (BR-09)
+- [x] `is_completed=true`, `is_success` 설정
+- [x] `status` 자동 계산 (COMPLETED_SUCCESS 또는 COMPLETED_FAILURE)
+- [x] 응답: `{ success: true, todo }` (HTTP 200)
 
 **의존성:**
-- [ ] 선행 작업: BE-05, BE-13, BE-14
+- [x] 선행 작업: BE-05, BE-13, BE-14
 
 ---
 
@@ -597,14 +597,14 @@ CREATE TABLE todos (
 **API:** `DELETE /todos/:id` (인증 필요)
 
 **완료 조건:**
-- [ ] 소유권 검증
-- [ ] `todoRepository.deleteById()` 구현
-- [ ] 소프트 삭제 또는 물리 삭제 결정 (PRD 에 따름)
-- [ ] 응답: `{ success: true, message, todoId }` (HTTP 204)
-- [ ] 권한 없음: 403 Forbidden
+- [x] 소유권 검증
+- [x] `todoRepository.deleteById()` 구현
+- [x] 소프트 삭제 또는 물리 삭제 결정 (PRD 에 따름)
+- [x] 응답: `{ success: true, message, todoId }` (HTTP 204)
+- [x] 권한 없음: 403 Forbidden
 
 **의존성:**
-- [ ] 선행 작업: BE-05, BE-14
+- [x] 선행 작업: BE-05, BE-14
 
 ---
 
@@ -615,14 +615,14 @@ CREATE TABLE todos (
 **설명:** 인증 관련 엔드포인트를 라우터로 통합한다.
 
 **완료 조건:**
-- [ ] `src/routes/authRouter.ts` 생성
-- [ ] `POST /auth/signup` 매핑
-- [ ] `POST /auth/login` 매핑
-- [ ] `POST /auth/refresh` 매핑
-- [ ] Rate Limiting 미들웨어 적용 (로그인 5 회/분)
+- [x] `src/routes/authRoutes.ts` 생성
+- [x] `POST /auth/signup` 매핑
+- [x] `POST /auth/login` 매핑
+- [x] `POST /auth/refresh` 매핑
+- [x] Rate Limiting 미들웨어 적용 (로그인 5 회/분)
 
 **의존성:**
-- [ ] 선행 작업: BE-10, BE-11, BE-12
+- [x] 선행 작업: BE-10, BE-11, BE-12
 
 ---
 
@@ -631,17 +631,17 @@ CREATE TABLE todos (
 **설명:** 할일 관련 엔드포인트를 라우터로 통합한다.
 
 **완료 조건:**
-- [ ] `src/routes/todoRouter.ts` 생성
-- [ ] `POST /todos` 매핑 (인증 필요)
-- [ ] `GET /todos` 매핑 (인증 필요)
-- [ ] `GET /todos/:id` 매핑 (인증 필요)
-- [ ] `PUT /todos/:id` 매핑 (인증 필요)
-- [ ] `POST /todos/:id/complete` 매핑 (인증 필요)
-- [ ] `DELETE /todos/:id` 매핑 (인증 필요)
-- [ ] `authenticateToken` 미들웨어 적용
+- [x] `src/routes/todoRoutes.ts` 생성
+- [x] `POST /todos` 매핑 (인증 필요)
+- [x] `GET /todos` 매핑 (인증 필요)
+- [x] `GET /todos/:id` 매핑 (인증 필요)
+- [x] `PUT /todos/:id` 매핑 (인증 필요)
+- [x] `POST /todos/:id/complete` 매핑 (인증 필요)
+- [x] `DELETE /todos/:id` 매핑 (인증 필요)
+- [x] `authenticateToken` 미들웨어 적용
 
 **의존성:**
-- [ ] 선행 작업: BE-14, BE-15, BE-16, BE-17, BE-18, BE-19
+- [x] 선행 작업: BE-14, BE-15, BE-16, BE-17, BE-18, BE-19
 
 ---
 
@@ -650,14 +650,15 @@ CREATE TABLE todos (
 **설명:** 모든 라우터와 미들웨어를 Express 앱에 등록한다.
 
 **완료 조건:**
-- [ ] `src/app.ts` 에 Express 앱 생성
-- [ ] CORS 설정 (`CORS_ORIGIN` 환경변수 기반)
-- [ ] `requestLogger`, `errorHandler` 미들웨어 등록
-- [ ] `/auth/*`, `/todos/*` 라우터 등록
-- [ ] 404 핸들러 등록
+- [x] `src/app.ts` 에 Express 앱 생성
+- [x] CORS 설정 (`CORS_ORIGIN` 환경변수 기반)
+- [x] `requestLogger`, `errorHandler` 미들웨어 등록
+- [x] `/auth/*`, `/todos/*` 라우터 등록
+- [x] 404 핸들러 등록
+- [x] Swagger UI 통합 (`/api-docs`)
 
 **의존성:**
-- [ ] 선행 작업: BE-20, BE-21
+- [x] 선행 작업: BE-20, BE-21
 
 ---
 
@@ -666,15 +667,15 @@ CREATE TABLE todos (
 **설명:** 인증 흐름과 할일 CRUD 전 주기를 테스트한다.
 
 **완료 조건:**
-- [ ] `tests/integration/auth.test.ts` 작성
-- [ ] 회원가입 → 로그인 → 토큰 갱신 흐름 테스트
-- [ ] `tests/integration/todos.test.ts` 작성
-- [ ] 할일 CRUD + 완료처리 전체 흐름 테스트
-- [ ] 타인 할일 접근 차단 (403) 테스트
-- [ ] SQL Injection 방어 확인 (parameterized query)
+- [x] `tests/integration/auth.test.ts` 작성
+- [x] 회원가입 → 로그인 → 토큰 갱신 흐름 테스트
+- [x] `tests/integration/todos.test.ts` 작성
+- [x] 할일 CRUD + 완료처리 전체 흐름 테스트
+- [x] 타인 할일 접근 차단 (403) 테스트
+- [x] SQL Injection 방어 확인 (parameterized query)
 
 **의존성:**
-- [ ] 선행 작업: BE-22
+- [x] 선행 작업: BE-22
 
 ---
 
@@ -683,13 +684,14 @@ CREATE TABLE todos (
 **설명:** API 명세를 문서화한다.
 
 **완료 조건:**
-- [ ] 엔드포인트 목록 정리 (메서드, 경로, 설명, 인증 필요 여부)
-- [ ] 요청/응답 스키마 정의
-- [ ] 에러 코드 목록 정리
-- [ ] `docs/` 디렉토리에 API 명세 추가 (선택)
+- [x] 엔드포인트 목록 정리 (메서드, 경로, 설명, 인증 필요 여부)
+- [x] 요청/응답 스키마 정의
+- [x] 에러 코드 목록 정리
+- [x] `swagger/swagger.json` OpenAPI 명세 작성
+- [x] Swagger UI 통합 (`/api-docs`)
 
 **의존성:**
-- [ ] 선행 작업: BE-22
+- [x] 선행 작업: BE-22
 
 ---
 
