@@ -1,7 +1,7 @@
 # 와이어프레임 명세서
 
 **프로젝트명:** todolist-app
-**문서 버전:** v1.0
+**문서 버전:** v1.1
 **작성일:** 2026-04-01
 **작성자:** Yongwoo
 
@@ -34,6 +34,7 @@
 | **일관성** | 전체 화면에서 통일된 컴포넌트와 패턴 사용 |
 | **접근성** | WCAG 2.1 Level AA 준수 (색상 대비 4.5:1 이상) |
 | **반응형** | 모바일 (320px~), 태블릿 (768px~), 데스크탑 (1024px~) 지원 |
+| **다크모드** | 시스템 테마 감지 및 수동 토글을 통한 라이트/다크 모드 전환 |
 
 ---
 
@@ -73,6 +74,7 @@ App.tsx
 │       └── TodosPage
 │           ├── Header
 │           │   ├── Logo
+│           │   ├── Button (theme toggle) 🌙/☀️
 │           │   └── Button (logout)
 │           │
 │           ├── TodoFilterBar
@@ -220,7 +222,7 @@ interface TodoFilterState {
   sortOrder: 'asc' | 'desc';
   page: number;
   limit: number;
-  
+
   // Actions
   setStatus: (status: TodoStatus | 'ALL') => void;
   setSortBy: (sortBy: 'start_date' | 'due_date') => void;
@@ -236,6 +238,50 @@ interface TodoFilterState {
 - `sortOrder`: 'asc'
 - `page`: 1
 - `limit`: 10
+
+### 5.3 테마 스토어 (`useThemeStore`)
+
+```typescript
+interface ThemeState {
+  theme: 'light' | 'dark' | 'system';
+
+  // Actions
+  setTheme: (theme: 'light' | 'dark' | 'system') => void;
+  toggleTheme: () => void; // light ↔ dark 토글
+}
+```
+
+**초기값:**
+- `theme`: 'system' (시스템 설정 따름)
+
+**상태 흐름:**
+```
+[초기] theme: 'system'
+   │
+   │ 사용자가 다크모드 토글
+   ▼
+[다크모드] theme: 'dark'
+   │
+   │ 사용자가 라이트모드 토글
+   ▼
+[라이트모드] theme: 'light'
+   │
+   │ 사용자가 시스템 설정 선택
+   ▼
+[시스템] theme: 'system' → 시스템 테마 감지
+```
+
+**localStorage 저장:**
+- 키: `todolist-theme`
+- 값: `'light' | 'dark' | 'system'`
+- 목적: 사용자 테마 선호도 영구 저장
+
+**시스템 테마 감지:**
+```typescript
+// prefers-color-scheme 미디어 쿼리 감지
+const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+const systemTheme = mediaQuery.matches ? 'dark' : 'light';
+```
 
 ---
 
@@ -255,7 +301,7 @@ interface TodoFilterState {
 ┌─────────────────────────────────────────────────────────────┐
 │                         Header (선택사항)                     │
 │  ┌─────────────────────────────────────────────────────┐    │
-│  │  [로고] todolist-app                                │    │
+│  │  [로고] todolist-app               [🌙/☀️]          │    │
 │  └─────────────────────────────────────────────────────┘    │
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
@@ -301,6 +347,7 @@ interface TodoFilterState {
 | 컴포넌트 | 타입 | 속성 | 상태 | 액션 |
 |---------|------|------|------|------|
 | Logo | Image/Text | src, alt | - | 홈으로 이동 |
+| ThemeToggle | Button | aria-label, icon | light, dark | 테마 토글 |
 | Email Input | Input | type="email", required, placeholder | default, focus, error, disabled | 값 입력 |
 | Password Input | Input | type="password", required, placeholder | default, focus, error, disabled | 값 입력, 비밀번호 표시 토글 |
 | Submit Button | Button | type="submit", variant="primary" | default, hover, active, disabled, loading | 폼 제출 |
@@ -451,7 +498,7 @@ interface TodoFilterState {
     margin: 0 auto;
     padding: 24px;
   }
-  
+
   .logo {
     width: 160px;
     height: 45px;
@@ -464,7 +511,7 @@ interface TodoFilterState {
     max-width: 400px;
     padding: 32px;
   }
-  
+
   .input-field,
   .submit-button {
     height: 44px;
@@ -478,12 +525,43 @@ interface TodoFilterState {
     background-color: #1a1a1a;
     color: #ffffff;
   }
-  
+
   .input-field {
     background-color: #2d2d2d;
     border-color: #404040;
     color: #ffffff;
   }
+}
+
+/* 데이터 속성 기반 다크 모드 (수동 토글) */
+[data-theme='dark'] {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --border-color: #404040;
+  --primary-color: #3b82f6;
+  --primary-hover: #2563eb;
+}
+
+[data-theme='dark'] .login-container {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+[data-theme='dark'] .input-field {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+[data-theme='dark'] .submit-button {
+  background-color: var(--primary-color);
+  color: #ffffff;
+}
+
+[data-theme='dark'] .submit-button:hover {
+  background-color: var(--primary-hover);
 }
 
 /* 고대비 모드 지원 */
@@ -550,7 +628,7 @@ interface TodoFilterState {
 ┌─────────────────────────────────────────────────────────────┐
 │                         Header                              │
 │  ┌─────────────────────────────────────────────────────┐    │
-│  │  [로고] todolist-app                                │    │
+│  │  [로고] todolist-app               [🌙/☀️]          │    │
 │  └─────────────────────────────────────────────────────┘    │
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
@@ -941,7 +1019,7 @@ interface TodoFilterState {
 ┌─────────────────────────────────────────────────────────────────┐
 │ Header                                                          │
 │ ┌─────────────────────────────────────────────────────────┐     │
-│ │ [로고] todolist-app                    [사용자명] [로그아웃]│     │
+│ │ [로고] todolist-app        [🌙/☀️]  [사용자명] [로그아웃]│     │
 │ └─────────────────────────────────────────────────────────┘     │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
@@ -1011,7 +1089,7 @@ interface TodoFilterState {
 ┌─────────────────────────────────┐
 │ Header                          │
 │ ┌─────────────────────────┐     │
-│ │ [로고]        [사용자] ▼│     │
+│ │ [로고]   [🌙/☀️] [사용자] ▼│     │
 │ └─────────────────────────┘     │
 ├─────────────────────────────────┤
 │                                 │
@@ -1056,6 +1134,7 @@ interface TodoFilterState {
 |---------|------|------|------|------|
 | Header | Container | - | default | - |
 | Logo | Image/Text | src, alt | - | 홈으로 이동 |
+| ThemeToggle | Button | aria-label, icon | light, dark | 테마 토글 |
 | UserMenu | Dropdown | user.name | default, open | 로그아웃, 설정 |
 | FilterBar | Container | - | default | - |
 | StatusFilter | Select | options | default, open | 상태 필터 변경 |
@@ -3914,6 +3993,7 @@ const handleTouchMove = (e) => {
 |------|--------|--------|-----------|
 | v1.0 | 2026-04-01 | Yongwoo | 최초 작성: 7 개 화면 와이어프레임, 컴포넌트 명세, 디자인 토큰, 접근성 가이드 |
 | v1.1 | 2026-04-01 | Yongwoo | 반응형 UI 명세 추가: 7 개 화면 상세 반응형 레이아웃, CSS 미디어 쿼리, 터치 타겟 가이드라인, 모바일 제스처, 성능 최적화, 테스트 매트릭스 |
+| v1.2 | 2026-04-02 | Yongwoo | **라이트모드/다크모드 토글 버튼 추가**: (§1.3) 디자인 원칙 추가, (§3) 컴포넌트 계층 구조 업데이트, (§5.3) 테마 스토어 추가, (§6) 모든 화면에 테마 토글 버튼 추가, 다크모드 CSS 변수 및 미디어 쿼리 추가 |
 
 ---
 

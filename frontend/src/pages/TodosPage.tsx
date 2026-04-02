@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useTodos } from '@/features/todos/hooks/useTodos';
 import { useTodoFilterStore } from '@/features/todos/stores/useTodoFilterStore';
 import { TodoFilterBar } from '@/features/todos/components/TodoFilterBar';
@@ -9,7 +8,8 @@ import { TodoEditForm } from '@/features/todos/components/TodoEditForm';
 import { Spinner } from '@/shared/components/Spinner';
 import { ErrorMessage } from '@/shared/components/ErrorMessage';
 import { Button } from '@/shared/components/Button';
-import { useAuthStore } from '@/features/auth/stores/useAuthStore';
+import { Header } from '@/shared/components/Header';
+import { useTheme } from '@/shared/hooks/useTheme';
 import type { Todo, TodoStatus } from '@/types/todo';
 
 /**
@@ -24,14 +24,11 @@ import type { Todo, TodoStatus } from '@/types/todo';
  * - 페이지네이션 UI 포함
  */
 export function TodosPage(): React.JSX.Element {
-  const navigate = useNavigate();
-  const clearAuth = useAuthStore((state) => state.clearAuth);
-  const user = useAuthStore((state) => state.user);
   const { status, sortBy, sortOrder, page, limit, setPage } = useTodoFilterStore();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [editingTodo, setEditingTodo] = useState<Todo | null>(null);
+  const { colors, isDark } = useTheme();
 
-  // 필터 파라미터 구성
   const filters: Parameters<typeof useTodos>[0] = {
     ...(status !== 'ALL' ? { status: status as TodoStatus } : {}),
     sort_by: sortBy,
@@ -42,11 +39,6 @@ export function TodosPage(): React.JSX.Element {
   };
 
   const { data, isLoading, error, refetch } = useTodos(filters);
-
-  const handleLogout = () => {
-    clearAuth();
-    navigate('/login');
-  };
 
   const handleCreateSuccess = () => {
     setIsCreateModalOpen(false);
@@ -61,37 +53,7 @@ export function TodosPage(): React.JSX.Element {
   // 페이지 컨테이너 스타일
   const containerStyle: React.CSSProperties = {
     minHeight: '100vh',
-    backgroundColor: '#F5F5F5',
-  };
-
-  // 헤더 스타일
-  const headerStyle: React.CSSProperties = {
-    backgroundColor: '#0068C4',
-    padding: '16px 20px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-  };
-
-  const titleStyle: React.CSSProperties = {
-    fontSize: '20px',
-    fontWeight: 700,
-    color: '#FFFFFF',
-    fontFamily: "'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif",
-    margin: 0,
-  };
-
-  const headerActionsStyle: React.CSSProperties = {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '12px',
-  };
-
-  const userNameStyle: React.CSSProperties = {
-    fontSize: '14px',
-    color: '#FFFFFF',
-    fontFamily: "'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif",
+    backgroundColor: colors.surface2,
   };
 
   // 메인 콘텐츠 스타일
@@ -103,10 +65,10 @@ export function TodosPage(): React.JSX.Element {
 
   // 콘텐츠 카드 스타일
   const contentCardStyle: React.CSSProperties = {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.surface1,
     borderRadius: '8px',
     padding: '20px',
-    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+    boxShadow: colors.shadow1,
     minHeight: '400px',
   };
 
@@ -121,12 +83,11 @@ export function TodosPage(): React.JSX.Element {
   const pageTitleStyle: React.CSSProperties = {
     fontSize: '18px',
     fontWeight: 600,
-    color: '#1A1A1A',
+    color: colors.textPrimary,
     fontFamily: "'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif",
     margin: 0,
   };
 
-  // 로딩/에러 상태 스타일
   const stateContainerStyle: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
@@ -143,30 +104,29 @@ export function TodosPage(): React.JSX.Element {
     justifyContent: 'center',
     minHeight: '300px',
     gap: '16px',
-    color: '#767676',
+    color: colors.textMuted,
   };
 
   const emptyIconStyle: React.CSSProperties = {
     fontSize: '48px',
-    color: '#C4C4C4',
+    color: colors.borderStrong,
   };
 
   const emptyTitleStyle: React.CSSProperties = {
     fontSize: '16px',
     fontWeight: 600,
-    color: '#404040',
+    color: colors.textSecondary,
     fontFamily: "'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif",
     margin: 0,
   };
 
   const emptyDescriptionStyle: React.CSSProperties = {
     fontSize: '14px',
-    color: '#767676',
+    color: colors.textMuted,
     fontFamily: "'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif",
     margin: 0,
   };
 
-  // 페이지네이션 스타일
   const paginationStyle: React.CSSProperties = {
     display: 'flex',
     justifyContent: 'center',
@@ -174,7 +134,7 @@ export function TodosPage(): React.JSX.Element {
     gap: '8px',
     marginTop: '24px',
     paddingTop: '16px',
-    borderTop: '1px solid #F0F0F0',
+    borderTop: `1px solid ${colors.border}`,
   };
 
   const pageButtonStyle: React.CSSProperties = {
@@ -183,10 +143,10 @@ export function TodosPage(): React.JSX.Element {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    border: '1px solid #C4C4C4',
+    border: `1px solid ${colors.borderStrong}`,
     borderRadius: '4px',
-    backgroundColor: '#FFFFFF',
-    color: '#404040',
+    backgroundColor: colors.surface1,
+    color: colors.textSecondary,
     fontSize: '14px',
     fontFamily: "'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif",
     cursor: 'pointer',
@@ -195,9 +155,9 @@ export function TodosPage(): React.JSX.Element {
 
   const activePageButtonStyle: React.CSSProperties = {
     ...pageButtonStyle,
-    backgroundColor: '#0068C4',
-    color: '#FFFFFF',
-    border: '1px solid #0068C4',
+    backgroundColor: colors.primary,
+    color: isDark ? '#121212' : '#FFFFFF',
+    border: `1px solid ${colors.primary}`,
   };
 
   const disabledButtonStyle: React.CSSProperties = {
@@ -213,23 +173,12 @@ export function TodosPage(): React.JSX.Element {
     const currentPage = page;
 
     const pages: (number | 'ellipsis')[] = [];
-
-    // 항상 첫 페이지 포함
     pages.push(1);
-
-    // 현재 페이지 주변 페이지들
     for (let i = currentPage - 1; i <= currentPage + 1; i++) {
-      if (i > 1 && i < totalPages) {
-        pages.push(i);
-      }
+      if (i > 1 && i < totalPages) pages.push(i);
     }
+    if (totalPages > 1) pages.push(totalPages);
 
-    // 항상 마지막 페이지 포함
-    if (totalPages > 1) {
-      pages.push(totalPages);
-    }
-
-    // 중복 제거 및 정렬
     const uniquePages = [...new Set(pages)].sort((a, b) => {
       if (a === 'ellipsis' || b === 'ellipsis') return 0;
       return a - b;
@@ -237,7 +186,6 @@ export function TodosPage(): React.JSX.Element {
 
     return (
       <div style={paginationStyle}>
-        {/* 이전 버튼 */}
         <button
           style={currentPage === 1 ? disabledButtonStyle : pageButtonStyle}
           onClick={() => setPage(currentPage - 1)}
@@ -248,7 +196,6 @@ export function TodosPage(): React.JSX.Element {
           ‹
         </button>
 
-        {/* 페이지 번호 */}
         {uniquePages.map((pageNum, index) => {
           if (pageNum === 'ellipsis') {
             return (
@@ -260,7 +207,6 @@ export function TodosPage(): React.JSX.Element {
               </span>
             );
           }
-
           const isCurrentPage = pageNum === currentPage;
           return (
             <button
@@ -276,11 +222,10 @@ export function TodosPage(): React.JSX.Element {
           );
         })}
 
-        {/* 다음 버튼 */}
         <button
-          style={currentPage >= totalPages ? disabledButtonStyle : pageButtonStyle}
+          style={currentPage >= (Math.ceil((data && 'data' in data && data.success ? data.data.total : 0) / limit) || 1) ? disabledButtonStyle : pageButtonStyle}
           onClick={() => setPage(currentPage + 1)}
-          disabled={currentPage >= totalPages}
+          disabled={currentPage >= (Math.ceil((data && 'data' in data && data.success ? data.data.total : 0) / limit) || 1)}
           aria-label="다음 페이지"
           type="button"
         >
@@ -290,25 +235,12 @@ export function TodosPage(): React.JSX.Element {
     );
   };
 
-  // 데이터 추출 (성공 응답인 경우)
   const todosData = data && 'data' in data && data.success ? data.data : undefined;
 
   return (
     <div style={containerStyle}>
       {/* 헤더 */}
-      <header style={headerStyle}>
-        <h1 style={titleStyle}>TodoList</h1>
-        <div style={headerActionsStyle}>
-          {user && (
-            <span style={userNameStyle}>
-              {user.name || '사용자'}님
-            </span>
-          )}
-          <Button variant="secondary" size="sm" onClick={handleLogout}>
-            로그아웃
-          </Button>
-        </div>
-      </header>
+      <Header />
 
       {/* 메인 콘텐츠 */}
       <main style={mainStyle}>
@@ -316,11 +248,7 @@ export function TodosPage(): React.JSX.Element {
           {/* 상단 액션 바 */}
           <div style={topActionBarStyle}>
             <h2 style={pageTitleStyle}>할일 목록</h2>
-            <Button
-              variant="primary"
-              size="md"
-              onClick={() => setIsCreateModalOpen(true)}
-            >
+            <Button variant="primary" size="md" onClick={() => setIsCreateModalOpen(true)}>
               + 할일 추가
             </Button>
           </div>
@@ -332,7 +260,7 @@ export function TodosPage(): React.JSX.Element {
           {isLoading ? (
             <div style={stateContainerStyle}>
               <Spinner size="lg" />
-              <span style={{ fontSize: '14px', color: '#767676' }}>
+              <span style={{ fontSize: '14px', color: colors.textMuted }}>
                 할일을 불러오는 중...
               </span>
             </div>
@@ -347,14 +275,8 @@ export function TodosPage(): React.JSX.Element {
             <div style={emptyStateStyle}>
               <div style={emptyIconStyle}>📝</div>
               <h3 style={emptyTitleStyle}>등록된 할일이 없습니다</h3>
-              <p style={emptyDescriptionStyle}>
-                새로운 할일을 추가해보세요
-              </p>
-              <Button
-                variant="primary"
-                size="md"
-                onClick={() => setIsCreateModalOpen(true)}
-              >
+              <p style={emptyDescriptionStyle}>새로운 할일을 추가해보세요</p>
+              <Button variant="primary" size="md" onClick={() => setIsCreateModalOpen(true)}>
                 + 할일 추가
               </Button>
             </div>

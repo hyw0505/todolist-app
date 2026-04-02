@@ -1,49 +1,67 @@
 # 프론트엔드 스타일 가이드
 
+**문서 버전:** v1.1  
+**작성일:** 2026-04-01  
+**작성자:** Yongwoo
+
 > 참조 디자인: 네이버 뉴스 포털 UI 분석 기반
 
 ---
 
 ## 1. 색상 시스템 (Color System)
 
-### Primary Colors
+### 1.1 Primary Colors
 
-| 이름 | HEX | 용도 |
-|------|-----|------|
-| Primary Blue | `#0068C4` | 상단 GNB 배경, 주요 액션 버튼, 링크 hover |
-| Primary Dark | `#003D7A` | Primary Blue hover/active 상태 |
-| Primary Light | `#E8F2FF` | 선택된 탭 배경, 포커스 상태 |
+| 이름 | Light Mode | Dark Mode | 용도 |
+|------|-----------|-----------|------|
+| Primary Blue | `#0068C4` | `#4DA3FF` | 상단 GNB 배경, 주요 액션 버튼, 링크 hover |
+| Primary Dark | `#003D7A` | `#2980E8` | Primary Blue hover/active 상태 |
+| Primary Light | `#E8F2FF` | `#1A2E47` | 선택된 탭 배경, 포커스 상태 |
 
-### Neutral Colors
+### 1.2 Neutral Colors
 
-| 이름 | HEX | 용도 |
-|------|-----|------|
-| Gray 900 | `#1A1A1A` | 헤드라인, 주요 본문 텍스트 |
-| Gray 700 | `#404040` | 부제목, 설명 텍스트 |
-| Gray 500 | `#767676` | 날짜, 메타 정보, 비활성 텍스트 |
-| Gray 300 | `#C4C4C4` | 구분선, 비활성 아이콘 |
-| Gray 100 | `#F5F5F5` | 카드 배경, 사이드바 배경 |
-| White | `#FFFFFF` | 기본 페이지 배경, 카드 배경 |
+| 이름 | Light Mode | Dark Mode | 용도 |
+|------|-----------|-----------|------|
+| Surface 0 (Page BG) | `#FFFFFF` | `#121212` | 기본 페이지 배경 |
+| Surface 1 (Card BG) | `#FFFFFF` | `#1E1E1E` | 카드, 모달 배경 |
+| Surface 2 (Subtle BG) | `#F5F5F5` | `#2A2A2A` | 사이드바, 필터 바 배경 |
+| Border | `#E0E0E0` | `#3A3A3A` | 구분선, 보더 |
+| Border Strong | `#C4C4C4` | `#555555` | 강조 구분선, 비활성 아이콘 |
+| Text Primary | `#1A1A1A` | `#E8E8E8` | 헤드라인, 주요 본문 텍스트 |
+| Text Secondary | `#404040` | `#AAAAAA` | 부제목, 설명 텍스트 |
+| Text Muted | `#767676` | `#6E6E6E` | 날짜, 메타 정보, 비활성 텍스트 |
 
-### Semantic Colors
+### 1.3 Semantic Colors
 
-| 이름 | HEX | 용도 |
-|------|-----|------|
-| Success Green | `#03C75A` | 완료 상태, 긍정 액션 |
-| Danger Red | `#FF3838` | 긴급 뱃지(속보), 삭제 액션, 경고 |
-| Warning Orange | `#FF6B35` | 주의 상태, 기한 임박 |
-| Info Blue | `#0068C4` | 정보성 메시지 |
-| Overdue Red | `#D93025` | 기한 초과 상태 표시 |
+| 이름 | Light Mode | Dark Mode | 용도 |
+|------|-----------|-----------|------|
+| Success Green | `#03C75A` | `#1FD67A` | 완료 상태, 긍정 액션 |
+| Danger Red | `#FF3838` | `#FF6B6B` | 긴급 뱃지(속보), 삭제 액션, 경고 |
+| Warning Orange | `#FF6B35` | `#FF8C5A` | 주의 상태, 기한 임박 |
+| Info Blue | `#0068C4` | `#4DA3FF` | 정보성 메시지 |
+| Overdue Red | `#D93025` | `#F05A50` | 기한 초과 상태 표시 |
 
-### Status Colors (Todo 전용)
+### 1.4 Status Colors (Todo 전용)
 
-| 상태 | 배경색 | 텍스트색 | 용도 |
-|------|--------|----------|------|
-| NOT_STARTED | `#F5F5F5` | `#767676` | 시작 전 |
-| IN_PROGRESS | `#E8F2FF` | `#0068C4` | 진행 중 |
-| OVERDUE | `#FFF0F0` | `#D93025` | 기한 초과 |
-| COMPLETED_SUCCESS | `#F0FFF4` | `#03C75A` | 성공 완료 |
-| COMPLETED_FAILURE | `#FFF5F5` | `#FF3838` | 실패 완료 |
+#### Light Mode
+
+| 상태 | 배경색 | 텍스트색 | 좌측 보더색 | 용도 |
+|------|--------|----------|------------|------|
+| NOT_STARTED | `#F5F5F5` | `#767676` | `#C4C4C4` | 시작 전 |
+| IN_PROGRESS | `#E8F2FF` | `#0068C4` | `#0068C4` | 진행 중 |
+| OVERDUE | `#FFF0F0` | `#D93025` | `#D93025` | 기한 초과 |
+| COMPLETED_SUCCESS | `#F0FFF4` | `#03C75A` | `#03C75A` | 성공 완료 |
+| COMPLETED_FAILURE | `#FFF5F5` | `#FF3838` | `#FF3838` | 실패 완료 |
+
+#### Dark Mode
+
+| 상태 | 배경색 | 텍스트색 | 좌측 보더색 | 용도 |
+|------|--------|----------|------------|------|
+| NOT_STARTED | `#2A2A2A` | `#6E6E6E` | `#555555` | 시작 전 |
+| IN_PROGRESS | `#1A2E47` | `#4DA3FF` | `#4DA3FF` | 진행 중 |
+| OVERDUE | `#2E1A1A` | `#F05A50` | `#F05A50` | 기한 초과 |
+| COMPLETED_SUCCESS | `#1A2E22` | `#1FD67A` | `#1FD67A` | 성공 완료 |
+| COMPLETED_FAILURE | `#2E1A1A` | `#FF6B6B` | `#FF6B6B` | 실패 완료 |
 
 ---
 
@@ -190,9 +208,14 @@ font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans
 ### 5.4 버튼 (Button)
 
 #### Primary 버튼
+
+| 속성 | Light Mode | Dark Mode |
+|------|-----------|-----------|
+| background | `#0068C4` | `#4DA3FF` |
+| color | `#FFFFFF` | `#121212` |
+| hover background | `#003D7A` | `#2980E8` |
+
 ```css
-background: #0068C4;
-color: #FFFFFF;
 border: none;
 border-radius: 4px;
 padding: 8px 16px;
@@ -201,36 +224,96 @@ font-weight: 500;
 ```
 
 #### Secondary (구독) 버튼
+
+| 속성 | Light Mode | Dark Mode |
+|------|-----------|-----------|
+| background | `#FFFFFF` | `#1E1E1E` |
+| color | `#0068C4` | `#4DA3FF` |
+| border | `1px solid #0068C4` | `1px solid #4DA3FF` |
+| hover background | `#E8F2FF` | `#1A2E47` |
+
 ```css
-background: #FFFFFF;
-color: #0068C4;
-border: 1px solid #0068C4;
-border-radius: 20px;  /* pill shape */
+border-radius: 20px;
 padding: 4px 10px;
 font-size: 12px;
 font-weight: 500;
 ```
 
-호버 시: `background: #E8F2FF`
-
 #### Ghost 버튼
+
+| 속성 | Light Mode | Dark Mode |
+|------|-----------|-----------|
+| background | `transparent` | `transparent` |
+| color | `#404040` | `#AAAAAA` |
+| border | `1px solid #C4C4C4` | `1px solid #3A3A3A` |
+| hover background | `#F5F5F5` | `#2A2A2A` |
+
 ```css
-background: transparent;
-color: #404040;
-border: 1px solid #C4C4C4;
 border-radius: 4px;
 padding: 6px 12px;
 font-size: 13px;
 ```
 
 #### 더 알아보기 버튼 (Dark CTA)
+
+| 속성 | Light Mode | Dark Mode |
+|------|-----------|-----------|
+| background | `#404040` | `#E8E8E8` |
+| color | `#FFFFFF` | `#121212` |
+| hover background | `#1A1A1A` | `#AAAAAA` |
+
 ```css
-background: #404040;
-color: #FFFFFF;
 border-radius: 4px;
 padding: 10px 20px;
 font-size: 14px;
 font-weight: 500;
+```
+
+#### 테마 토글 버튼
+
+| 속성 | Light Mode | Dark Mode |
+|------|-----------|-----------|
+| background | `transparent` | `transparent` |
+| color | `#1A1A1A` | `#E8E8E8` |
+| hover background | `#F5F5F5` | `#2A2A2A` |
+| 아이콘 크기 | 20x20px | 20x20px |
+| 클릭 영역 | 44x44px | 44x44px |
+
+```css
+border: none;
+border-radius: 50%;
+padding: 12px;
+cursor: pointer;
+transition: background-color 0.15s ease;
+display: flex;
+align-items: center;
+justify-content: center;
+```
+
+**호버 상태:**
+```css
+&:hover {
+  background-color: var(--color-surface-2);
+}
+```
+
+**포커스 상태:**
+```css
+&:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+```
+
+**접근성:**
+```html
+<button 
+  aria-label="테마 전환" 
+  aria-pressed="false"
+  title="다크모드 토글"
+>
+  ☀️ 또는 🌙
+</button>
 ```
 
 ### 5.5 뱃지 (Badge)
@@ -301,6 +384,16 @@ border-top: 2px solid #0068C4;
 - **색상**: 맥락에 따라 Gray 700 (일반) / Primary Blue (활성) / White (GNB)
 - **클릭 영역**: 최소 44x44px 보장 (모바일 접근성)
 
+### 테마 토글 아이콘
+
+| 상태 | 아이콘 | 설명 |
+|------|--------|------|
+| Light Mode | ☀️ (sun) | 해 아이콘, 라이트모드 표시 |
+| Dark Mode | 🌙 (moon) | 달 아이콘, 다크모드 표시 |
+| 크기 | 20x20px | Header 에서 사용 |
+| 색상 | 현재 텍스트 색상 상속 | `color: currentColor` |
+| 호버 | 배경색 `--color-surface-2` | 원형 배경 표시 |
+
 ---
 
 ## 7. 섀도 & 엘리베이션 (Shadow & Elevation)
@@ -338,13 +431,13 @@ transition: box-shadow 0.2s ease;
 
 ### 호버 상태
 
-| 요소 | 기본 | 호버 |
-|------|------|------|
-| 링크 텍스트 | Gray 900 | Primary Blue |
-| 카드 | 섀도 없음 | Level 1 섀도 |
-| 버튼 Primary | `#0068C4` | `#003D7A` |
-| 구독 버튼 | White | `#E8F2FF` |
-| 탭 | Gray 700 | Primary Blue |
+| 요소 | Light 기본 | Light 호버 | Dark 기본 | Dark 호버 |
+|------|-----------|-----------|----------|----------|
+| 링크 텍스트 | `#1A1A1A` | `#0068C4` | `#E8E8E8` | `#4DA3FF` |
+| 카드 | 섀도 없음 | `--shadow-1` | 섀도 없음 | `--shadow-1` |
+| 버튼 Primary | `#0068C4` | `#003D7A` | `#4DA3FF` | `#2980E8` |
+| 구독 버튼 | `#FFFFFF` | `#E8F2FF` | `#1E1E1E` | `#1A2E47` |
+| 탭 | `#404040` | `#0068C4` | `#AAAAAA` | `#4DA3FF` |
 
 ### 포커스 상태 (접근성)
 
@@ -467,39 +560,310 @@ border-color: #0068C4;
 
 ---
 
-## 12. 다크모드 고려사항
+## 12. 다크모드 (Dark Mode)
 
-| 라이트 | 다크 |
-|--------|------|
-| White `#FFFFFF` | `#1A1A2E` |
-| Gray 100 `#F5F5F5` | `#16213E` |
-| Gray 900 `#1A1A1A` | `#E0E0E0` |
-| Primary Blue `#0068C4` | `#4DA3FF` |
-| 보더 `#E0E0E0` | `#2A2A3E` |
+### 12.1 구현 전략
 
-> 초기 릴리즈는 라이트모드만 구현, 추후 `prefers-color-scheme` 미디어 쿼리로 확장
+`data-theme` 어트리뷰트를 `<html>` 태그에 설정하여 CSS 커스텀 프로퍼티를 오버라이드하는 방식을 사용한다. `prefers-color-scheme` 미디어 쿼리로 OS 설정도 지원한다.
+
+```css
+/* OS 설정 기반 자동 적용 */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    /* dark mode tokens */
+  }
+}
+
+/* 수동 설정 기반 */
+[data-theme="dark"] {
+  /* dark mode tokens */
+}
+```
+
+### 12.1.1 테마 토글 UI 구현
+
+**HTML 구조:**
+```html
+<!-- Header 내 테마 토글 버튼 -->
+<header class="gnb">
+  <div class="gnb__logo">todolist-app</div>
+  <button 
+    class="theme-toggle" 
+    aria-label="테마 전환"
+    aria-pressed="false"
+    title="다크모드 토글"
+  >
+    <span class="theme-toggle__icon">☀️</span>
+  </button>
+  <div class="gnb__user">사용자명</div>
+</header>
+```
+
+**JavaScript 구현 (React + Zustand):**
+```typescript
+// stores/useThemeStore.ts
+import { create } from 'zustand';
+
+interface ThemeState {
+  theme: 'light' | 'dark' | 'system';
+  setTheme: (theme: 'light' | 'dark' | 'system') => void;
+  toggleTheme: () => void;
+}
+
+const STORAGE_KEY = 'todolist-theme';
+
+export const useThemeStore = create<ThemeState>((set, get) => ({
+  theme: 'system',
+  
+  setTheme: (newTheme) => {
+    localStorage.setItem(STORAGE_KEY, newTheme);
+    set({ theme: newTheme });
+    applyTheme(newTheme);
+  },
+  
+  toggleTheme: () => {
+    const current = get().theme;
+    const newTheme = current === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+  },
+}));
+
+// 테마 적용 함수
+function applyTheme(theme: 'light' | 'dark' | 'system') {
+  const html = document.documentElement;
+  
+  if (theme === 'system') {
+    html.removeAttribute('data-theme');
+  } else {
+    html.setAttribute('data-theme', theme);
+  }
+}
+
+// 초기 테마 설정
+function initializeTheme() {
+  const saved = localStorage.getItem(STORAGE_KEY) as ThemeState['theme'] | null;
+  const theme = saved || 'system';
+  applyTheme(theme);
+  useThemeStore.setState({ theme });
+}
+
+// 컴포넌트 예시
+function ThemeToggle() {
+  const { theme, toggleTheme } = useThemeStore();
+  const isDark = theme === 'dark';
+  
+  return (
+    <button
+      className="theme-toggle"
+      onClick={toggleTheme}
+      aria-label="테마 전환"
+      aria-pressed={isDark}
+      title={isDark ? '라이트모드로 전환' : '다크모드로 전환'}
+    >
+      {isDark ? '🌙' : '☀️'}
+    </button>
+  );
+}
+```
+
+**CSS 구현:**
+```css
+.theme-toggle {
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  padding: 12px;
+  cursor: pointer;
+  color: var(--color-text-primary);
+  transition: background-color 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle:hover {
+  background-color: var(--color-surface-2);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.theme-toggle__icon {
+  font-size: 20px;
+  line-height: 1;
+}
+```
+
+### 12.1.2 테마 우선순위
+
+1. **사용자 수동 설정** (`data-theme` 어트리뷰트)
+2. **OS 시스템 설정** (`prefers-color-scheme` 미디어 쿼리)
+3. **기본값** (라이트모드)
+
+```typescript
+// 테마 결정 로직
+function getEffectiveTheme(storedTheme: 'light' | 'dark' | 'system'): 'light' | 'dark' {
+  if (storedTheme !== 'system') {
+    return storedTheme;
+  }
+  
+  // 시스템 설정 감지
+  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    return 'dark';
+  }
+  
+  return 'light';
+}
+```
+
+### 12.2 Dark Mode CSS 커스텀 프로퍼티
+
+```css
+[data-theme="dark"],
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Surface */
+    --color-surface-0: #121212;
+    --color-surface-1: #1E1E1E;
+    --color-surface-2: #2A2A2A;
+
+    /* Border */
+    --color-border: #3A3A3A;
+    --color-border-strong: #555555;
+
+    /* Text */
+    --color-text-primary: #E8E8E8;
+    --color-text-secondary: #AAAAAA;
+    --color-text-muted: #6E6E6E;
+
+    /* Primary */
+    --color-primary: #4DA3FF;
+    --color-primary-dark: #2980E8;
+    --color-primary-light: #1A2E47;
+
+    /* Semantic */
+    --color-success: #1FD67A;
+    --color-danger: #FF6B6B;
+    --color-warning: #FF8C5A;
+    --color-overdue: #F05A50;
+
+    /* Status Backgrounds */
+    --status-not-started-bg: #2A2A2A;
+    --status-not-started-text: #6E6E6E;
+    --status-not-started-border: #555555;
+
+    --status-in-progress-bg: #1A2E47;
+    --status-in-progress-text: #4DA3FF;
+    --status-in-progress-border: #4DA3FF;
+
+    --status-overdue-bg: #2E1A1A;
+    --status-overdue-text: #F05A50;
+    --status-overdue-border: #F05A50;
+
+    --status-completed-success-bg: #1A2E22;
+    --status-completed-success-text: #1FD67A;
+    --status-completed-success-border: #1FD67A;
+
+    --status-completed-failure-bg: #2E1A1A;
+    --status-completed-failure-text: #FF6B6B;
+    --status-completed-failure-border: #FF6B6B;
+  }
+}
+```
+
+### 12.3 Light / Dark 토큰 대조표
+
+| 역할 | Light Mode | Dark Mode |
+|------|-----------|-----------|
+| 페이지 배경 | `#FFFFFF` | `#121212` |
+| 카드/모달 배경 | `#FFFFFF` | `#1E1E1E` |
+| 서브 배경 (사이드바 등) | `#F5F5F5` | `#2A2A2A` |
+| 구분선 | `#E0E0E0` | `#3A3A3A` |
+| 강조 구분선 | `#C4C4C4` | `#555555` |
+| 주요 텍스트 | `#1A1A1A` | `#E8E8E8` |
+| 보조 텍스트 | `#404040` | `#AAAAAA` |
+| 흐린 텍스트 | `#767676` | `#6E6E6E` |
+| Primary 색상 | `#0068C4` | `#4DA3FF` |
+| Primary hover | `#003D7A` | `#2980E8` |
+| Primary 배경 (연) | `#E8F2FF` | `#1A2E47` |
+| Success | `#03C75A` | `#1FD67A` |
+| Danger | `#FF3838` | `#FF6B6B` |
+| Warning | `#FF6B35` | `#FF8C5A` |
+| Overdue | `#D93025` | `#F05A50` |
+
+### 12.4 컴포넌트별 Dark Mode 고려사항
+
+| 컴포넌트 | Light Mode | Dark Mode |
+|---------|-----------|-----------|
+| GNB 배경 | `#0068C4` | `#1A2E47` |
+| 카드 배경 | `#FFFFFF` | `#1E1E1E` |
+| 카드 hover 섀도 | `0 2px 8px rgba(0,0,0,0.12)` | `0 2px 8px rgba(0,0,0,0.40)` |
+| 모달 오버레이 | `rgba(0,0,0,0.50)` | `rgba(0,0,0,0.70)` |
+| Input 배경 | `#FFFFFF` | `#2A2A2A` |
+| Input 비활성 배경 | `#F5F5F5` | `#1E1E1E` |
+| Input 포커스 shadow | `0 0 0 3px rgba(0,104,196,0.15)` | `0 0 0 3px rgba(77,163,255,0.25)` |
+| 스크롤바 track | `#F5F5F5` | `#2A2A2A` |
+| 스크롤바 thumb | `#C4C4C4` | `#555555` |
 
 ---
 
 ## 13. CSS 커스텀 프로퍼티 (Design Tokens)
 
+### Light Mode (기본값)
+
 ```css
 :root {
-  /* Colors */
+  /* Surface */
+  --color-surface-0: #FFFFFF;
+  --color-surface-1: #FFFFFF;
+  --color-surface-2: #F5F5F5;
+
+  /* Border */
+  --color-border: #E0E0E0;
+  --color-border-strong: #C4C4C4;
+
+  /* Text */
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #404040;
+  --color-text-muted: #767676;
+
+  /* Primary */
   --color-primary: #0068C4;
   --color-primary-dark: #003D7A;
   --color-primary-light: #E8F2FF;
+
+  /* Semantic */
   --color-success: #03C75A;
   --color-danger: #FF3838;
   --color-warning: #FF6B35;
   --color-overdue: #D93025;
 
-  --color-gray-900: #1A1A1A;
-  --color-gray-700: #404040;
-  --color-gray-500: #767676;
-  --color-gray-300: #C4C4C4;
-  --color-gray-100: #F5F5F5;
-  --color-white: #FFFFFF;
+  /* Status — NOT_STARTED */
+  --status-not-started-bg: #F5F5F5;
+  --status-not-started-text: #767676;
+  --status-not-started-border: #C4C4C4;
+
+  /* Status — IN_PROGRESS */
+  --status-in-progress-bg: #E8F2FF;
+  --status-in-progress-text: #0068C4;
+  --status-in-progress-border: #0068C4;
+
+  /* Status — OVERDUE */
+  --status-overdue-bg: #FFF0F0;
+  --status-overdue-text: #D93025;
+  --status-overdue-border: #D93025;
+
+  /* Status — COMPLETED_SUCCESS */
+  --status-completed-success-bg: #F0FFF4;
+  --status-completed-success-text: #03C75A;
+  --status-completed-success-border: #03C75A;
+
+  /* Status — COMPLETED_FAILURE */
+  --status-completed-failure-bg: #FFF5F5;
+  --status-completed-failure-text: #FF3838;
+  --status-completed-failure-border: #FF3838;
 
   /* Typography */
   --font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -541,3 +905,76 @@ border-color: #0068C4;
   --transition-slow: 0.2s ease;
 }
 ```
+
+### Dark Mode 오버라이드
+
+```css
+[data-theme="dark"],
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    /* Surface */
+    --color-surface-0: #121212;
+    --color-surface-1: #1E1E1E;
+    --color-surface-2: #2A2A2A;
+
+    /* Border */
+    --color-border: #3A3A3A;
+    --color-border-strong: #555555;
+
+    /* Text */
+    --color-text-primary: #E8E8E8;
+    --color-text-secondary: #AAAAAA;
+    --color-text-muted: #6E6E6E;
+
+    /* Primary */
+    --color-primary: #4DA3FF;
+    --color-primary-dark: #2980E8;
+    --color-primary-light: #1A2E47;
+
+    /* Semantic */
+    --color-success: #1FD67A;
+    --color-danger: #FF6B6B;
+    --color-warning: #FF8C5A;
+    --color-overdue: #F05A50;
+
+    /* Status — NOT_STARTED */
+    --status-not-started-bg: #2A2A2A;
+    --status-not-started-text: #6E6E6E;
+    --status-not-started-border: #555555;
+
+    /* Status — IN_PROGRESS */
+    --status-in-progress-bg: #1A2E47;
+    --status-in-progress-text: #4DA3FF;
+    --status-in-progress-border: #4DA3FF;
+
+    /* Status — OVERDUE */
+    --status-overdue-bg: #2E1A1A;
+    --status-overdue-text: #F05A50;
+    --status-overdue-border: #F05A50;
+
+    /* Status — COMPLETED_SUCCESS */
+    --status-completed-success-bg: #1A2E22;
+    --status-completed-success-text: #1FD67A;
+    --status-completed-success-border: #1FD67A;
+
+    /* Status — COMPLETED_FAILURE */
+    --status-completed-failure-bg: #2E1A1A;
+    --status-completed-failure-text: #FF6B6B;
+    --status-completed-failure-border: #FF6B6B;
+
+    /* Shadow (어두운 배경에서 더 진한 그림자) */
+    --shadow-1: 0 2px 8px rgba(0, 0, 0, 0.40);
+    --shadow-2: 0 4px 16px rgba(0, 0, 0, 0.50);
+    --shadow-3: 0 8px 24px rgba(0, 0, 0, 0.60);
+  }
+}
+```
+
+---
+
+## 14. 변경 이력
+
+| 버전 | 변경일 | 변경자 | 변경 내용 |
+|------|--------|--------|-----------|
+| v1.0 | 2026-04-01 | Yongwoo | 최초 작성: 색상 시스템, 타이포그래피, 컴포넌트, 다크모드 CSS 커스텀 프로퍼티 정의 |
+| v1.1 | 2026-04-02 | Yongwoo | **라이트모드/다크모드 토글 버튼 추가**: (§5.4) 테마 토글 버튼 명세 추가, (§6) 테마 토글 아이콘 명세 추가, (§12.1.1) 테마 토글 UI 구현 가이드 추가, (§12.1.2) 테마 우선순위 정의 |
