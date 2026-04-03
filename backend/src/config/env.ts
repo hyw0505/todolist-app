@@ -28,12 +28,14 @@ export type Env = z.infer<typeof envSchema>;
 
 function loadEnv(): void {
   const nodeEnv = process.env['NODE_ENV'] ?? 'development';
-  const envFile =
-    nodeEnv === 'test'
-      ? '.env.test'
-      : nodeEnv === 'production'
-        ? '.env.production'
-        : '.env.development';
+
+  // Vercel 환경에서는 환경변수를 대시보드에서 직접 주입하므로 .env 파일 불필요
+  if (process.env['VERCEL'] === '1') {
+    console.log('[ENV] Vercel environment detected, skipping .env file load');
+    return;
+  }
+
+  const envFile = nodeEnv === 'test' ? '.env.test' : '.env.development';
   const envPath = path.resolve(process.cwd(), envFile);
   console.log(`[ENV] Loading environment file: ${envPath}`);
   // override: true to override existing environment variables
