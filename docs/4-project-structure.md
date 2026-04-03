@@ -387,11 +387,19 @@ frontend/
 │   │   │   └── useDebounce.ts       # 입력값 디바운스 훅
 │   │   └── utils/
 │   │       ├── formatDate.ts        # 날짜 포맷 유틸 (YYYY-MM-DD)
-│   │       └── todoStatusLabel.ts   # status → 한국어 레이블 변환
+│   │       └── todoStatusLabel.ts   # status → 다국어 레이블 변환 (i18next t() 활용)
 │   │
 │   ├── constants/                   # 애플리케이션 전역 상수
 │   │   ├── todoStatus.ts            # TODO_STATUS enum / 상수 정의
 │   │   └── queryKeys.ts             # TanStack Query queryKey 상수 정의
+│   │
+│   ├── locales/                     # 다국어 번역 리소스 (react-i18next)
+│   │   ├── ko/
+│   │   │   └── translation.json     # 한국어 번역 (기본값)
+│   │   ├── en/
+│   │   │   └── translation.json     # 영어 번역
+│   │   └── jp/
+│   │       └── translation.json     # 일본어 번역
 │   │
 │   └── types/                       # TypeScript 타입 정의
 │       ├── auth.ts                  # User, LoginRequest, SignupRequest, TokenResponse
@@ -494,3 +502,4 @@ backend/
 | v0.1 | 2026-04-01 | Yongwoo | 최초 작성: 공통 원칙, 레이어 원칙, 네이밍 원칙, 테스트 원칙, 보안/운영 원칙, 프론트엔드·백엔드 디렉토리 구조 정의 |
 | v0.2 | 2026-04-01 | Yongwoo | §5.1 환경변수 목록을 Tier별(프론트엔드/백엔드/DB)로 상세화, 개발·프로덕션 예시값 및 설명 추가 |
 | v0.3 | 2026-04-01 | Yongwoo | §5.3 로깅 원칙에 콘솔 로그(`console`) 사용 명시, 레벨별 메서드 및 프로덕션 억제 규칙 추가 |
+| v0.4 | 2026-04-02 | Yongwoo | **다국어 지원 반영**: §6 프론트엔드 구조에 `locales/` 디렉토리(ko/en/jp) 추가, `todoStatusLabel.ts` 다국어 전환 명시 |

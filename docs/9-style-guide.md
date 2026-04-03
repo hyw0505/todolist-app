@@ -560,7 +560,63 @@ border-color: #0068C4;
 
 ---
 
-## 12. 다크모드 (Dark Mode)
+## 12. 언어 선택 UI (Language Selector)
+
+### 12.1 언어 선택 컴포넌트
+
+GNB(상단 바) 또는 사용자 설정 화면에 배치하는 언어 선택 드롭다운.
+
+| 속성 | 값 |
+|------|---|
+| **지원 언어** | 한국어 (ko), English (en), 日本語 (jp) |
+| **기본값** | 사용자 프로필 `language` 필드 (미설정 시 `ko`) |
+| **저장 위치** | 서버 사용자 프로필 + 로컬 `localStorage` 캐시 |
+
+### 12.2 언어 선택 버튼 스타일
+
+```css
+.language-selector {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid var(--border);
+}
+
+.language-selector:hover {
+  background: var(--surface-2);
+  color: var(--text-primary);
+}
+```
+
+| 상태 | Light Mode | Dark Mode |
+|------|-----------|-----------|
+| 기본 | 테두리 `#E0E0E0`, 텍스트 `#404040` | 테두리 `#3A3A3A`, 텍스트 `#AAAAAA` |
+| hover | 배경 `#F5F5F5`, 텍스트 `#1A1A1A` | 배경 `#2A2A2A`, 텍스트 `#E8E8E8` |
+
+### 12.3 언어 드롭다운 옵션
+
+```
+┌─────────────────┐
+│ 🌐 한국어  ✓   │  ← 현재 선택 (체크 표시)
+│    English      │
+│    日本語       │
+└─────────────────┘
+```
+
+- 드롭다운 너비: `min-width: 120px`
+- 배경: `var(--surface-1)`, 테두리: `var(--border)`
+- 선택된 항목: `color: var(--primary-blue)`, 체크 아이콘 표시
+
+---
+
+## 13. 다크모드 (Dark Mode)
 
 ### 12.1 구현 전략
 
@@ -978,3 +1034,4 @@ function getEffectiveTheme(storedTheme: 'light' | 'dark' | 'system'): 'light' | 
 |------|--------|--------|-----------|
 | v1.0 | 2026-04-01 | Yongwoo | 최초 작성: 색상 시스템, 타이포그래피, 컴포넌트, 다크모드 CSS 커스텀 프로퍼티 정의 |
 | v1.1 | 2026-04-02 | Yongwoo | **라이트모드/다크모드 토글 버튼 추가**: (§5.4) 테마 토글 버튼 명세 추가, (§6) 테마 토글 아이콘 명세 추가, (§12.1.1) 테마 토글 UI 구현 가이드 추가, (§12.1.2) 테마 우선순위 정의 |
+| v1.2 | 2026-04-03 | Yongwoo | **다국어 지원 추가**: §12 언어 선택 UI 컴포넌트 스타일 신설 (버튼, 드롭다운, 상태별 색상) |

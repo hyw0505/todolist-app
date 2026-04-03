@@ -21,6 +21,14 @@
 - **Access Token**: `Authorization: Bearer <token>` 헤더 (유효기간 15 분)
 - **Refresh Token**: HTTP-only 쿠키 자동 전송 (유효기간 7 일)
 
+### 1.3 공통 요청 헤더
+
+| 헤더 | 필수 | 설명 |
+|------|:----:|------|
+| `Authorization` | 인증 필요 엔드포인트 | `Bearer <accessToken>` |
+| `Content-Type` | 본문 있는 요청 | `application/json` |
+| `Accept-Language` | 선택 | 응답 메시지 언어 (`ko`, `en`, `jp`). 미설정 시 사용자 프로필 언어 → 기본값 `ko` 순으로 적용 |
+
 ### 1.3 공통 응답 형식
 
 **성공 응답:**
@@ -58,9 +66,12 @@
 {
   "email": "user@example.com",
   "password": "SecurePass123!",
-  "name": "홍길동"
+  "name": "홍길동",
+  "language": "ko"
 }
 ```
+
+> `language`: 선택 필드. `ko`(한국어), `en`(영어), `jp`(일본어) 중 하나. 미입력 시 `Accept-Language` 헤더 → 기본값 `ko` 순으로 적용.
 
 **응답 (201 Created):**
 ```json
@@ -101,7 +112,8 @@
   "user": {
     "id": "550e8400-e29b-41d4-a716-446655440000",
     "email": "user@example.com",
-    "name": "홍길동"
+    "name": "홍길동",
+    "language": "ko"
   }
 }
 ```
@@ -481,6 +493,7 @@ GET /api/v1/todos?status=IN_PROGRESS&sort_by=due_date&sort_order=desc&page=1&lim
 | 버전 | 변경일 | 변경자 | 변경 내용 |
 |------|--------|--------|-----------|
 | v1.0 | 2026-04-01 | Yongwoo | 초기 작성: 인증 (BE-10~12), 할일 CRUD (BE-14~19) API 명세 |
+| v1.1 | 2026-04-02 | Yongwoo | **다국어 지원 추가**: §1.3 공통 요청 헤더(`Accept-Language`) 신설, §2.1 회원가입 `language` 필드 추가, §2.2 로그인 응답 `user.language` 포함 |
 
 ---
 
