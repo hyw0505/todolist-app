@@ -41,21 +41,34 @@ function createApp(pool: Pool): Application {
 
   // Swagger UI
   const swaggerPath = path.join(__dirname, '../../swagger/swagger.json');
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const swaggerDocument = require(swaggerPath);
-  app.use(
-    '/api-docs',
-    swaggerUi.serve,
-    swaggerUi.setup(swaggerDocument, {
-      swaggerOptions: {
-        url: '/swagger/swagger.json',
-      },
-    }),
-  );
+  let swaggerDocument: object | null = null;
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    swaggerDocument = require(swaggerPath);
+  } catch {
+    console.warn('[APP] swagger.json not found, skipping Swagger UI setup');
+  }
 
-  // Serve swagger.json for dynamic loading
-  app.get('/swagger/swagger.json', (_req: Request, res: Response) => {
-    res.json(swaggerDocument);
+  if (swaggerDocument) {
+    app.use(
+      '/api-docs',
+      swaggerUi.serve,
+      swaggerUi.setup(swaggerDocument, {
+        swaggerOptions: {
+          url: '/swagger/swagger.json',
+        },
+      }),
+    );
+
+    // Serve swagger.json for dynamic loading
+    app.get('/swagger/swagger.json', (_req: Request, res: Response) => {
+      res.json(swaggerDocument);
+    });
+  }
+
+  // Root endpoint
+  app.get('/', (_req: Request, res: Response) => {
+    res.json({ status: 'ok', message: 'TodoList API Server' });
   });
 
   // Health check endpoint
