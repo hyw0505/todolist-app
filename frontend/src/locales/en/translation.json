@@ -1,0 +1,62 @@
+{
+  "common": {
+    "logout": "Logout",
+    "login": "Login",
+    "signup": "Sign Up",
+    "language": "Language"
+  },
+  "auth": {
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "namePlaceholder": "John Doe",
+    "emailPlaceholder": "example@email.com",
+    "passwordPlaceholder": "Enter your password",
+    "confirmPasswordPlaceholder": "Re-enter your password",
+    "loginButton": "Login",
+    "signupButton": "Sign Up",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "loginError": "Login failed.",
+    "signupError": "Sign up failed.",
+    "validation": {
+      "nameRequired": "Please enter your name.",
+      "nameLength": "Name must be between 2 and 50 characters.",
+      "emailRequired": "Please enter your email.",
+      "emailInvalid": "Please enter a valid email address.",
+      "passwordRequired": "Please enter your password.",
+      "passwordLength": "Password must be between 8 and 64 characters.",
+      "passwordUppercase": "Must include uppercase letters.",
+      "passwordLowercase": "Must include lowercase letters.",
+      "passwordNumber": "Must include numbers.",
+      "passwordSpecial": "Must include special characters.",
+      "confirmPasswordRequired": "Please confirm your password.",
+      "confirmPasswordMismatch": "Passwords do not match."
+    },
+    "passwordPolicy": {
+      "title": "Password Policy",
+      "minLength": "8-64 characters",
+      "uppercase": "Uppercase letters",
+      "lowercase": "Lowercase letters",
+      "number": "Numbers",
+      "special": "Special characters (!@#$%^&*(),.?\":{}|<>)"
+    },
+    "language": "Language"
+  },
+  "todo": {
+    "empty": "No todos registered.",
+    "status": {
+      "pending": "Pending",
+      "inProgress": "In Progress",
+      "completed": "Completed",
+      "failed": "Failed"
+    }
+  },
+  "languageSelector": {
+    "label": "Select Language",
+    "ko": "한국어",
+    "en": "English",
+    "jp": "日本語"
+  }
+}

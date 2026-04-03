@@ -1,0 +1,62 @@
+{
+  "common": {
+    "logout": "ログアウト",
+    "login": "ログイン",
+    "signup": "新規登録",
+    "language": "言語"
+  },
+  "auth": {
+    "name": "名前",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "confirmPassword": "パスワード確認",
+    "namePlaceholder": "山田太郎",
+    "emailPlaceholder": "example@email.com",
+    "passwordPlaceholder": "パスワードを入力してください",
+    "confirmPasswordPlaceholder": "パスワードを再入力してください",
+    "loginButton": "ログイン",
+    "signupButton": "新規登録",
+    "noAccount": "アカウントをお持ちでないですか？",
+    "hasAccount": "すでにアカウントをお持ちですか？",
+    "loginError": "ログインに失敗しました。",
+    "signupError": "新規登録に失敗しました。",
+    "validation": {
+      "nameRequired": "名前を入力してください。",
+      "nameLength": "名前は2〜50文字で入力してください。",
+      "emailRequired": "メールアドレスを入力してください。",
+      "emailInvalid": "正しいメールアドレス形式で入力してください。",
+      "passwordRequired": "パスワードを入力してください。",
+      "passwordLength": "パスワードは8〜64文字で入力してください。",
+      "passwordUppercase": "大文字を含めてください。",
+      "passwordLowercase": "小文字を含めてください。",
+      "passwordNumber": "数字を含めてください。",
+      "passwordSpecial": "特殊文字を含めてください。",
+      "confirmPasswordRequired": "パスワード確認を入力してください。",
+      "confirmPasswordMismatch": "パスワードが一致しません。"
+    },
+    "passwordPolicy": {
+      "title": "パスワードポリシー",
+      "minLength": "8〜64文字",
+      "uppercase": "大文字を含む",
+      "lowercase": "小文字を含む",
+      "number": "数字を含む",
+      "special": "特殊文字を含む (!@#$%^&*(),.?\":{}|<>)"
+    },
+    "language": "言語選択"
+  },
+  "todo": {
+    "empty": "登録されたタスクがありません。",
+    "status": {
+      "pending": "待機中",
+      "inProgress": "進行中",
+      "completed": "完了",
+      "failed": "失敗"
+    }
+  },
+  "languageSelector": {
+    "label": "言語選択",
+    "ko": "한국어",
+    "en": "English",
+    "jp": "日本語"
+  }
+}

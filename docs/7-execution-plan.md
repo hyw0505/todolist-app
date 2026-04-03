@@ -1090,12 +1090,12 @@ CREATE TABLE todos (
 **설명:** react-i18next 기반 다국어(ko/en/jp) 지원을 구성한다.
 
 **완료 조건:**
-- [ ] `react-i18next`, `i18next` 패키지 설치
-- [ ] `src/i18n.ts` 초기화 파일 생성 (언어 감지, fallback `ko`)
-- [ ] `src/locales/ko/translation.json`, `en/translation.json`, `jp/translation.json` 번역 파일 생성
-- [ ] `src/main.tsx` 에 i18n 초기화 import 추가
-- [ ] 브라우저 `Accept-Language` 자동 감지 설정 (`i18next-browser-languagedetector`)
-- [ ] `localStorage` 언어 설정 저장 (`i18next` 키)
+- [x] `react-i18next`, `i18next` 패키지 설치
+- [x] `src/i18n.ts` 초기화 파일 생성 (언어 감지, fallback `ko`)
+- [x] `src/locales/ko/translation.json`, `en/translation.json`, `jp/translation.json` 번역 파일 생성
+- [x] `src/main.tsx` 에 i18n 초기화 import 추가
+- [x] 브라우저 `Accept-Language` 자동 감지 설정 (`i18next-browser-languagedetector`)
+- [x] `localStorage` 언어 설정 저장 (`i18nextLng` 키)
 
 **번역 키 범위:**
 - 인증: 로그인, 회원가입, 폼 레이블 및 오류 메시지
@@ -1103,7 +1103,7 @@ CREATE TABLE todos (
 - 공통: 확인, 취소, 로딩, 에러 메시지
 
 **의존성:**
-- [ ] 선행 작업: FE-03
+- [x] 선행 작업: FE-03
 
 ---
 
@@ -1112,15 +1112,15 @@ CREATE TABLE todos (
 **설명:** 사용자가 UI 언어를 선택할 수 있는 컴포넌트를 구현한다.
 
 **완료 조건:**
-- [ ] `src/shared/components/LanguageSelector.tsx` 드롭다운 컴포넌트 구현
-- [ ] 지원 언어: `ko`(한국어), `en`(English), `jp`(日本語)
-- [ ] 언어 변경 시 `i18next.changeLanguage()` 호출
-- [ ] 언어 변경 시 `localStorage`에 저장 (서버 전송 없음)
-- [ ] Header 에 언어 선택 버튼 배치
-- [ ] 선택된 언어 `localStorage` 저장 (새로고침 시 유지)
+- [x] `src/shared/components/LanguageSelector.tsx` 드롭다운 컴포넌트 구현
+- [x] 지원 언어: `ko`(한국어), `en`(English), `jp`(日本語)
+- [x] 언어 변경 시 `i18next.changeLanguage()` 호출
+- [x] 언어 변경 시 `localStorage`에 저장 (서버 전송 없음)
+- [x] Header 에 언어 선택 버튼 배치
+- [x] 선택된 언어 `localStorage` 저장 (새로고침 시 유지)
 
 **의존성:**
-- [ ] 선행 작업: FE-24, FE-06
+- [x] 선행 작업: FE-24, FE-06
 
 ---
 
@@ -1191,6 +1191,7 @@ FE-01 → FE-03 → FE-04 → FE-05 → FE-12 → FE-13 → FE-16 → FE-22
 | v1.3 | 2026-04-02 | Frontend Agent | FE-06~FE-09, FE-12~FE-15, FE-17, FE-18 구현 완료: 10 개 작업, 54 개 테스트 |
 | v1.4 | 2026-04-02 | Frontend Agent | FE-10~FE-23 구현 완료: 14 개 작업, 85 개 테스트 통과 (14 개는 validation timing issue) |
 | v1.5 | 2026-04-03 | Yongwoo | **다국어 지원 추가**: §1.2 범위, §1.3 기술 스택(react-i18next), DB-03 `language` 컬럼, FE-03/05/07 다국어 반영, FE-24(i18n 설정)·FE-25(언어 선택 UI) 신규 태스크 추가 (총 57 개 작업) |
+| v1.6 | 2026-04-03 | Frontend Agent | **FE-24·FE-25 구현 완료**: i18n 초기화, ko/en/jp 번역 파일, useLanguageStore, LanguageSelector 컴포넌트, Header·SignupForm 연동, 16 개 테스트 통과 |
 
 ---
 

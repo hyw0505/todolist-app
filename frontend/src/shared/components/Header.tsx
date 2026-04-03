@@ -1,7 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { ThemeToggle } from '@/shared/components/ThemeToggle';
+import { LanguageSelector } from '@/shared/components/LanguageSelector';
 import { useAuthStore } from '@/features/auth/stores/useAuthStore';
 
 interface HeaderProps {
@@ -18,6 +20,7 @@ interface HeaderProps {
  */
 export function Header({ showUserMenu = true }: HeaderProps): React.JSX.Element {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const user = useAuthStore((state) => state.user);
   const clearAuth = useAuthStore((state) => state.clearAuth);
   const { colors } = useTheme();
@@ -95,6 +98,7 @@ export function Header({ showUserMenu = true }: HeaderProps): React.JSX.Element 
 
       {showUserMenu && user && (
         <div style={rightSectionStyle}>
+          <LanguageSelector />
           <div style={userMenuStyle}>
             <span style={userNameStyle}>{user.name}</span>
             <button
@@ -108,7 +112,7 @@ export function Header({ showUserMenu = true }: HeaderProps): React.JSX.Element 
                 e.currentTarget.style.backgroundColor = 'transparent';
               }}
             >
-              로그아웃
+              {t('common.logout')}
             </button>
           </div>
         </div>

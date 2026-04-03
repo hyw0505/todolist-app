@@ -5,6 +5,7 @@ import { Button } from '@/shared/components/Button';
 import { ErrorMessage } from '@/shared/components/ErrorMessage';
 import { useSignup } from '../hooks/useSignup';
 import { useTheme } from '@/shared/hooks/useTheme';
+import { useLanguageStore, type Language } from '@/shared/stores/useLanguageStore';
 import type { SignupRequest } from '@/types/auth';
 
 interface SignupFormProps {
@@ -30,6 +31,7 @@ interface PasswordPolicy {
 export function SignupForm({ onSuccess }: SignupFormProps): React.JSX.Element {
   const navigate = useNavigate();
   const { colors } = useTheme();
+  const { language, setLanguage } = useLanguageStore();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -180,6 +182,38 @@ export function SignupForm({ onSuccess }: SignupFormProps): React.JSX.Element {
     textDecoration: 'underline',
   };
 
+  const languageSelectorGroupStyle: React.CSSProperties = {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '6px',
+  };
+
+  const languageLabelStyle: React.CSSProperties = {
+    fontSize: '13px',
+    fontWeight: 500,
+    color: colors.textSecondary,
+    fontFamily: "'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif",
+  };
+
+  const languageButtonGroupStyle: React.CSSProperties = {
+    display: 'flex',
+    gap: '8px',
+  };
+
+  const getLanguageButtonStyle = (isSelected: boolean): React.CSSProperties => ({
+    flex: 1,
+    padding: '8px',
+    border: `1px solid ${isSelected ? colors.primary : colors.border}`,
+    borderRadius: '4px',
+    backgroundColor: isSelected ? colors.primary : 'transparent',
+    color: isSelected ? '#FFFFFF' : colors.textPrimary,
+    fontSize: '13px',
+    fontWeight: isSelected ? 600 : 400,
+    cursor: 'pointer',
+    fontFamily: "'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif",
+    transition: 'all 0.15s ease',
+  });
+
   return (
     <form onSubmit={handleSubmit} style={formStyle}>
       {errors.general && <ErrorMessage message={errors.general} />}
@@ -275,6 +309,24 @@ export function SignupForm({ onSuccess }: SignupFormProps): React.JSX.Element {
           id="signup-confirm-password"
           name="confirmPassword"
         />
+
+        {/* 언어 선택 (localStorage에만 저장) */}
+        <div style={languageSelectorGroupStyle}>
+          <span style={languageLabelStyle}>언어 선택</span>
+          <div style={languageButtonGroupStyle} role="group" aria-label="언어 선택">
+            {(['ko', 'en', 'jp'] as Language[]).map((lang) => (
+              <button
+                key={lang}
+                type="button"
+                style={getLanguageButtonStyle(language === lang)}
+                onClick={() => setLanguage(lang)}
+                aria-pressed={language === lang}
+              >
+                {lang === 'ko' ? '한국어' : lang === 'en' ? 'English' : '日本語'}
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
 
       <div style={buttonGroupStyle}>
