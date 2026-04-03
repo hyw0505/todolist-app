@@ -109,7 +109,7 @@ export function LoginForm({ onSuccess }: LoginFormProps): React.JSX.Element {
         <Input
           label={t('auth.email')}
           type="email"
-          value={email}
+          value={email} 
           onChange={(e) => {
             setEmail(e.target.value);
             if (errors.email) setErrors((prev) => ({ ...prev, email: '' }));
