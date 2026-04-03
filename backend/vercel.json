@@ -1,5 +1,5 @@
 {
   "version": 2,
-  "buildCommand": "echo 'No build needed for serverless API'",
-  "outputDirectory": null
+  "buildCommand": "",
+  "outputDirectory": "."
 }
