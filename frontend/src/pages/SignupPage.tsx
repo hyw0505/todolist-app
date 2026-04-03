@@ -16,9 +16,12 @@ export function SignupPage(): React.JSX.Element {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     backgroundColor: colors.surface2,
-    padding: '20px',
+    paddingTop: '40px',
+    paddingBottom: '20px',
+    paddingLeft: '20px',
+    paddingRight: '20px',
   };
 
   const cardStyle: React.CSSProperties = {

@@ -124,7 +124,7 @@ export function LoginForm({ onSuccess }: LoginFormProps): React.JSX.Element {
 
         <Input
           label={t('auth.password')}
-          type="password"
+          type="password" 
           value={password}
           onChange={(e) => {
             setPassword(e.target.value);
