@@ -1,37 +1,26 @@
-import http from 'node:http';
-import { env } from './config/env';
+import { VercelRequest, VercelResponse } from '@vercel/node';
 import { pool, testConnection } from './config/database';
 import { createApp } from './app';
 
-async function main(): Promise<void> {
-  await testConnection();
+// Initialize database connection on first load
+let appInitialized = false;
 
-  const app = createApp(pool);
-  const server = http.createServer(app);
-
-  server.listen(env.PORT, () => {
-    console.info(`[SERVER] Started on port ${env.PORT} (${env.NODE_ENV})`);
-  });
-
-  const shutdown = async (signal: string): Promise<void> => {
-    console.info(`[SERVER] ${signal} received, shutting down gracefully`);
-    server.close(() => {
-      void pool.end().then(() => {
-        console.info('[SERVER] Database pool closed');
-        process.exit(0);
-      });
-    });
-    setTimeout(() => {
-      console.error('[SERVER] Forced shutdown after timeout');
-      process.exit(1);
-    }, 10_000);
-  };
-
-  process.on('SIGTERM', () => void shutdown('SIGTERM'));
-  process.on('SIGINT', () => void shutdown('SIGINT'));
+async function ensureInitialized(): Promise<void> {
+  if (!appInitialized) {
+    await testConnection();
+    appInitialized = true;
+  }
 }
 
-main().catch((error: unknown) => {
-  console.error('[SERVER] Fatal error during startup', error);
-  process.exit(1);
-});
+// Vercel serverless handler
+export default async function handler(
+  req: VercelRequest,
+  res: VercelResponse,
+): Promise<void> {
+  await ensureInitialized();
+
+  const app = createApp(pool);
+
+  // Handle the request
+  app(req, res);
+}
