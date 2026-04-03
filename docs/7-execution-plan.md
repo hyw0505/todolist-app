@@ -21,12 +21,13 @@
 | **인증** | 회원가입, 로그인, JWT 토큰 갱신 | 소셜 로그인, 2FA |
 | **할일 관리** | CRUD, 상태 필터링, 정렬, 완료 처리 | 팀 공유, 알림, 파일 첨부 |
 | **플랫폼** | 모바일 웹 + 데스크탑 반응형 | 네이티브 모바일 앱 |
+| **다국어** | 한국어(ko), 영어(en), 일본어(jp) 지원 | 추가 언어 확장 |
 
 ### 1.3 기술 스택
 
 | 계층 | 기술 | 버전 |
 |------|------|------|
-| **프론트엔드** | React + TypeScript + Zustand + TanStack Query + Vite | 19 + 최신 |
+| **프론트엔드** | React + TypeScript + Zustand + TanStack Query + Vite + react-i18next | 19 + 최신 |
 | **백엔드** | Node.js + Express + pg + bcryptjs + jsonwebtoken | v18+ |
 | **데이터베이스** | PostgreSQL | 12+ |
 
@@ -48,8 +49,8 @@
 |--------|--------|----------|----------|
 | **데이터베이스** | 8 개 | - | 백엔드 |
 | **백엔드** | 24 개 | 데이터베이스 | 프론트엔드 |
-| **프론트엔드** | 23 개 | 백엔드 API | - |
-| **총계** | **55 개** | - | - |
+| **프론트엔드** | 25 개 | 백엔드 API | - |
+| **총계** | **57 개** | - | - |
 
 ---
 
@@ -97,6 +98,7 @@ CREATE TABLE users (
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     name VARCHAR(50) NOT NULL,
+    language VARCHAR(2) NOT NULL DEFAULT 'ko',
     created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
 ```
@@ -105,6 +107,7 @@ CREATE TABLE users (
 - [x] `users` 테이블 DDL 실행 완료
 - [x] `email` 컬럼에 UNIQUE 제약조건 설정
 - [x] `id` 컬럼에 PRIMARY KEY 설정
+- [x] `language` 컬럼 추가 (`VARCHAR(2) NOT NULL DEFAULT 'ko'`, 허용값: `ko`, `en`, `jp`)
 - [x] 인덱스 자동 생성 확인
 
 **의존성:**
@@ -742,6 +745,7 @@ CREATE TABLE todos (
 - [x] `src/api/`, `src/features/`, `src/pages/`, `src/shared/` 생성
 - [x] `src/constants/`, `src/types/` 생성
 - [x] `src/features/auth/`, `src/features/todos/` 기능 모듈 생성
+- [x] `src/locales/ko/`, `src/locales/en/`, `src/locales/jp/` 다국어 리소스 디렉토리 생성
 - [x] 진입점 `src/main.tsx`, `src/App.tsx` 생성
 
 **의존성:**
@@ -772,10 +776,11 @@ CREATE TABLE todos (
 **설명:** TypeScript 타입을 정의한다.
 
 **완료 조건:**
-- [x] `src/types/auth.ts`: `User`, `LoginRequest`, `SignupRequest`, `TokenResponse`
+- [x] `src/types/auth.ts`: `User`, `LoginRequest`, `SignupRequest`, `TokenResponse` (`User`에 `language` 필드 포함)
 - [x] `src/types/todo.ts`: `Todo`, `TodoStatus`, `CreateTodoInput`, `UpdateTodoInput`
 - [x] `src/types/api.ts`: `ApiResponse<T>` 공통 응답 타입
 - [x] `src/constants/todoStatus.ts`: `TodoStatus` enum 상수 정의
+- [x] `src/constants/language.ts`: `Language` 타입 (`'ko' | 'en' | 'jp'`), 언어 레이블 상수 정의
 
 **의존성:**
 - [x] 선행 작업: FE-03
@@ -805,7 +810,7 @@ CREATE TABLE todos (
 
 **완료 조건:**
 - [x] `src/shared/utils/formatDate.ts`: `YYYY-MM-DD` 포맷팅
-- [x] `src/shared/utils/todoStatusLabel.ts`: `TodoStatus` → 한국어 레이블 매핑
+- [x] `src/shared/utils/todoStatusLabel.ts`: `TodoStatus` → 다국어 레이블 매핑 (i18next `t()` 활용)
 - [x] `src/shared/hooks/useDebounce.ts`: 입력값 디바운스 훅
 
 **의존성:**
@@ -1080,16 +1085,57 @@ CREATE TABLE todos (
 
 ---
 
+### 5.6 다국어 지원 (i18n)
+
+#### FE-24. react-i18next 설정
+
+**설명:** react-i18next 기반 다국어(ko/en/jp) 지원을 구성한다.
+
+**완료 조건:**
+- [ ] `react-i18next`, `i18next` 패키지 설치
+- [ ] `src/i18n.ts` 초기화 파일 생성 (언어 감지, fallback `ko`)
+- [ ] `src/locales/ko/translation.json`, `en/translation.json`, `jp/translation.json` 번역 파일 생성
+- [ ] `src/main.tsx` 에 i18n 초기화 import 추가
+- [ ] 브라우저 `Accept-Language` 자동 감지 설정 (`i18next-browser-languagedetector`)
+- [ ] `localStorage` 언어 설정 저장 (`i18next` 키)
+
+**번역 키 범위:**
+- 인증: 로그인, 회원가입, 폼 레이블 및 오류 메시지
+- 할일: 상태 레이블(NOT_STARTED, IN_PROGRESS, OVERDUE, COMPLETED_SUCCESS, COMPLETED_FAILURE), 액션 버튼
+- 공통: 확인, 취소, 로딩, 에러 메시지
+
+**의존성:**
+- [ ] 선행 작업: FE-03
+
+---
+
+#### FE-25. 언어 선택 UI 구현
+
+**설명:** 사용자가 UI 언어를 선택할 수 있는 컴포넌트를 구현한다.
+
+**완료 조건:**
+- [ ] `src/shared/components/LanguageSelector.tsx` 드롭다운 컴포넌트 구현
+- [ ] 지원 언어: `ko`(한국어), `en`(English), `jp`(日本語)
+- [ ] 언어 변경 시 `i18next.changeLanguage()` 호출
+- [ ] 회원가입 폼에 언어 선택 필드 추가 (`SignupRequest.language`)
+- [ ] Header 에 언어 선택 버튼 배치
+- [ ] 선택된 언어 `localStorage` 저장 (새로고침 시 유지)
+
+**의존성:**
+- [ ] 선행 작업: FE-24, FE-06
+
+---
+
 ## 6. 종합 요약
 
 ### 6.1 작업 카운트
 
 | 레이어 | 작업 수 | 완료 조건 항목 | 평균 의존성 |
 |--------|--------|---------------|------------|
-| **데이터베이스** | 8 개 | 32 개 | 1.5 개 |
+| **데이터베이스** | 8 개 | 33 개 | 1.5 개 |
 | **백엔드** | 24 개 | 134 개 | 2.8 개 |
-| **프론트엔드** | 23 개 | 115 개 | 2.1 개 |
-| **총계** | **55 개** | **281 개** | **2.1 개** |
+| **프론트엔드** | 25 개 | 127 개 | 2.1 개 |
+| **총계** | **57 개** | **294 개** | **2.1 개** |
 
 ---
 
@@ -1146,6 +1192,7 @@ FE-01 → FE-03 → FE-04 → FE-05 → FE-12 → FE-13 → FE-16 → FE-22
 | v1.2 | 2026-04-01 | Yongwoo | BE-10~BE-24 인증/할일 CRUD 구현 완료: 15 개 작업, 400 개 테스트, 평균 커버리지 80.38% |
 | v1.3 | 2026-04-02 | Frontend Agent | FE-06~FE-09, FE-12~FE-15, FE-17, FE-18 구현 완료: 10 개 작업, 54 개 테스트 |
 | v1.4 | 2026-04-02 | Frontend Agent | FE-10~FE-23 구현 완료: 14 개 작업, 85 개 테스트 통과 (14 개는 validation timing issue) |
+| v1.5 | 2026-04-03 | Yongwoo | **다국어 지원 추가**: §1.2 범위, §1.3 기술 스택(react-i18next), DB-03 `language` 컬럼, FE-03/05/07 다국어 반영, FE-24(i18n 설정)·FE-25(언어 선택 UI) 신규 태스크 추가 (총 57 개 작업) |
 
 ---
 

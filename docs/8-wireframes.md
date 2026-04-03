@@ -35,6 +35,7 @@
 | **접근성** | WCAG 2.1 Level AA 준수 (색상 대비 4.5:1 이상) |
 | **반응형** | 모바일 (320px~), 태블릿 (768px~), 데스크탑 (1024px~) 지원 |
 | **다크모드** | 시스템 테마 감지 및 수동 토글을 통한 라이트/다크 모드 전환 |
+| **다국어** | 한국어(ko), 영어(en), 일본어(jp) 선택 가능한 언어 전환 UI 제공 |
 
 ---
 
@@ -68,6 +69,7 @@ App.tsx
 │   │       ├── Input (name)
 │   │       ├── Input (email)
 │   │       ├── Input (password)
+│   │       ├── LanguageSelector (ko/en/jp)
 │   │       └── Button (submit)
 │   │
 │   └── ProtectedRoute (/)
@@ -75,6 +77,7 @@ App.tsx
 │           ├── Header
 │           │   ├── Logo
 │           │   ├── Button (theme toggle) 🌙/☀️
+│           │   ├── LanguageSelector 🌐 (ko/en/jp)
 │           │   └── Button (logout)
 │           │
 │           ├── TodoFilterBar
@@ -282,6 +285,38 @@ interface ThemeState {
 const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 const systemTheme = mediaQuery.matches ? 'dark' : 'light';
 ```
+
+### 5.4 언어 스토어 (`useLanguageStore`)
+
+```typescript
+type Language = 'ko' | 'en' | 'jp';
+
+interface LanguageState {
+  language: Language;
+
+  // Actions
+  setLanguage: (lang: Language) => void;
+}
+```
+
+**초기값:**
+- `language`: 사용자 프로필 `language` 필드 → 브라우저 `Accept-Language` → `'ko'` 순으로 결정
+
+**상태 흐름:**
+```
+[초기] language: 사용자 프로필 or 브라우저 감지 or 'ko'
+   │
+   │ 사용자가 언어 선택 (LanguageSelector)
+   ▼
+[변경] language: 'en' | 'jp' | 'ko'
+       → i18next.changeLanguage() 호출
+       → localStorage 저장 ('i18nextLng' 키)
+```
+
+**localStorage 저장:**
+- 키: `i18nextLng`
+- 값: `'ko' | 'en' | 'jp'`
+- 목적: 새로고침 시 언어 설정 유지
 
 ---
 
@@ -662,6 +697,13 @@ const systemTheme = mediaQuery.matches ? 'dark' : 'light';
 │  │  └─────────────────────────────────────────────┘    │    │
 │  │                                                     │    │
 │  │  ┌─────────────────────────────────────────────┐    │    │
+│  │  │ 언어 선택                                  │    │    │
+│  │  │ ┌─────────────────────────────────────────┐ │    │    │
+│  │  │ │ 🌐 한국어                          ▼   │ │    │    │
+│  │  │ └─────────────────────────────────────────┘ │    │    │
+│  │  └─────────────────────────────────────────────┘    │    │
+│  │                                                     │    │
+│  │  ┌─────────────────────────────────────────────┐    │    │
 │  │  │            가입하기                          │    │    │
 │  │  └─────────────────────────────────────────────┘    │    │
 │  │                                                     │    │
@@ -685,6 +727,7 @@ const systemTheme = mediaQuery.matches ? 'dark' : 'light';
 | Email Input | Input | type="email", required | default, focus, error, disabled | 값 입력 |
 | Password Input | Input | type="password", required, minLength=8, maxLength=64 | default, focus, error, disabled | 값 입력, 비밀번호 표시 토글 |
 | Password Guide | Text | - | default, valid, invalid | 비밀번호 정책 안내 |
+| Language Select | Select | options=[ko, en, jp], defaultValue="ko" | default, focus, open | 언어 선택 |
 | Submit Button | Button | type="submit", variant="primary" | default, hover, active, disabled, loading | 폼 제출 |
 | Login Link | Link | to="/login" | default, hover | 로그인 페이지 이동 |
 
@@ -1019,7 +1062,7 @@ const systemTheme = mediaQuery.matches ? 'dark' : 'light';
 ┌─────────────────────────────────────────────────────────────────┐
 │ Header                                                          │
 │ ┌─────────────────────────────────────────────────────────┐     │
-│ │ [로고] todolist-app        [🌙/☀️]  [사용자명] [로그아웃]│     │
+│ │ [로고] todolist-app   [🌙/☀️]  [🌐 ko▼]  [사용자명] [로그아웃]│     │
 │ └─────────────────────────────────────────────────────────┘     │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
@@ -1089,7 +1132,7 @@ const systemTheme = mediaQuery.matches ? 'dark' : 'light';
 ┌─────────────────────────────────┐
 │ Header                          │
 │ ┌─────────────────────────┐     │
-│ │ [로고]   [🌙/☀️] [사용자] ▼│     │
+│ │ [로고]  [🌙/☀️] [🌐] [사용자]▼│     │
 │ └─────────────────────────┘     │
 ├─────────────────────────────────┤
 │                                 │
@@ -3994,6 +4037,7 @@ const handleTouchMove = (e) => {
 | v1.0 | 2026-04-01 | Yongwoo | 최초 작성: 7 개 화면 와이어프레임, 컴포넌트 명세, 디자인 토큰, 접근성 가이드 |
 | v1.1 | 2026-04-01 | Yongwoo | 반응형 UI 명세 추가: 7 개 화면 상세 반응형 레이아웃, CSS 미디어 쿼리, 터치 타겟 가이드라인, 모바일 제스처, 성능 최적화, 테스트 매트릭스 |
 | v1.2 | 2026-04-02 | Yongwoo | **라이트모드/다크모드 토글 버튼 추가**: (§1.3) 디자인 원칙 추가, (§3) 컴포넌트 계층 구조 업데이트, (§5.3) 테마 스토어 추가, (§6) 모든 화면에 테마 토글 버튼 추가, 다크모드 CSS 변수 및 미디어 쿼리 추가 |
+| v1.3 | 2026-04-03 | Yongwoo | **다국어 지원 추가**: (§1.3) 다국어 디자인 원칙 추가, (§3) LanguageSelector 컴포넌트 계층 추가, (§5.4) 언어 스토어(`useLanguageStore`) 신설, SCR-02 회원가입 언어 선택 필드 추가, SCR-03 Header 언어 선택 버튼 추가 |
 
 ---
 
