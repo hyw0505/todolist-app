@@ -3,7 +3,9 @@
     "logout": "ログアウト",
     "login": "ログイン",
     "signup": "新規登録",
-    "language": "言語"
+    "language": "言語",
+    "cancel": "キャンセル",
+    "retry": "再試行"
   },
   "auth": {
     "name": "名前",
@@ -44,14 +46,77 @@
     },
     "language": "言語選択"
   },
+  "page": {
+    "login": "ログイン",
+    "signup": "新規登録"
+  },
   "todo": {
-    "empty": "登録されたタスクがありません。",
+    "title": "タスクリスト",
+    "addButton": "+ タスク追加",
+    "loading": "タスクを読み込み中...",
+    "loadError": "タスクの読み込みに失敗しました。",
+    "emptyTitle": "登録されたタスクがありません",
+    "emptyDescription": "新しいタスクを追加してみましょう",
+    "complete": "完了",
+    "edit": "編集",
+    "delete": "削除",
+    "completeModal": {
+      "title": "タスク完了処理",
+      "message": "このタスクを完了にしますか？",
+      "success": "成功",
+      "failure": "失敗"
+    },
+    "deleteModal": {
+      "title": "タスク削除",
+      "message": "本当にこのタスクを削除しますか？"
+    },
+    "createModal": {
+      "title": "新しいタスク追加",
+      "titleLabel": "タイトル",
+      "descriptionLabel": "説明",
+      "startDate": "開始日",
+      "dueDate": "終了日",
+      "titlePlaceholder": "タスクのタイトルを入力してください",
+      "descriptionPlaceholder": "説明を入力してください（任意）",
+      "submit": "追加",
+      "createError": "タスクの作成に失敗しました。"
+    },
+    "editModal": {
+      "title": "タスク編集",
+      "titlePlaceholder": "タスクのタイトルを入力してください",
+      "descriptionPlaceholder": "説明を入力してください（任意）",
+      "submit": "保存",
+      "editError": "タスクの更新に失敗しました。"
+    },
+    "validation": {
+      "titleRequired": "タイトルを入力してください。",
+      "titleLength": "タイトルは1〜100文字で入力してください。",
+      "descriptionLength": "説明は1000文字以内で入力してください。",
+      "startDateRequired": "開始日を入力してください。",
+      "dueDateRequired": "終了日を入力してください。",
+      "dueDateAfterStartDate": "終了日は開始日より後でなければなりません。"
+    },
     "status": {
-      "pending": "待機中",
+      "notStarted": "未開始",
       "inProgress": "進行中",
-      "completed": "完了",
-      "failed": "失敗"
+      "overdue": "期限超過",
+      "completedSuccess": "完了",
+      "completedFailure": "失敗完了"
     }
+  },
+  "filter": {
+    "status": "ステータス",
+    "sort": "並び替え",
+    "all": "全て",
+    "notStarted": "未開始",
+    "inProgress": "進行中",
+    "overdue": "期限超過",
+    "completedSuccess": "完了（成功）",
+    "completedFailure": "完了（失敗）",
+    "startDate": "開始日",
+    "dueDate": "終了日",
+    "asc": "昇順",
+    "desc": "降順"
   },
   "languageSelector": {
     "label": "言語選択",

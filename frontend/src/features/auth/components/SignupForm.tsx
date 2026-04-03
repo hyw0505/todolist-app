@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Input } from '@/shared/components/Input';
 import { Button } from '@/shared/components/Button';
 import { ErrorMessage } from '@/shared/components/ErrorMessage';
@@ -30,6 +31,7 @@ interface PasswordPolicy {
  */
 export function SignupForm({ onSuccess }: SignupFormProps): React.JSX.Element {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const { language, setLanguage } = useLanguageStore();
   const [name, setName] = useState('');
@@ -50,7 +52,7 @@ export function SignupForm({ onSuccess }: SignupFormProps): React.JSX.Element {
       navigate('/login');
     },
     onError: (error: unknown) => {
-      const errorMessage = error instanceof Error ? error.message : '회원가입에 실패했습니다.';
+      const errorMessage = error instanceof Error ? error.message : t('auth.signupError');
       setErrors((prev) => ({ ...prev, general: errorMessage }));
     },
   });
@@ -67,31 +69,31 @@ export function SignupForm({ onSuccess }: SignupFormProps): React.JSX.Element {
   const isPasswordValid = Object.values(passwordPolicy).every(Boolean);
 
   const validateName = (value: string): string | undefined => {
-    if (!value) return '이름을 입력해주세요.';
-    if (value.length < 2 || value.length > 50) return '이름은 2-50 자 사이여야 합니다.';
+    if (!value) return t('auth.validation.nameRequired');
+    if (value.length < 2 || value.length > 50) return t('auth.validation.nameLength');
     return undefined;
   };
 
   const validateEmail = (value: string): string | undefined => {
-    if (!value) return '이메일을 입력해주세요.';
+    if (!value) return t('auth.validation.emailRequired');
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(value)) return '올바른 이메일 형식이 아닙니다.';
+    if (!emailRegex.test(value)) return t('auth.validation.emailInvalid');
     return undefined;
   };
 
   const validatePassword = (value: string): string | undefined => {
-    if (!value) return '비밀번호를 입력해주세요.';
-    if (value.length < 8 || value.length > 64) return '비밀번호는 8-64 자 사이여야 합니다.';
-    if (!/[A-Z]/.test(value)) return '대문자를 포함해주세요.';
-    if (!/[a-z]/.test(value)) return '소문자를 포함해주세요.';
-    if (!/[0-9]/.test(value)) return '숫자를 포함해주세요.';
-    if (!/[!@#$%^&*(),.?":{}|<>]/.test(value)) return '특수문자를 포함해주세요.';
+    if (!value) return t('auth.validation.passwordRequired');
+    if (value.length < 8 || value.length > 64) return t('auth.validation.passwordLength');
+    if (!/[A-Z]/.test(value)) return t('auth.validation.passwordUppercase');
+    if (!/[a-z]/.test(value)) return t('auth.validation.passwordLowercase');
+    if (!/[0-9]/.test(value)) return t('auth.validation.passwordNumber');
+    if (!/[!@#$%^&*(),.?":{}|<>]/.test(value)) return t('auth.validation.passwordSpecial');
     return undefined;
   };
 
   const validateConfirmPassword = (value: string): string | undefined => {
-    if (!value) return '비밀번호 확인을 입력해주세요.';
-    if (value !== password) return '비밀번호가 일치하지 않습니다.';
+    if (!value) return t('auth.validation.confirmPasswordRequired');
+    if (value !== password) return t('auth.validation.confirmPasswordMismatch');
     return undefined;
   };
 
@@ -220,14 +222,14 @@ export function SignupForm({ onSuccess }: SignupFormProps): React.JSX.Element {
 
       <div style={inputGroupStyle}>
         <Input
-          label="이름"
+          label={t('auth.name')}
           type="text"
           value={name}
           onChange={(e) => {
             setName(e.target.value);
             if (errors.name) setErrors((prev) => ({ ...prev, name: '' }));
           }}
-          placeholder="홍길동"
+          placeholder={t('auth.namePlaceholder')}
           error={errors.name}
           required
           autoComplete="name"
@@ -236,14 +238,14 @@ export function SignupForm({ onSuccess }: SignupFormProps): React.JSX.Element {
         />
 
         <Input
-          label="이메일"
+          label={t('auth.email')}
           type="email"
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
             if (errors.email) setErrors((prev) => ({ ...prev, email: '' }));
           }}
-          placeholder="example@email.com"
+          placeholder={t('auth.emailPlaceholder')}
           error={errors.email}
           required
           autoComplete="email"
@@ -252,14 +254,14 @@ export function SignupForm({ onSuccess }: SignupFormProps): React.JSX.Element {
         />
 
         <Input
-          label="비밀번호"
+          label={t('auth.password')}
           type="password"
           value={password}
           onChange={(e) => {
             setPassword(e.target.value);
             if (errors.password) setErrors((prev) => ({ ...prev, password: '' }));
           }}
-          placeholder="비밀번호를 입력해주세요"
+          placeholder={t('auth.passwordPlaceholder')}
           error={errors.password}
           required
           autoComplete="new-password"
@@ -269,40 +271,40 @@ export function SignupForm({ onSuccess }: SignupFormProps): React.JSX.Element {
 
         {/* 비밀번호 정책 안내 */}
         <div style={passwordPolicyStyle}>
-          <div style={policyTitleStyle}>비밀번호 정책</div>
+          <div style={policyTitleStyle}>{t('auth.passwordPolicy.title')}</div>
           <div style={policyListStyle}>
             <div style={getPolicyItemStyle(passwordPolicy.minLength)}>
               <span>{passwordPolicy.minLength ? '✓' : '○'}</span>
-              8-64 자
+              {t('auth.passwordPolicy.minLength')}
             </div>
             <div style={getPolicyItemStyle(passwordPolicy.hasUpperCase)}>
               <span>{passwordPolicy.hasUpperCase ? '✓' : '○'}</span>
-              대문자 포함
+              {t('auth.passwordPolicy.uppercase')}
             </div>
             <div style={getPolicyItemStyle(passwordPolicy.hasLowerCase)}>
               <span>{passwordPolicy.hasLowerCase ? '✓' : '○'}</span>
-              소문자 포함
+              {t('auth.passwordPolicy.lowercase')}
             </div>
             <div style={getPolicyItemStyle(passwordPolicy.hasNumber)}>
               <span>{passwordPolicy.hasNumber ? '✓' : '○'}</span>
-              숫자 포함
+              {t('auth.passwordPolicy.number')}
             </div>
             <div style={getPolicyItemStyle(passwordPolicy.hasSpecialChar)}>
               <span>{passwordPolicy.hasSpecialChar ? '✓' : '○'}</span>
-              특수문자 포함 (!@#$%^&*(),.?":{}|&lt;&gt;)
+              {t('auth.passwordPolicy.special')}
             </div>
           </div>
         </div>
 
         <Input
-          label="비밀번호 확인"
+          label={t('auth.confirmPassword')}
           type="password"
           value={confirmPassword}
           onChange={(e) => {
             setConfirmPassword(e.target.value);
             if (errors.confirmPassword) setErrors((prev) => ({ ...prev, confirmPassword: '' }));
           }}
-          placeholder="비밀번호를 다시 입력해주세요"
+          placeholder={t('auth.confirmPasswordPlaceholder')}
           error={errors.confirmPassword}
           required
           autoComplete="new-password"
@@ -312,8 +314,8 @@ export function SignupForm({ onSuccess }: SignupFormProps): React.JSX.Element {
 
         {/* 언어 선택 (localStorage에만 저장) */}
         <div style={languageSelectorGroupStyle}>
-          <span style={languageLabelStyle}>언어 선택</span>
-          <div style={languageButtonGroupStyle} role="group" aria-label="언어 선택">
+          <span style={languageLabelStyle}>{t('auth.language')}</span>
+          <div style={languageButtonGroupStyle} role="group" aria-label={t('auth.language')}>
             {(['ko', 'en', 'jp'] as Language[]).map((lang) => (
               <button
                 key={lang}
@@ -338,13 +340,13 @@ export function SignupForm({ onSuccess }: SignupFormProps): React.JSX.Element {
           loading={isPending}
           disabled={!isPasswordValid || !confirmPassword}
         >
-          회원가입
+          {t('auth.signupButton')}
         </Button>
 
         <div style={linkStyle}>
-          이미 계정이 있으신가요?{' '}
+          {t('auth.hasAccount')}{' '}
           <button type="button" style={linkButtonStyle} onClick={() => navigate('/login')}>
-            로그인
+            {t('common.login')}
           </button>
         </div>
       </div>

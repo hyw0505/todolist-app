@@ -3,7 +3,9 @@
     "logout": "로그아웃",
     "login": "로그인",
     "signup": "회원가입",
-    "language": "언어"
+    "language": "언어",
+    "cancel": "취소",
+    "retry": "다시 시도"
   },
   "auth": {
     "name": "이름",
@@ -44,14 +46,77 @@
     },
     "language": "언어 선택"
   },
+  "page": {
+    "login": "로그인",
+    "signup": "회원가입"
+  },
   "todo": {
-    "empty": "등록된 할일이 없습니다.",
+    "title": "할일 목록",
+    "addButton": "+ 할일 추가",
+    "loading": "할일을 불러오는 중...",
+    "loadError": "할일 목록을 불러오는데 실패했습니다.",
+    "emptyTitle": "등록된 할일이 없습니다",
+    "emptyDescription": "새로운 할일을 추가해보세요",
+    "complete": "완료",
+    "edit": "수정",
+    "delete": "삭제",
+    "completeModal": {
+      "title": "할일 완료 처리",
+      "message": "할일을 완료 처리하시겠습니까?",
+      "success": "성공",
+      "failure": "실패"
+    },
+    "deleteModal": {
+      "title": "할일 삭제",
+      "message": "정말로 이 할일을 삭제하시겠습니까?"
+    },
+    "createModal": {
+      "title": "새 할일 추가",
+      "titleLabel": "제목",
+      "descriptionLabel": "설명",
+      "startDate": "시작일",
+      "dueDate": "종료일",
+      "titlePlaceholder": "할일 제목을 입력해주세요",
+      "descriptionPlaceholder": "설명을 입력해주세요 (선택사항)",
+      "submit": "추가",
+      "createError": "할일 생성에 실패했습니다."
+    },
+    "editModal": {
+      "title": "할일 수정",
+      "titlePlaceholder": "할일 제목을 입력해주세요",
+      "descriptionPlaceholder": "설명을 입력해주세요 (선택사항)",
+      "submit": "수정",
+      "editError": "할일 수정에 실패했습니다."
+    },
+    "validation": {
+      "titleRequired": "제목을 입력해주세요.",
+      "titleLength": "제목은 1-100 자 사이여야 합니다.",
+      "descriptionLength": "설명은 1000 자 이내로 입력해주세요.",
+      "startDateRequired": "시작일을 입력해주세요.",
+      "dueDateRequired": "종료일을 입력해주세요.",
+      "dueDateAfterStartDate": "종료일은 시작일보다 이후여야 합니다."
+    },
     "status": {
-      "pending": "대기",
-      "inProgress": "진행중",
-      "completed": "완료",
-      "failed": "실패"
+      "notStarted": "시작 전",
+      "inProgress": "진행 중",
+      "overdue": "기한 초과",
+      "completedSuccess": "완료",
+      "completedFailure": "실패 완료"
     }
+  },
+  "filter": {
+    "status": "상태",
+    "sort": "정렬",
+    "all": "전체",
+    "notStarted": "시작 전",
+    "inProgress": "진행 중",
+    "overdue": "기한 초과",
+    "completedSuccess": "완료 (성공)",
+    "completedFailure": "완료 (실패)",
+    "startDate": "시작일",
+    "dueDate": "종료일",
+    "asc": "오름차순",
+    "desc": "내림차순"
   },
   "languageSelector": {
     "label": "언어 선택",

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { SignupForm } from '@/features/auth/components/SignupForm';
 import { Header } from '@/shared/components/Header';
 import { useTheme } from '@/shared/hooks/useTheme';
@@ -7,6 +8,7 @@ import { useTheme } from '@/shared/hooks/useTheme';
  * 회원가입 페이지 컨테이너
  */
 export function SignupPage(): React.JSX.Element {
+  const { t } = useTranslation();
   const { colors } = useTheme();
 
   const containerStyle: React.CSSProperties = {
@@ -44,7 +46,7 @@ export function SignupPage(): React.JSX.Element {
       <Header showUserMenu={false} />
       <div style={containerStyle}>
         <div style={cardStyle}>
-          <h1 style={titleStyle}>회원가입</h1>
+          <h1 style={titleStyle}>{t('page.signup')}</h1>
           <SignupForm />
         </div>
       </div>

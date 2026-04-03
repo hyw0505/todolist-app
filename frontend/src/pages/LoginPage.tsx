@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { LoginForm } from '@/features/auth/components/LoginForm';
 import { Header } from '@/shared/components/Header';
 import { useTheme } from '@/shared/hooks/useTheme';
@@ -7,6 +8,7 @@ import { useTheme } from '@/shared/hooks/useTheme';
  * 로그인 페이지 컨테이너
  */
 export function LoginPage(): React.JSX.Element {
+  const { t } = useTranslation();
   const { colors } = useTheme();
 
   const containerStyle: React.CSSProperties = {
@@ -42,7 +44,7 @@ export function LoginPage(): React.JSX.Element {
       <Header showUserMenu={false} />
       <div style={containerStyle}>
         <div style={cardStyle}>
-          <h1 style={titleStyle}>로그인</h1>
+          <h1 style={titleStyle}>{t('page.login')}</h1>
           <LoginForm />
         </div>
       </div>

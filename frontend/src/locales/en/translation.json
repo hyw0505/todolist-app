@@ -3,7 +3,9 @@
     "logout": "Logout",
     "login": "Login",
     "signup": "Sign Up",
-    "language": "Language"
+    "language": "Language",
+    "cancel": "Cancel",
+    "retry": "Retry"
   },
   "auth": {
     "name": "Name",
@@ -44,14 +46,77 @@
     },
     "language": "Language"
   },
+  "page": {
+    "login": "Login",
+    "signup": "Sign Up"
+  },
   "todo": {
-    "empty": "No todos registered.",
+    "title": "Todo List",
+    "addButton": "+ Add Todo",
+    "loading": "Loading todos...",
+    "loadError": "Failed to load todos.",
+    "emptyTitle": "No todos registered",
+    "emptyDescription": "Add a new todo to get started",
+    "complete": "Complete",
+    "edit": "Edit",
+    "delete": "Delete",
+    "completeModal": {
+      "title": "Complete Todo",
+      "message": "Mark this todo as complete?",
+      "success": "Success",
+      "failure": "Failure"
+    },
+    "deleteModal": {
+      "title": "Delete Todo",
+      "message": "Are you sure you want to delete this todo?"
+    },
+    "createModal": {
+      "title": "Add New Todo",
+      "titleLabel": "Title",
+      "descriptionLabel": "Description",
+      "startDate": "Start Date",
+      "dueDate": "Due Date",
+      "titlePlaceholder": "Enter todo title",
+      "descriptionPlaceholder": "Enter description (optional)",
+      "submit": "Add",
+      "createError": "Failed to create todo."
+    },
+    "editModal": {
+      "title": "Edit Todo",
+      "titlePlaceholder": "Enter todo title",
+      "descriptionPlaceholder": "Enter description (optional)",
+      "submit": "Save",
+      "editError": "Failed to update todo."
+    },
+    "validation": {
+      "titleRequired": "Please enter a title.",
+      "titleLength": "Title must be between 1 and 100 characters.",
+      "descriptionLength": "Description must be 1000 characters or less.",
+      "startDateRequired": "Please enter a start date.",
+      "dueDateRequired": "Please enter a due date.",
+      "dueDateAfterStartDate": "Due date must be after start date."
+    },
     "status": {
-      "pending": "Pending",
+      "notStarted": "Not Started",
       "inProgress": "In Progress",
-      "completed": "Completed",
-      "failed": "Failed"
+      "overdue": "Overdue",
+      "completedSuccess": "Completed",
+      "completedFailure": "Failed"
     }
+  },
+  "filter": {
+    "status": "Status",
+    "sort": "Sort",
+    "all": "All",
+    "notStarted": "Not Started",
+    "inProgress": "In Progress",
+    "overdue": "Overdue",
+    "completedSuccess": "Completed (Success)",
+    "completedFailure": "Completed (Failure)",
+    "startDate": "Start Date",
+    "dueDate": "Due Date",
+    "asc": "Ascending",
+    "desc": "Descending"
   },
   "languageSelector": {
     "label": "Select Language",

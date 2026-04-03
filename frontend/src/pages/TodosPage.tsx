@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useTodos } from '@/features/todos/hooks/useTodos';
 import { useTodoFilterStore } from '@/features/todos/stores/useTodoFilterStore';
 import { TodoFilterBar } from '@/features/todos/components/TodoFilterBar';
@@ -27,6 +28,7 @@ export function TodosPage(): React.JSX.Element {
   const { status, sortBy, sortOrder, page, limit, setPage } = useTodoFilterStore();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [editingTodo, setEditingTodo] = useState<Todo | null>(null);
+  const { t } = useTranslation();
   const { colors, isDark } = useTheme();
 
   const filters: Parameters<typeof useTodos>[0] = {
@@ -247,9 +249,9 @@ export function TodosPage(): React.JSX.Element {
         <div style={contentCardStyle}>
           {/* 상단 액션 바 */}
           <div style={topActionBarStyle}>
-            <h2 style={pageTitleStyle}>할일 목록</h2>
+            <h2 style={pageTitleStyle}>{t('todo.title')}</h2>
             <Button variant="primary" size="md" onClick={() => setIsCreateModalOpen(true)}>
-              + 할일 추가
+              {t('todo.addButton')}
             </Button>
           </div>
 
@@ -261,23 +263,23 @@ export function TodosPage(): React.JSX.Element {
             <div style={stateContainerStyle}>
               <Spinner size="lg" />
               <span style={{ fontSize: '14px', color: colors.textMuted }}>
-                할일을 불러오는 중...
+                {t('todo.loading')}
               </span>
             </div>
           ) : error ? (
             <div style={stateContainerStyle}>
-              <ErrorMessage message="할일 목록을 불러오는데 실패했습니다." />
+              <ErrorMessage message={t('todo.loadError')} />
               <Button variant="primary" size="md" onClick={() => refetch()}>
-                다시 시도
+                {t('common.retry')}
               </Button>
             </div>
           ) : !todosData || todosData.todos.length === 0 ? (
             <div style={emptyStateStyle}>
               <div style={emptyIconStyle}>📝</div>
-              <h3 style={emptyTitleStyle}>등록된 할일이 없습니다</h3>
-              <p style={emptyDescriptionStyle}>새로운 할일을 추가해보세요</p>
+              <h3 style={emptyTitleStyle}>{t('todo.emptyTitle')}</h3>
+              <p style={emptyDescriptionStyle}>{t('todo.emptyDescription')}</p>
               <Button variant="primary" size="md" onClick={() => setIsCreateModalOpen(true)}>
-                + 할일 추가
+                {t('todo.addButton')}
               </Button>
             </div>
           ) : (

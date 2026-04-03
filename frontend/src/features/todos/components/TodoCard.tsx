@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { Todo, TodoStatus } from '@/types/todo';
-import { getTodoStatusLabel } from '@/shared/utils/todoStatusLabel';
 import { formatDateKorean } from '@/shared/utils/formatDate';
 import { Button } from '@/shared/components/Button';
 import { Modal } from '@/shared/components/Modal';
@@ -22,11 +22,19 @@ interface TodoCardProps {
  * - 상태별 스타일링 (좌측 보더, 배경색)
  */
 export function TodoCard({ todo, onComplete, onEdit, onDelete }: TodoCardProps): React.JSX.Element {
+  const { t } = useTranslation();
   const [showCompleteModal, setShowCompleteModal] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const { colors } = useTheme();
 
-  const statusLabel = getTodoStatusLabel(todo.status);
+  const statusLabelMap: Record<TodoStatus, string> = {
+    NOT_STARTED: t('todo.status.notStarted'),
+    IN_PROGRESS: t('todo.status.inProgress'),
+    OVERDUE: t('todo.status.overdue'),
+    COMPLETED_SUCCESS: t('todo.status.completedSuccess'),
+    COMPLETED_FAILURE: t('todo.status.completedFailure'),
+  };
+  const statusLabel = statusLabelMap[todo.status];
 
   const getStatusColors = (status: TodoStatus) => {
     const map: Record<TodoStatus, { bg: string; text: string; border: string; cardBg: string }> = {
@@ -186,13 +194,13 @@ export function TodoCard({ todo, onComplete, onEdit, onDelete }: TodoCardProps):
         {!todo.is_completed && (
           <div style={actionsStyle}>
             <Button variant="secondary" size="sm" onClick={handleCompleteClick}>
-              완료
+              {t('todo.complete')}
             </Button>
             <Button variant="ghost" size="sm" onClick={handleEditClick}>
-              수정
+              {t('todo.edit')}
             </Button>
             <Button variant="danger" size="sm" onClick={handleDeleteClick}>
-              삭제
+              {t('todo.delete')}
             </Button>
           </div>
         )}
@@ -200,10 +208,10 @@ export function TodoCard({ todo, onComplete, onEdit, onDelete }: TodoCardProps):
         {todo.is_completed && (
           <div style={actionsStyle}>
             <Button variant="ghost" size="sm" onClick={handleEditClick}>
-              수정
+              {t('todo.edit')}
             </Button>
             <Button variant="danger" size="sm" onClick={handleDeleteClick}>
-              삭제
+              {t('todo.delete')}
             </Button>
           </div>
         )}
@@ -213,20 +221,20 @@ export function TodoCard({ todo, onComplete, onEdit, onDelete }: TodoCardProps):
       <Modal
         isOpen={showCompleteModal}
         onClose={() => setShowCompleteModal(false)}
-        title="할일 완료 처리"
+        title={t('todo.completeModal.title')}
         size="sm"
       >
         <div style={{ textAlign: 'center', padding: '16px 0' }}>
-          <p style={modalTextStyle}>할일을 완료 처리하시겠습니까?</p>
+          <p style={modalTextStyle}>{t('todo.completeModal.message')}</p>
           <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
             <Button variant="primary" size="md" onClick={handleCompleteSuccess}>
-              성공
+              {t('todo.completeModal.success')}
             </Button>
             <Button variant="ghost" size="md" onClick={handleCompleteFailure}>
-              실패
+              {t('todo.completeModal.failure')}
             </Button>
             <Button variant="ghost" size="md" onClick={() => setShowCompleteModal(false)}>
-              취소
+              {t('common.cancel')}
             </Button>
           </div>
         </div>
@@ -236,17 +244,17 @@ export function TodoCard({ todo, onComplete, onEdit, onDelete }: TodoCardProps):
       <Modal
         isOpen={showDeleteConfirm}
         onClose={() => setShowDeleteConfirm(false)}
-        title="할일 삭제"
+        title={t('todo.deleteModal.title')}
         size="sm"
       >
         <div style={{ textAlign: 'center', padding: '16px 0' }}>
-          <p style={modalTextStyle}>정말로 이 할일을 삭제하시겠습니까?</p>
+          <p style={modalTextStyle}>{t('todo.deleteModal.message')}</p>
           <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
             <Button variant="danger" size="md" onClick={handleDeleteConfirm}>
-              삭제
+              {t('todo.delete')}
             </Button>
             <Button variant="ghost" size="md" onClick={() => setShowDeleteConfirm(false)}>
-              취소
+              {t('common.cancel')}
             </Button>
           </div>
         </div>

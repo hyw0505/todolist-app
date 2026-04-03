@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Input } from '@/shared/components/Input';
 import { Button } from '@/shared/components/Button';
 import { ErrorMessage } from '@/shared/components/ErrorMessage';
@@ -21,6 +22,7 @@ interface LoginFormProps {
  */
 export function LoginForm({ onSuccess }: LoginFormProps): React.JSX.Element {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -32,20 +34,20 @@ export function LoginForm({ onSuccess }: LoginFormProps): React.JSX.Element {
       navigate('/');
     },
     onError: (error: unknown) => {
-      const errorMessage = error instanceof Error ? error.message : '로그인에 실패했습니다.';
+      const errorMessage = error instanceof Error ? error.message : t('auth.loginError');
       setErrors((prev) => ({ ...prev, general: errorMessage }));
     },
   });
 
   const validateEmail = (value: string): string | undefined => {
-    if (!value) return '이메일을 입력해주세요.';
+    if (!value) return t('auth.validation.emailRequired');
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(value)) return '올바른 이메일 형식이 아닙니다.';
+    if (!emailRegex.test(value)) return t('auth.validation.emailInvalid');
     return undefined;
   };
 
   const validatePassword = (value: string): string | undefined => {
-    if (!value) return '비밀번호를 입력해주세요.';
+    if (!value) return t('auth.validation.passwordRequired');
     return undefined;
   };
 
@@ -105,14 +107,14 @@ export function LoginForm({ onSuccess }: LoginFormProps): React.JSX.Element {
 
       <div style={inputGroupStyle}>
         <Input
-          label="이메일"
+          label={t('auth.email')}
           type="email"
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
             if (errors.email) setErrors((prev) => ({ ...prev, email: '' }));
           }}
-          placeholder="example@email.com"
+          placeholder={t('auth.emailPlaceholder')}
           error={errors.email}
           required
           autoComplete="email"
@@ -121,14 +123,14 @@ export function LoginForm({ onSuccess }: LoginFormProps): React.JSX.Element {
         />
 
         <Input
-          label="비밀번호"
+          label={t('auth.password')}
           type="password"
           value={password}
           onChange={(e) => {
             setPassword(e.target.value);
             if (errors.password) setErrors((prev) => ({ ...prev, password: '' }));
           }}
-          placeholder="비밀번호를 입력해주세요"
+          placeholder={t('auth.passwordPlaceholder')}
           error={errors.password}
           required
           autoComplete="current-password"
@@ -139,13 +141,13 @@ export function LoginForm({ onSuccess }: LoginFormProps): React.JSX.Element {
 
       <div style={buttonGroupStyle}>
         <Button type="submit" variant="primary" size="md" fullWidth loading={isPending}>
-          로그인
+          {t('auth.loginButton')}
         </Button>
 
         <div style={linkStyle}>
-          계정이 없으신가요?{' '}
+          {t('auth.noAccount')}{' '}
           <button type="button" style={linkButtonStyle} onClick={() => navigate('/signup')}>
-            회원가입
+            {t('common.signup')}
           </button>
         </div>
       </div>

@@ -1,29 +1,8 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useTodoFilterStore } from '../stores/useTodoFilterStore';
 import { useTheme } from '@/shared/hooks/useTheme';
 import type { TodoStatus } from '@/types/todo';
-
-/** 상태 필터 옵션 */
-const STATUS_OPTIONS: { value: TodoStatus | 'ALL'; label: string }[] = [
-  { value: 'ALL', label: '전체' },
-  { value: 'NOT_STARTED', label: '시작 전' },
-  { value: 'IN_PROGRESS', label: '진행 중' },
-  { value: 'OVERDUE', label: '기한 초과' },
-  { value: 'COMPLETED_SUCCESS', label: '완료 (성공)' },
-  { value: 'COMPLETED_FAILURE', label: '완료 (실패)' },
-];
-
-/** 정렬 기준 옵션 */
-const SORT_BY_OPTIONS: { value: 'start_date' | 'due_date'; label: string }[] = [
-  { value: 'start_date', label: '시작일' },
-  { value: 'due_date', label: '종료일' },
-];
-
-/** 정렬 순서 옵션 */
-const SORT_ORDER_OPTIONS: { value: 'asc' | 'desc'; label: string }[] = [
-  { value: 'asc', label: '오름차순' },
-  { value: 'desc', label: '내림차순' },
-];
 
 /**
  * 할일 필터 바 컴포넌트
@@ -34,8 +13,28 @@ const SORT_ORDER_OPTIONS: { value: 'asc' | 'desc'; label: string }[] = [
  * - useTodoFilterStore 와 연동되어 변경 시 자동 재조회
  */
 export function TodoFilterBar(): React.JSX.Element {
+  const { t } = useTranslation();
   const { status, setStatus, sortBy, setSortBy, sortOrder, setSortOrder } = useTodoFilterStore();
   const { colors } = useTheme();
+
+  const STATUS_OPTIONS: { value: TodoStatus | 'ALL'; label: string }[] = [
+    { value: 'ALL', label: t('filter.all') },
+    { value: 'NOT_STARTED', label: t('filter.notStarted') },
+    { value: 'IN_PROGRESS', label: t('filter.inProgress') },
+    { value: 'OVERDUE', label: t('filter.overdue') },
+    { value: 'COMPLETED_SUCCESS', label: t('filter.completedSuccess') },
+    { value: 'COMPLETED_FAILURE', label: t('filter.completedFailure') },
+  ];
+
+  const SORT_BY_OPTIONS: { value: 'start_date' | 'due_date'; label: string }[] = [
+    { value: 'start_date', label: t('filter.startDate') },
+    { value: 'due_date', label: t('filter.dueDate') },
+  ];
+
+  const SORT_ORDER_OPTIONS: { value: 'asc' | 'desc'; label: string }[] = [
+    { value: 'asc', label: t('filter.asc') },
+    { value: 'desc', label: t('filter.desc') },
+  ];
 
   const containerStyle: React.CSSProperties = {
     backgroundColor: colors.surface2,
@@ -91,12 +90,12 @@ export function TodoFilterBar(): React.JSX.Element {
     <div style={containerStyle}>
       {/* 상태 필터 */}
       <div style={filterGroupStyle}>
-        <span style={labelStyle}>상태</span>
+        <span style={labelStyle}>{t('filter.status')}</span>
         <select
           value={status}
           onChange={(e) => setStatus(e.target.value as TodoStatus | 'ALL')}
           style={getSelectStyle(status !== 'ALL')}
-          aria-label="상태 필터"
+          aria-label={t('filter.status')}
         >
           {STATUS_OPTIONS.map((option) => (
             <option key={option.value} value={option.value}>
@@ -110,12 +109,12 @@ export function TodoFilterBar(): React.JSX.Element {
 
       {/* 정렬 기준 */}
       <div style={filterGroupStyle}>
-        <span style={labelStyle}>정렬</span>
+        <span style={labelStyle}>{t('filter.sort')}</span>
         <select
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value as 'start_date' | 'due_date')}
           style={getSelectStyle(true)}
-          aria-label="정렬 기준"
+          aria-label={t('filter.sort')}
         >
           {SORT_BY_OPTIONS.map((option) => (
             <option key={option.value} value={option.value}>
@@ -130,7 +129,7 @@ export function TodoFilterBar(): React.JSX.Element {
         value={sortOrder}
         onChange={(e) => setSortOrder(e.target.value as 'asc' | 'desc')}
         style={getSelectStyle(true)}
-        aria-label="정렬 순서"
+        aria-label={t('filter.sort')}
       >
         {SORT_ORDER_OPTIONS.map((option) => (
           <option key={option.value} value={option.value}>

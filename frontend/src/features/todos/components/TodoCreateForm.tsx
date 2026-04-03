@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Input } from '@/shared/components/Input';
 import { Button } from '@/shared/components/Button';
 import { Modal } from '@/shared/components/Modal';
@@ -21,6 +22,7 @@ interface TodoCreateFormProps {
  * - useCreateTodo 훅 사용
  */
 export function TodoCreateForm({ isOpen, onClose, onSuccess }: TodoCreateFormProps): React.JSX.Element {
+  const { t } = useTranslation();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [startDate, setStartDate] = useState('');
@@ -39,7 +41,7 @@ export function TodoCreateForm({ isOpen, onClose, onSuccess }: TodoCreateFormPro
       handleClose();
     },
     onError: (error: unknown) => {
-      const errorMessage = error instanceof Error ? error.message : '할일 생성에 실패했습니다.';
+      const errorMessage = error instanceof Error ? error.message : t('todo.createModal.createError');
       setErrors((prev) => ({ ...prev, general: errorMessage }));
     },
   });
@@ -53,52 +55,29 @@ export function TodoCreateForm({ isOpen, onClose, onSuccess }: TodoCreateFormPro
     onClose();
   };
 
-  // 제목 유효성 검증
   const validateTitle = (value: string): string | undefined => {
-    if (!value) {
-      return '제목을 입력해주세요.';
-    }
-    if (value.length < 1 || value.length > 100) {
-      return '제목은 1-100 자 사이여야 합니다.';
-    }
+    if (!value) return t('todo.validation.titleRequired');
+    if (value.length < 1 || value.length > 100) return t('todo.validation.titleLength');
     return undefined;
   };
 
-  // 설명 유효성 검증
   const validateDescription = (value: string): string | undefined => {
-    if (value && value.length > 1000) {
-      return '설명은 1000 자 이내로 입력해주세요.';
-    }
+    if (value && value.length > 1000) return t('todo.validation.descriptionLength');
     return undefined;
   };
 
-  // 날짜 유효성 검증
   const validateDates = (start: string, due: string): { start?: string; due?: string } => {
-    const errors: { start?: string; due?: string } = {};
-
-    if (!start) {
-      errors.start = '시작일을 입력해주세요.';
+    const errs: { start?: string; due?: string } = {};
+    if (!start) errs.start = t('todo.validation.startDateRequired');
+    if (!due) errs.due = t('todo.validation.dueDateRequired');
+    if (start && due && new Date(due) < new Date(start)) {
+      errs.due = t('todo.validation.dueDateAfterStartDate');
     }
-    if (!due) {
-      errors.due = '종료일을 입력해주세요.';
-    }
-
-    if (start && due) {
-      const startDateObj = new Date(start);
-      const dueDateObj = new Date(due);
-
-      if (dueDateObj < startDateObj) {
-        errors.due = '종료일은 시작일보다 이후여야 합니다.';
-      }
-    }
-
-    return errors;
+    return errs;
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    // 유효성 검사
     const titleError = validateTitle(title);
     const descriptionError = validateDescription(description);
     const dateErrors = validateDates(startDate, dueDate);
@@ -113,7 +92,6 @@ export function TodoCreateForm({ isOpen, onClose, onSuccess }: TodoCreateFormPro
       return;
     }
 
-    // 할일 생성 요청
     createMutate({
       title,
       description: description || undefined,
@@ -122,7 +100,6 @@ export function TodoCreateForm({ isOpen, onClose, onSuccess }: TodoCreateFormPro
     } as CreateTodoInput);
   };
 
-  // 폼 컨테이너 스타일
   const formStyle: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
@@ -130,21 +107,18 @@ export function TodoCreateForm({ isOpen, onClose, onSuccess }: TodoCreateFormPro
     width: '100%',
   };
 
-  // 입력 필드 그룹 스타일
   const inputGroupStyle: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
     gap: '12px',
   };
 
-  // 날짜 입력 그룹 스타일
   const dateGroupStyle: React.CSSProperties = {
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
     gap: '12px',
   };
 
-  // 버튼 그룹 스타일
   const buttonGroupStyle: React.CSSProperties = {
     display: 'flex',
     gap: '8px',
@@ -152,7 +126,6 @@ export function TodoCreateForm({ isOpen, onClose, onSuccess }: TodoCreateFormPro
     marginTop: '8px',
   };
 
-  // textarea 스타일
   const textareaStyle: React.CSSProperties = {
     border: errors.description ? '1px solid #FF3838' : '1px solid #C4C4C4',
     borderRadius: '4px',
@@ -185,7 +158,6 @@ export function TodoCreateForm({ isOpen, onClose, onSuccess }: TodoCreateFormPro
     fontFamily: "'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif",
   };
 
-  // 날짜 입력 래퍼 스타일
   const dateInputWrapperStyle: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
@@ -206,25 +178,23 @@ export function TodoCreateForm({ isOpen, onClose, onSuccess }: TodoCreateFormPro
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={handleClose} title="새 할일 추가" size="md">
+    <Modal isOpen={isOpen} onClose={handleClose} title={t('todo.createModal.title')} size="md">
       <form onSubmit={handleSubmit} style={formStyle}>
         {errors.general && <ErrorMessage message={errors.general} />}
 
         <div style={inputGroupStyle}>
           <div>
             <label htmlFor="todo-title" style={labelStyle}>
-              제목 <span style={{ color: '#FF3838' }}>*</span>
+              {t('todo.createModal.titleLabel')} <span style={{ color: '#FF3838' }}>*</span>
             </label>
             <Input
               type="text"
               value={title}
               onChange={(e) => {
                 setTitle(e.target.value);
-                if (errors.title) {
-                  setErrors((prev) => ({ ...prev, title: '' }));
-                }
+                if (errors.title) setErrors((prev) => ({ ...prev, title: '' }));
               }}
-              placeholder="할일 제목을 입력해주세요"
+              placeholder={t('todo.createModal.titlePlaceholder')}
               error={errors.title}
               required
               id="todo-title"
@@ -234,7 +204,7 @@ export function TodoCreateForm({ isOpen, onClose, onSuccess }: TodoCreateFormPro
 
           <div>
             <label htmlFor="todo-description" style={labelStyle}>
-              설명
+              {t('todo.createModal.descriptionLabel')}
             </label>
             <textarea
               id="todo-description"
@@ -242,24 +212,22 @@ export function TodoCreateForm({ isOpen, onClose, onSuccess }: TodoCreateFormPro
               value={description}
               onChange={(e) => {
                 setDescription(e.target.value);
-                if (errors.description) {
-                  setErrors((prev) => ({ ...prev, description: '' }));
-                }
+                if (errors.description) setErrors((prev) => ({ ...prev, description: '' }));
               }}
-              placeholder="설명을 입력해주세요 (선택사항)"
+              placeholder={t('todo.createModal.descriptionPlaceholder')}
               style={textareaStyle}
               maxLength={1000}
             />
             {errors.description && <span style={errorStyle}>{errors.description}</span>}
             <span style={{ ...errorStyle, marginTop: '4px', color: '#767676' }}>
-              {description.length}/1000 자
+              {description.length}/1000
             </span>
           </div>
 
           <div style={dateGroupStyle}>
             <div style={dateInputWrapperStyle}>
               <label htmlFor="todo-start-date" style={labelStyle}>
-                시작일 <span style={{ color: '#FF3838' }}>*</span>
+                {t('todo.createModal.startDate')} <span style={{ color: '#FF3838' }}>*</span>
               </label>
               <input
                 id="todo-start-date"
@@ -268,9 +236,7 @@ export function TodoCreateForm({ isOpen, onClose, onSuccess }: TodoCreateFormPro
                 value={startDate}
                 onChange={(e) => {
                   setStartDate(e.target.value);
-                  if (errors.startDate) {
-                    setErrors((prev) => ({ ...prev, startDate: '' }));
-                  }
+                  if (errors.startDate) setErrors((prev) => ({ ...prev, startDate: '' }));
                 }}
                 style={dateInputStyle}
                 required
@@ -280,7 +246,7 @@ export function TodoCreateForm({ isOpen, onClose, onSuccess }: TodoCreateFormPro
 
             <div style={dateInputWrapperStyle}>
               <label htmlFor="todo-due-date" style={labelStyle}>
-                종료일 <span style={{ color: '#FF3838' }}>*</span>
+                {t('todo.createModal.dueDate')} <span style={{ color: '#FF3838' }}>*</span>
               </label>
               <input
                 id="todo-due-date"
@@ -289,9 +255,7 @@ export function TodoCreateForm({ isOpen, onClose, onSuccess }: TodoCreateFormPro
                 value={dueDate}
                 onChange={(e) => {
                   setDueDate(e.target.value);
-                  if (errors.dueDate) {
-                    setErrors((prev) => ({ ...prev, dueDate: '' }));
-                  }
+                  if (errors.dueDate) setErrors((prev) => ({ ...prev, dueDate: '' }));
                 }}
                 style={{
                   ...dateInputStyle,
@@ -306,10 +270,10 @@ export function TodoCreateForm({ isOpen, onClose, onSuccess }: TodoCreateFormPro
 
         <div style={buttonGroupStyle}>
           <Button type="button" variant="ghost" size="md" onClick={handleClose}>
-            취소
+            {t('common.cancel')}
           </Button>
           <Button type="submit" variant="primary" size="md" loading={isPending}>
-            추가
+            {t('todo.createModal.submit')}
           </Button>
         </div>
       </form>
