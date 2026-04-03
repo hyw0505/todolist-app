@@ -1191,7 +1191,8 @@ FE-01 → FE-03 → FE-04 → FE-05 → FE-12 → FE-13 → FE-16 → FE-22
 | v1.3 | 2026-04-02 | Frontend Agent | FE-06~FE-09, FE-12~FE-15, FE-17, FE-18 구현 완료: 10 개 작업, 54 개 테스트 |
 | v1.4 | 2026-04-02 | Frontend Agent | FE-10~FE-23 구현 완료: 14 개 작업, 85 개 테스트 통과 (14 개는 validation timing issue) |
 | v1.5 | 2026-04-03 | Yongwoo | **다국어 지원 추가**: §1.2 범위, §1.3 기술 스택(react-i18next), DB-03 `language` 컬럼, FE-03/05/07 다국어 반영, FE-24(i18n 설정)·FE-25(언어 선택 UI) 신규 태스크 추가 (총 57 개 작업) |
-| v1.6 | 2026-04-03 | Frontend Agent | **FE-24·FE-25 구현 완료**: i18n 초기화, ko/en/jp 번역 파일, useLanguageStore, LanguageSelector 컴포넌트, Header·SignupForm 연동, 16 개 테스트 통과 |
+| v1.6 | 2026-04-03 | Frontend Agent | **FE-24·FE-25 구현 완료**: i18n 초기화, ko/en/jp 번역 파일, useLanguageStore, LanguageSelector 컴포넌트, Header 연동, 16 개 테스트 통과 |
+| v1.7 | 2026-04-03 | Yongwoo | **회원가입 폼 언어 선택 제거**: SignupForm 내 언어 선택 UI 삭제, 언어 선택은 Header LanguageSelector로 통일 |
 
 ---
 
