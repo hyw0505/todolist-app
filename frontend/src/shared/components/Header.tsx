@@ -93,10 +93,10 @@ export function Header({ showUserMenu = true }: HeaderProps): React.JSX.Element 
         <span style={logoStyle} onClick={() => navigate('/')}>
           todolist-app
         </span>
-        <ThemeToggle />
       </div>
 
       <div style={rightSectionStyle}>
+        <ThemeToggle />
         <LanguageSelector />
         {showUserMenu && user && (
           <div style={userMenuStyle}>

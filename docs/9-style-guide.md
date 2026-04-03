@@ -161,9 +161,11 @@ font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans
 ```
 
 **구조:**
-- 좌측: 로고
-- 중앙: 주요 메뉴 (엔터, 스포츠, 날씨, 프리미엄)
-- 우측: 로그인, 앱 아이콘, 검색
+- 좌측: 로고 (`todolist-app`)
+- 우측: ThemeToggle(🌙/☀️) + LanguageSelector(🌐 ko▼) + [사용자명 + 로그아웃] *(로그인 후)*
+
+**로그인 전:** 로고(좌) / ThemeToggle + LanguageSelector(우)
+**로그인 후:** 로고(좌) / ThemeToggle + LanguageSelector + 사용자명 + 로그아웃(우)
 
 ### 5.2 카테고리 탭 (Sub Navigation)
 
@@ -564,17 +566,21 @@ border-color: #0068C4;
 
 ### 12.1 언어 선택 컴포넌트
 
-GNB(상단 바) 또는 사용자 설정 화면에 배치하는 언어 선택 드롭다운.
+GNB(상단 바) 우측에 ThemeToggle 다음에 배치하는 언어 선택 드롭다운.
 
 | 속성 | 값 |
 |------|---|
 | **지원 언어** | 한국어 (ko), English (en), 日本語 (jp) |
-| **기본값** | 사용자 프로필 `language` 필드 (미설정 시 `ko`) |
-| **저장 위치** | 서버 사용자 프로필 + 로컬 `localStorage` 캐시 |
+| **기본값** | `ko` (미설정 시) |
+| **저장 위치** | `localStorage` (`i18nextLng` 키) — 서버 전송 없음 |
+| **GNB 배치** | 우측 영역, ThemeToggle 오른쪽 / 사용자명 왼쪽 |
 
 ### 12.2 언어 선택 버튼 스타일
 
+GNB 내에서는 헤더 배경(Primary Blue) 위에 흰색 텍스트로 표시된다.
+
 ```css
+/* GNB 내 언어 선택 버튼 */
 .language-selector {
   display: flex;
   align-items: center;
@@ -584,21 +590,21 @@ GNB(상단 바) 또는 사용자 설정 화면에 배치하는 언어 선택 드
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
-  color: var(--text-secondary);
+  color: #FFFFFF;
   background: transparent;
-  border: 1px solid var(--border);
+  border: none;
 }
 
 .language-selector:hover {
-  background: var(--surface-2);
-  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.1);
 }
 ```
 
-| 상태 | Light Mode | Dark Mode |
-|------|-----------|-----------|
-| 기본 | 테두리 `#E0E0E0`, 텍스트 `#404040` | 테두리 `#3A3A3A`, 텍스트 `#AAAAAA` |
-| hover | 배경 `#F5F5F5`, 텍스트 `#1A1A1A` | 배경 `#2A2A2A`, 텍스트 `#E8E8E8` |
+| 상태 | 스타일 |
+|------|--------|
+| 기본 | 흰색 텍스트 (`#FFFFFF`), 배경 없음 |
+| hover | 배경 `rgba(255,255,255,0.1)` |
+| focus | outline `2px solid var(--primary-blue)` |
 
 ### 12.3 언어 드롭다운 옵션
 
