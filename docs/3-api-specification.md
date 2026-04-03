@@ -27,7 +27,6 @@
 |------|:----:|------|
 | `Authorization` | 인증 필요 엔드포인트 | `Bearer <accessToken>` |
 | `Content-Type` | 본문 있는 요청 | `application/json` |
-| `Accept-Language` | 선택 | 응답 메시지 언어 (`ko`, `en`, `jp`). 미설정 시 사용자 프로필 언어 → 기본값 `ko` 순으로 적용 |
 
 ### 1.3 공통 응답 형식
 
@@ -66,12 +65,9 @@
 {
   "email": "user@example.com",
   "password": "SecurePass123!",
-  "name": "홍길동",
-  "language": "ko"
+  "name": "홍길동"
 }
 ```
-
-> `language`: 선택 필드. `ko`(한국어), `en`(영어), `jp`(일본어) 중 하나. 미입력 시 `Accept-Language` 헤더 → 기본값 `ko` 순으로 적용.
 
 **응답 (201 Created):**
 ```json
@@ -112,8 +108,7 @@
   "user": {
     "id": "550e8400-e29b-41d4-a716-446655440000",
     "email": "user@example.com",
-    "name": "홍길동",
-    "language": "ko"
+    "name": "홍길동"
   }
 }
 ```

@@ -98,7 +98,6 @@ CREATE TABLE users (
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     name VARCHAR(50) NOT NULL,
-    language VARCHAR(2) NOT NULL DEFAULT 'ko',
     created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
 ```
@@ -107,7 +106,6 @@ CREATE TABLE users (
 - [x] `users` 테이블 DDL 실행 완료
 - [x] `email` 컬럼에 UNIQUE 제약조건 설정
 - [x] `id` 컬럼에 PRIMARY KEY 설정
-- [x] `language` 컬럼 추가 (`VARCHAR(2) NOT NULL DEFAULT 'ko'`, 허용값: `ko`, `en`, `jp`)
 - [x] 인덱스 자동 생성 확인
 
 **의존성:**
@@ -776,7 +774,7 @@ CREATE TABLE todos (
 **설명:** TypeScript 타입을 정의한다.
 
 **완료 조건:**
-- [x] `src/types/auth.ts`: `User`, `LoginRequest`, `SignupRequest`, `TokenResponse` (`User`에 `language` 필드 포함)
+- [x] `src/types/auth.ts`: `User`, `LoginRequest`, `SignupRequest`, `TokenResponse`
 - [x] `src/types/todo.ts`: `Todo`, `TodoStatus`, `CreateTodoInput`, `UpdateTodoInput`
 - [x] `src/types/api.ts`: `ApiResponse<T>` 공통 응답 타입
 - [x] `src/constants/todoStatus.ts`: `TodoStatus` enum 상수 정의
@@ -1117,7 +1115,7 @@ CREATE TABLE todos (
 - [ ] `src/shared/components/LanguageSelector.tsx` 드롭다운 컴포넌트 구현
 - [ ] 지원 언어: `ko`(한국어), `en`(English), `jp`(日本語)
 - [ ] 언어 변경 시 `i18next.changeLanguage()` 호출
-- [ ] 회원가입 폼에 언어 선택 필드 추가 (`SignupRequest.language`)
+- [ ] 언어 변경 시 `localStorage`에 저장 (서버 전송 없음)
 - [ ] Header 에 언어 선택 버튼 배치
 - [ ] 선택된 언어 `localStorage` 저장 (새로고침 시 유지)
 

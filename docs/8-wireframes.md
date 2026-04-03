@@ -300,7 +300,7 @@ interface LanguageState {
 ```
 
 **초기값:**
-- `language`: 사용자 프로필 `language` 필드 → 브라우저 `Accept-Language` → `'ko'` 순으로 결정
+- `language`: `localStorage('i18nextLng')` → 브라우저 `Accept-Language` → `'ko'` 순으로 결정
 
 **상태 흐름:**
 ```
@@ -727,7 +727,7 @@ interface LanguageState {
 | Email Input | Input | type="email", required | default, focus, error, disabled | 값 입력 |
 | Password Input | Input | type="password", required, minLength=8, maxLength=64 | default, focus, error, disabled | 값 입력, 비밀번호 표시 토글 |
 | Password Guide | Text | - | default, valid, invalid | 비밀번호 정책 안내 |
-| Language Select | Select | options=[ko, en, jp], defaultValue="ko" | default, focus, open | 언어 선택 |
+| Language Select | Select | options=[ko, en, jp], defaultValue="ko" | default, focus, open | 언어 선택 (localStorage 저장, 서버 전송 없음) |
 | Submit Button | Button | type="submit", variant="primary" | default, hover, active, disabled, loading | 폼 제출 |
 | Login Link | Link | to="/login" | default, hover | 로그인 페이지 이동 |
 
