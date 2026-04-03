@@ -96,9 +96,9 @@ export function Header({ showUserMenu = true }: HeaderProps): React.JSX.Element 
         <ThemeToggle />
       </div>
 
-      {showUserMenu && user && (
-        <div style={rightSectionStyle}>
-          <LanguageSelector />
+      <div style={rightSectionStyle}>
+        <LanguageSelector />
+        {showUserMenu && user && (
           <div style={userMenuStyle}>
             <span style={userNameStyle}>{user.name}</span>
             <button
@@ -115,8 +115,8 @@ export function Header({ showUserMenu = true }: HeaderProps): React.JSX.Element 
               {t('common.logout')}
             </button>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </header>
   );
 }
